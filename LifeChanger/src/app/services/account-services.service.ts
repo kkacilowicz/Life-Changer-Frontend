@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class AccountServicesService {
 
   constructor(private accountService: AccountServicesService) { }
+
+  getAccount(): void {
+
+  }
 }

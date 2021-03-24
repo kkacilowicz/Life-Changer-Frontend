@@ -1,28 +1,34 @@
-.burger
-  position: absolute
-  top: 1%
-  left: 2%
-  color: black
-  transition: .2s
+.nav
+  position: fixed
+  height: 10vh
+  width: 100%
+  background-color: #1d3557
   z-index: 1
-  &:hover
-    opacity: .5
-    cursor: pointer
-  i
-    font-size: 4rem
-    display: none
-    &.show
-      display: block
-    &.fa-times.show
-      color: white
+  .burger
+    position: absolute
+    top: 20%
+    left: 2%
+    color: #caf0f8
+    transition: .2s
+    &:hover
+      opacity: .5
+      cursor: pointer
+    i
+      font-size: 4rem
+      display: none
+      &.show
+        display: block
+      &.fa-times.show
+        color: #caf0f8
 
 aside
   position: relative
-  top: 0
+  top: 10vh
   height: 100%
   left: -25%
   width: 25%
   background-color: black
+  z-index: 2
   ul
     position: absolute
     display: flex
@@ -46,7 +52,7 @@ aside
           border-right: 1px solid white
           margin-right: 5%
         &:hover
-          color: white
+          color: orange
           margin-left: 15%
   &.show
     opacity: .9

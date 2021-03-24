@@ -1,6 +1,8 @@
-<div class="burger" (click)="clicked()">
-  <i [ngClass]="showAdded == true ? 'fas fa-bars': 'fas fa-bars show'"></i>
-  <i [ngClass]="showAdded == true ? 'fas fa-times show': 'fas fa-times'"></i>
+<div class="nav">
+  <div class="burger" (click)="clicked()">
+    <i [ngClass]="showAdded == true ? 'fas fa-bars': 'fas fa-bars show'"></i>
+    <i [ngClass]="showAdded == true ? 'fas fa-times show': 'fas fa-times'"></i>
+  </div>
 </div>
 <aside class="show" *ngIf="showAdded == true">
     <ul>
