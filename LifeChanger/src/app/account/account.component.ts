@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.component.sass']
 })
 export class AccountComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
