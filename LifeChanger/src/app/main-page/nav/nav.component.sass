@@ -1,0 +1,58 @@
+.burger
+  position: absolute
+  top: 1%
+  left: 2%
+  color: black
+  transition: .2s
+  z-index: 1
+  &:hover
+    opacity: .5
+    cursor: pointer
+  i
+    font-size: 4rem
+    display: none
+    &.show
+      display: block
+    &.fa-times.show
+      color: white
+
+aside
+  position: relative
+  top: 0
+  height: 100%
+  left: -25%
+  width: 25%
+  background-color: black
+  ul
+    position: absolute
+    display: flex
+    flex-direction: column
+    list-style: none
+    top: 5%
+    height: 25%
+    li
+      flex-basis: 20%
+      a
+        display: block
+        padding: 5% 0
+        height: 100%
+        font-size: 2.5rem
+        text-decoration: none
+        color: #ddd
+        margin-left: 10%
+        i
+          font-size: 2rem
+          padding-right: 5%
+          border-right: 1px solid white
+          margin-right: 5%
+        &:hover
+          color: white
+          margin-left: 15%
+  &.show
+    opacity: .9
+    animation: show .3s both alternate
+@keyframes show
+  0%
+    left: -25%
+  100%
+    left: 0

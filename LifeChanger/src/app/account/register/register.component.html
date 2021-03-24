@@ -1,0 +1,69 @@
+<form class="row g-3">
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">First name</label>
+    <input [(ngModel)]="firstName" name="name" type="text" class="form-control is-valid"  placeholder="Name" required>
+    <!-- <div class="valid-feedback">
+      Looks good!
+    </div> -->
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer02" class="form-label">Last name</label>
+    <input [(ngModel)]="lastName" name="surname" type="text" class="form-control is-valid" id="validationServer02" placeholder="Surname" required>
+    <!-- <div class="valid-feedback">
+      Looks good!
+    </div> -->
+  </div>
+  <div class="col-md-4">
+    <label for="validationServerUsername" class="form-label">Username</label>
+    <div class="input-group has-validation">
+      <!-- <span class="input-group-text" id="inputGroupPrepend3">@</span> -->
+      <input [(ngModel)]="userName" name="nick" type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <label for="validationServerUsername" class="form-label">Email</label>
+    <div class="input-group has-validation">
+      <!-- <span class="input-group-text" id="inputGroupPrepend3">@</span> -->
+      <input [(ngModel)]="email" name="mail" type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Please write your email
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label for="validationServerUsername" class="form-label">Password</label>
+    <div class="input-group has-validation">
+      <!-- <span class="input-group-text" id="inputGroupPrepend3">@</span> -->
+      <input [(ngModel)]="password" name="password" type="password" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Set the password
+      </div>
+    </div>
+    <label for="validationServerUsername" class="form-label">Confirm Password</label>
+    <div class="input-group has-validation">
+      <!-- <span class="input-group-text" id="inputGroupPrepend3">@</span> -->
+      <input [(ngModel)]="passwordConfirm" name="passwordConfirm" type="password" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Confirm the password
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+      <label class="form-check-label" for="invalidCheck3">
+        Agree to terms and conditions
+      </label>
+      <div id="invalidCheck3Feedback" class="invalid-feedback">
+        You must agree before submitting.
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit" (click)="signIn()">Sign In</button>
+  </div>
+</form>
