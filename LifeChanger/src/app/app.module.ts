@@ -1,33 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { HeaderComponent } from './main-page/header/header.component';
-import { NavComponent } from './main-page/nav/nav.component';
-import { MainComponent } from './main-page/main/main.component';
-import { FooterComponent } from './main-page/footer/footer.component';
-import { AccountComponent } from './account/account.component';
-import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
+import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
-    HeaderComponent,
-    NavComponent,
-    MainComponent,
-    FooterComponent,
-    AccountComponent,
-    routingComponents
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    // RouterModule,
     AppRoutingModule,
-    FormsModule
+    SharedModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

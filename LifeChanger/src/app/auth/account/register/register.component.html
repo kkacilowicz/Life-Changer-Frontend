@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6 offset-md3 mt-4">
+    <h3>Register</h3>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="mb-3">
+        <label for="registerUsername" class="form-label">Username</label>
+        <input type="text" name="username" ngModel required #username="ngModel" class="form-control" id="registerUsername" placeholder="Enter username">
+      </div>
+      <div class="mb-3">
+        <label for="registerEmail" class="form-label">Email</label>
+        <input type="email" name="email" ngModel required #email="ngModel" class="form-control" id="registerEmail" placeholder="Enter email">
+      </div>
+      <div class="mb-3">
+        <label for="registerPassword" class="form-label">Password</label>
+        <input type="password" name="password" ngModel required #password="ngModel" class="form-control" id="registerPassword" placeholder="Password">
+      </div>
+      <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+</div>
