@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
   userPassword: string;
 
   constructor() { }
-
   ngOnInit(): void {
   }
 
@@ -19,4 +18,5 @@ export class LoginComponent implements OnInit {
     console.log(this.userEmail);
     console.log(this.userPassword);
   }
+
 }

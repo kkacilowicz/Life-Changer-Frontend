@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
   showAdded = false;
+  id = 0;
   constructor() { }
 
   ngOnInit(): void {
   }
+
   clicked() {
     this.showAdded = !this.showAdded;
   }
+
 }
