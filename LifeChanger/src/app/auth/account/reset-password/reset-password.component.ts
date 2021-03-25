@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -8,13 +9,16 @@ import { NgForm } from '@angular/forms';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(f: NgForm) {
-    console.log(f.value);
-    console.log(f.valid);
+    const resetPasswordObserver = {
+      next: x => console.log('check email to change the password'),
+      error: err => console.log(err)
+    };
+    this.authService.resetPassword(f.value).subscribe(resetPasswordObserver);
   }
 }

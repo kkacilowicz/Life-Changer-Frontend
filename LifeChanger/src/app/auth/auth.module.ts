@@ -6,14 +6,21 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
+import { ChangePasswordComponent } from './account/change-password/change-password.component';
+
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent],
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent,],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserModule,
+    HttpClientModule
   ],
   exports: [
     LoginComponent,
