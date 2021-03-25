@@ -10,7 +10,7 @@ import { MainComponent } from './main-page/main/main.component';
 import { FooterComponent } from './main-page/footer/footer.component';
 import { AccountComponent } from './account/account.component';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+// import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
-    RouterModule,
+    // RouterModule,
     AppRoutingModule,
     FormsModule
   ],
