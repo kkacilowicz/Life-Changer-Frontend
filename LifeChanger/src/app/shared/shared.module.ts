@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgProgressModule } from '@ngx-progressbar/core'
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertModule } from 'ngx-alerts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [NavComponent, HeaderComponent],
@@ -14,7 +15,8 @@ import { AlertModule } from 'ngx-alerts';
     RouterModule,
     NgProgressModule,
     BrowserModule,
-    AlertModule,
+    BrowserAnimationsModule,
+    AlertModule.forRoot({ maxMessages: 5, timeout: 5000, positionX: 'right', positionY: 'top' })
   ],
   exports: [
     NavComponent
