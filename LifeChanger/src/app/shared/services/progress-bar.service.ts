@@ -1,20 +1,32 @@
 import { Injectable } from '@angular/core';
 import { NgProgressRef } from '@ngx-progressbar/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProgressBarService {
 
-  // progressRef!: NgProgressRef;
-
+  progressRef: NgProgressRef;
+  default: string = "blue";
+  succes: string = "green";
+  error: string = "red";
+  currentColor: string = this.default;
   constructor() { }
 
   startLoading() {
-    // this.progressRef.start()
+    this.currentColor = this.default;
+    this.progressRef.start()
   }
 
   completeLoading() {
-    // this.progressRef.complete();
+    this.progressRef.complete();
+  }
+
+  setSucces() {
+    this.currentColor = this.succes;
+  }
+  setError() {
+    this.currentColor = this.error;
   }
 }

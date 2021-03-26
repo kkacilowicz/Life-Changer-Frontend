@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
   helper = new JwtHelperService();
   token;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(model: any) {
     console.log(model);
@@ -44,16 +46,19 @@ export class AuthService {
   }
 
   confirmEmail(model: any) {
-    return this.http.post(this.authUrl + "confirmemail", model); // dodac koncowke urla confirmmail
+    return this.http.post(this.confirmEmailUrl, model);
   }
 
   changePassword(model: any) {
-    return this.http.post(this.authUrl + "changepassword", model); // dodac koncowke urla confirmmail
+    return this.http.post(this.changePasswordUrl, model);
   }
 
   loggedIn() {
     this.token = localStorage.getItem('token');
     return !this.helper.isTokenExpired(this.token);
+  }
+  changePage(path: string) {
+    this.router.navigateByUrl(path);
   }
 }
 
