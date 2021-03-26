@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt'
 
 export class AuthService {
   authUrl = "https://localhost:5001/api/Account/";
-  userUrl = "https://localhost:5001/api/Account/";
+  userUrl = "https://localhost:5001/api/Account/register";
   confirmEmailUrl = "localhost:5001/api/Account/confirm-email/";
   changePasswordUrl = "localhost:5001/api/Account/change-password/";
   helper = new JwtHelperService();
@@ -32,7 +32,7 @@ export class AuthService {
       'confirmEmailUrl': this.confirmEmailUrl
     });
     let options = { headers: headers };
-    return this.http.post(this.userUrl + 'register', model, options)
+    return this.http.post(this.userUrl, model, options)
   }
 
   resetPassword(model: any) {
