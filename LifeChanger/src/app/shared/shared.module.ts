@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AlertModule } from 'ngx-alerts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [NavComponent, HeaderComponent],
   imports: [

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'ngx-alerts';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -8,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    this.alertService.success("Logged Out");
+  }
 }
