@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid green;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid red;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Oswald', sans-serif;
+}
+
+body {
+  height: 130vh;
+  background-image: url(\assets\Images\background.jpg);
+  background-size: auto;
+}
+
+.root {
+  display: block;
+  width: 100%;
+}
