@@ -10,7 +10,7 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-
+  
   constructor(private authService: AuthService, private alertService: AlertService,
     public progressBar: ProgressBarService) { }
 

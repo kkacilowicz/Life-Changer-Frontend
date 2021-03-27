@@ -20,7 +20,7 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
     AuthRoutingModule,
     FormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [
     LoginComponent,
