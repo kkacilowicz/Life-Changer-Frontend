@@ -23,13 +23,13 @@ export class RegisterComponent implements OnInit {
     const registerObserver = {
       next: x => {
         console.log('User created');
-        this.alertService.success('User logged in');
+        this.alertService.success('Check your email');
         this.progressBar.completeLoading();
         this.progressBar.setSucces();
       },
       error: err => {
         console.log(err);
-        this.alertService.danger(err.error.errors[0].description);
+        // this.alertService.danger(err.error.errors[0].description);
         this.progressBar.completeLoading();
         this.progressBar.setError();
       }
