@@ -24,11 +24,10 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
           <div class="col-sm-9">
-            <input type="password" #password="ngModel" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" ngModel
+            <input type="password" #password="ngModel" required pattern="(?=^.{6,15}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$" ngModel
               required name="password" class="form-control" placeholder="Password">
             <div *ngIf="password.touched&&password.errors?.required" class="bgAlert">This field is required</div>
-            <div *ngIf="password.touched&&password.errors?.pattern" class="bgAlert">Password required at least 6
-              characters with: digit, capital letter, lower case letter</div>
+            <div *ngIf="password.touched&&password.errors?.pattern" class="bgAlert">Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and 6 to 15 characters</div>
           </div>
 
         </div>
@@ -70,6 +69,7 @@
         </div>
         <button type="submit" [disabled]="f.invalid" class="buttonstyle"> <i class="fas fa-sign-in-alt"></i> Register
         </button>
+
       </form>
     </div>
   </div>
