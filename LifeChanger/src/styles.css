@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 .ng-valid[required],
 .ng-valid.required {
-  border-left: 5px solid green;
+  border-left: 0px solid green;
 }
 
 .ng-invalid:not(form) {
-  border-left: 5px solid red;
+  border-left: 0px solid red;
 }
 
 * {
@@ -16,9 +16,12 @@
 }
 
 body {
-  height: 130vh;
+  height: 100vh;
   background-image: url(\assets\Images\background.jpg);
-  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .root {
