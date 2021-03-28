@@ -17,7 +17,7 @@
             <div class="form-group row">
               <label for="email" class="col-sm-3 col-form-label">Email</label>
               <div class="col-sm-9">
-                <input type="email" #email="ngModel" pattern="^[a-z0-9-._]+@[a-z0-9.-]+\.[a-z]{2,}$" ngModel required
+                <input type="text" #email="ngModel" pattern="^[a-z0-9-._]+@[a-z0-9.-]+\.[a-z]{2,}$" ngModel required
                   name="email" class="form-control" placeholder="name@example.com" required>
                 <div *ngIf="email.touched&&email.errors?.required" class="bgAlert">This field is required</div>
                 <div *ngIf="email.touched&&email.errors?.pattern" class="bgAlert">The email is incorrect</div>
@@ -47,13 +47,13 @@
                 <legend class="col-form-label col-sm-3 pt-0">Sex</legend>
                 <div class="col-sm-4">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="birthDate" id="sexFemale" value="female" checked ngModel required #sexFemale="ngModel">
+                      <input class="form-check-input" type="radio" name="gender" id="sexFemale" value="female" checked ngModel required #sexFemale="ngModel">
                     <label class="form-check-label" for="sexFemale" >
                       <i class="fas fa-female"></i> Female
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="birthDate" id="sexMale" value="male" ngModel required #sexMale="ngModel">
+                    <input class="form-check-input" type="radio" name="gender" id="sexMale" value="male" ngModel required #sexMale="ngModel">
                     <label class="form-check-label" for="sexMale">
                       <i class="fas fa-male"></i> Male
                     </label>
@@ -65,7 +65,7 @@
               <label for="dateBirth" class="col-3 col-form-label">Date of birth</label>
               <div class="col-9">
                 <input class="form-control" ngModel required #dateBirth="ngModel" type="date" placeholder="yyyy-mm-dd"
-                  id="dateBirth" required min="2008-03-28" name="dateBirth">
+                  id="dateBirth" required min="2008-03-28" name="birthDate">
                 <div *ngIf="dateBirth.touched&&dateBirth.errors" class="bgAlert">The account is for people over 13 years of age</div>
               </div>
             </div>
