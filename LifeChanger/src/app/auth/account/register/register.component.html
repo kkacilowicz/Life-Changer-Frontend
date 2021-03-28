@@ -2,34 +2,43 @@
   <div class="col-sm-12 main-section">
     <div class="modal-content">
       <h2> Register </h2>
-      <p> Enter your details to create an account  </p>
+      <p> Enter your details to create an account </p>
       <form class="col-12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-3 col-form-label">Username</label>
           <div class="col-sm-9">
             <input type="text" name="username" ngModel required #username="ngModel" class="form-control"
               id="registerUsername" placeholder="Enter username">
+            <div *ngIf="username.touched&&username.errors?.required" class="bgAlert">This field is required</div>
           </div>
         </div>
         <div class="form-group row">
-          <label for="staticEmail" class="col-sm-3 col-form-label">Email</label>
+          <label for="email" class="col-sm-3 col-form-label">Email</label>
           <div class="col-sm-9">
-            <input type="email" name="email" ngModel required #email="ngModel" class="form-control" id="registerEmail"
-              placeholder="name@example.com">
+            <input type="email" #email="ngModel" pattern="^[a-z0-9-._]+@[a-z0-9.-]+\.[a-z]{2,}$" ngModel required
+              name="email" class="form-control" placeholder="name@example.com" required>
+            <div *ngIf="email.touched&&email.errors?.required" class="bgAlert">This field is required</div>
+            <div *ngIf="email.touched&&email.errors?.pattern" class="bgAlert">The email is incorrect</div>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
           <div class="col-sm-9">
-            <input type="password" name="password" ngModel required #password="ngModel" class="form-control"
-              id="loginPassword" placeholder="Enter password">
+            <input type="password" #password="ngModel" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" ngModel
+              required name="password" class="form-control" placeholder="Password">
+            <div *ngIf="password.touched&&password.errors?.required" class="bgAlert">This field is required</div>
+            <div *ngIf="password.touched&&password.errors?.pattern" class="bgAlert">Password required at least 6
+              characters with: digit, capital letter, lower case letter</div>
           </div>
+
         </div>
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-3 col-form-label">Phone number</label>
           <div class="col-sm-9">
-            <input type="number" name="phoneNumber" ngModel required #password="ngModel" class="form-control"
-              id="phoneNumber" placeholder="Enter phone number">
+            <input type="number" name="phoneNumber" ngModel required #phoneNumber="ngModel" class="form-control"
+              id="phoneNumber" placeholder="Phone number e.g. 987654321 " required pattern="[0-9]{9}">
+            <div *ngIf="phoneNumber.touched&&phoneNumber.errors?.required" class="bgAlert">This field is required</div>
+            <div *ngIf="phoneNumber.touched&&phoneNumber.errors?.pattern" class="bgAlert">Wrong phone number</div>
           </div>
         </div>
         <fieldset class="form-group">
@@ -52,12 +61,15 @@
           </div>
         </fieldset>
         <div class="form-group row">
-          <label for="example-date-input" class="col-3 col-form-label">Date of birth</label>
+          <label for="dateBirth" class="col-3 col-form-label">Date of birth</label>
           <div class="col-9">
-            <input class="form-control" type="date" value="yyyy-mm-dd" id="example-date-input">
+            <input class="form-control" ngModel required #dateBirth="ngModel" type="date" placeholder="yyyy-mm-dd"
+              id="dateBirth" required min="2008-03-28" name="dateBirth">
+            <div *ngIf="dateBirth.touched&&dateBirth.errors" class="bgAlert">The account is for people over 13 years of age</div>
           </div>
         </div>
-        <button type="submit" [disabled]="f.invalid" class="buttonstyle"> <i class="fas fa-sign-in-alt"></i> Register </button>
+        <button type="submit" [disabled]="f.invalid" class="buttonstyle"> <i class="fas fa-sign-in-alt"></i> Register
+        </button>
       </form>
     </div>
   </div>
