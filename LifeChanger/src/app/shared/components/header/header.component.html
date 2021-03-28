@@ -15,6 +15,15 @@
         <li class="nav-item" *ngIf="!authService.loggedIn();">
           <a class="nav-link" [routerLink]="['login']" routerLinkActive="active"> <i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
+        <div class="dropdown" *ngIf="authService.loggedIn();">
+          <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" [routerLink]="['reset-password']" routerLinkActive="active">Reset Password</a></li>
+            <li><a class="dropdown-item" (click)='logout()'>Logout</a></li>
+          </ul>
+        </div>
       </ul>
     </div>
   </div>

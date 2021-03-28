@@ -1,7 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap')
 
-
-h1 
-    text-align: center
+.homePage
+  position: relative
+  height: 100vh
+  background-image: url("../../../assets/Images/background.jpg")
+  background-position: center center
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-size: cover
+  .bg
+    position: absolute
+    background-color: rgba(0, 63, 114, .3)
+    width: 100vw
+    height: 100vh
+    left: 0
+  h1
+    position: absolute
+    z-index: 1
+    font-size: 100px
     color: #fff
     font-family: 'Lobster', cursive
+    top: 30%
+    left: 50%
+    transform: translate(-50%, -50%)
