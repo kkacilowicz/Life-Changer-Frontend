@@ -30,6 +30,7 @@ export class AuthService {
     )
   }
   register(model: any) {
+    console.log(model);
     let headers = new HttpHeaders({
       'confirmEmailUrl': this.confirmEmailUrl
     });
