@@ -16,6 +16,7 @@
           <a class="nav-link" [routerLink]="['login']" routerLinkActive="active"> <i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
         <div class="dropdown" *ngIf="authService.loggedIn();">
+          Right-aligned
           <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             Profile
           </a>
