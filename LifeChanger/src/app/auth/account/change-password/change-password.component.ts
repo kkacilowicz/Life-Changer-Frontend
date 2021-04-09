@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements OnInit {
       this.alertService.success('Password changed');
     }, error => {
       console.log(error);
-      this.alertService.danger('Something went wrong')
+      this.alertService.danger(error.message);
       this.progressBar.completeLoading();
       this.progressBar.setError();
     })

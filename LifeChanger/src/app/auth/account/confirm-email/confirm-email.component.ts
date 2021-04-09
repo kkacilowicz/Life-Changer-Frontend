@@ -36,7 +36,7 @@ export class ConfirmEmailComponent implements OnInit {
       this.progressBar.completeLoading();
       this.progressBar.setError();
       this.emailConfirmed = false;
-      this.alertService.danger('Try again')
+      this.alertService.danger(error.message);
     })
   }
 

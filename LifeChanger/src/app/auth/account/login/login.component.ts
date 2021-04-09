@@ -10,7 +10,7 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  
+
   constructor(private authService: AuthService, private alertService: AlertService,
     public progressBar: ProgressBarService) { }
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       },
       error: err => {
         console.log(err);
-        this.alertService.danger('Unable to login')
+        this.alertService.danger(err.error.message);
         this.progressBar.completeLoading();
         this.progressBar.setError();
       }

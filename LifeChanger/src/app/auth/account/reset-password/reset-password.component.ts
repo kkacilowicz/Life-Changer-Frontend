@@ -22,14 +22,12 @@ export class ResetPasswordComponent implements OnInit {
     this.alertService.info('Reseting password');
     const resetPasswordObserver = {
       next: x => {
-        console.log('check email to change the password'),
-          this.alertService.success('Check email to change the password');
+        this.alertService.success('Check email to change the password');
         this.progressBar.completeLoading();
         this.progressBar.setSucces();
       },
       error: err => {
-        console.log(err);
-        this.alertService.danger('Something went wrong')
+        this.alertService.danger(err.error.message);
         this.progressBar.completeLoading();
         this.progressBar.setError();
       }
