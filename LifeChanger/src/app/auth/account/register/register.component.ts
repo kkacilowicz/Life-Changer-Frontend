@@ -29,9 +29,9 @@ export class RegisterComponent implements OnInit {
       },
       error: err => {
         console.log(err);
-        // this.alertService.danger(err.error.errors[0].description);
         this.progressBar.completeLoading();
         this.progressBar.setError();
+        this.alertService.danger(err.error.message);
       }
     };
     this.authService.register(f.value).subscribe(registerObserver);

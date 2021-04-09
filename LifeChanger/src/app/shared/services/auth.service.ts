@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { IUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class AuthService {
   confirmEmailUrl = "localhost:5001/api/Email/confirm/";
   helper = new JwtHelperService();
   token;
+  decodedToken: any;
+  currentUser: IUser | undefined;
+
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -24,7 +28,10 @@ export class AuthService {
     return this.http.post(this.apiUrl + 'login', model).pipe(
       map((user: any) => {
         if (user) {
-          localStorage.setItem('token', user.token)
+          localStorage.setItem('token', user.token);
+          this.decodedToken = this.helper.decodeToken(user.token);
+          this.currentUser = user.given_name;
+
         }
       })
     )
