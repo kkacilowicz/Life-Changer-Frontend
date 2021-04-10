@@ -11,8 +11,13 @@
             <div class="form-group2">
 
             </div>
-            
-          <button type="submit" class="buttonstyle"> <i class="fas fa-user-edit"></i> Update Account</button>
+            <div>
+              <a [routerLink]="['/preferences']" routerLinkActive="active">Edit preferences</a>
+            </div>
+            <div>
+              <a [routerLink]="['/delete-account']" routerLinkActive="active">Delete account</a>
+            </div>
+            <button type="submit" class="buttonstyle"> <i class="fas fa-user-edit"></i> Update Account</button>
           </form>
         </div>
       </div>

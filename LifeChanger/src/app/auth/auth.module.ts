@@ -10,11 +10,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
+import { DeleteComponent } from './account/delete/delete.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent,],
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent,],
   imports: [
     CommonModule,
     AuthRoutingModule,

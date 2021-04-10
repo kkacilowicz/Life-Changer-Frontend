@@ -5,13 +5,15 @@ import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.com
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
+import { DeleteComponent } from './account/delete/delete.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'confirm-email', component: ConfirmEmailComponent },
-  { path: 'change-email', component: ChangePasswordComponent }
+  { path: 'change-email', component: ChangePasswordComponent },
+  { path: 'delete-account', component: DeleteComponent }
 ];
 
 @NgModule({
