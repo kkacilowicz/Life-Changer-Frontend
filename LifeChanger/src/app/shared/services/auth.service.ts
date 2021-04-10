@@ -67,6 +67,12 @@ export class AuthService {
     return this.http.post(this.changePasswordUrl, model); //zmienic end pointa na usuwanie konta
   }
 
+  // getUser() {
+  //   return this.http.get("end point")
+  //   .pipe(
+  //     catchError(this.h)
+  //     );
+  // }
 
   loggedIn() {
     this.token = localStorage.getItem('token');

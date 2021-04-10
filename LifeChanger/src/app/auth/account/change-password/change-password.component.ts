@@ -21,7 +21,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
 
-  changePassword() {
+  modifyPassword() {
     this.progressBar.startLoading();
     this.alertService.info('Changing password');
     this.authService.changePassword(this.model).subscribe(() => {
