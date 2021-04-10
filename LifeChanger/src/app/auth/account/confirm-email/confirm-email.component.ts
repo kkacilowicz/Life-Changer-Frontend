@@ -22,6 +22,7 @@ export class ConfirmEmailComponent implements OnInit {
     this.urlParams.userId = this.route.snapshot.queryParamMap.get('userId');
     this.confirmEmail();
   }
+
   confirmEmail() {
     this.progressBar.startLoading();
     this.alertService.info('Confirming email');

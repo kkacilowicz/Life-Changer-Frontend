@@ -62,6 +62,12 @@ export class AuthService {
     return this.http.post(this.changePasswordUrl, model);
   }
 
+  deleteAccount(model: any) {
+    console.log(model);
+    return this.http.post(this.changePasswordUrl, model); //zmienic end pointa na usuwanie konta
+  }
+
+
   loggedIn() {
     this.token = localStorage.getItem('token');
     return !this.helper.isTokenExpired(this.token);

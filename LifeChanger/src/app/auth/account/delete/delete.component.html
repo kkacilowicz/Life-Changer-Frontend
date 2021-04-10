@@ -1,14 +1,18 @@
-<form>
+<div class="main-container">
   <div class="form-title">
-    <h2>Deleting account</h2>
+    <h2>Delete account</h2>
   </div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="password-label">
       <label for="inputPassword5" class="form-label">Password</label>
-      <input type="password" id="Password" class="form-control" placeholder="Enter password">
+      <input type="password" name="password" ngModel required #email="ngModel" id="Password" class="form-control" placeholder="Enter password">
     </div>
     <div class="password-label">
       <label for="inputPassword5" class="form-label">Confirm Password</label>
-      <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password">
+      <input type="password" name="confirmPassword" ngModel required #email="ngModel" id="confirmPassword" class="form-control" placeholder="Confirm password">
     </div>
-</form>
+    <button type="submit" [disabled]="f.invalid" class="buttonstyle">Delete Account</button>
+  </form>
+</div>
+
 
