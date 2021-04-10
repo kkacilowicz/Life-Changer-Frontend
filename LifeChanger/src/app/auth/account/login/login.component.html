@@ -8,8 +8,9 @@
           <form class="col-12" #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div class="form-group1">
                 <i class="fas fa-user"></i>
-                <input type="text" name="email" ngModel required #email="ngModel" class ="form-control" id="email" placeholder="Enter email">
+                <input type="text" name="email" ngModel required #email="ngModel" pattern="^[a-z0-9-._]+@[a-z0-9.-]+\.[a-z]{2,}$" class ="form-control" id="email" placeholder="Enter email">
                 <div *ngIf="email.touched&&email.errors?.required" class="bgAlert">This field is required</div>
+                <div *ngIf="email.touched&&email.errors?.pattern" class="bgAlert">The email is incorrect</div>
               </div>
             <div class="form-group2">
              <i class="fas fa-lock"></i>
