@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'confirm-email', component: ConfirmEmailComponent },
-  { path: 'change-email', component: ChangePasswordComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
   { path: 'delete-account', component: DeleteComponent }
 ];
 

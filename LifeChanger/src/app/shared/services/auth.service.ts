@@ -58,6 +58,7 @@ export class AuthService {
   }
 
   changePassword(model: any) {
+    console.log(model);
     return this.http.post(this.changePasswordUrl, model);
   }
 
