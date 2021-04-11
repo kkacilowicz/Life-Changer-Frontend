@@ -59,7 +59,11 @@ export class AuthService {
 
   changePassword(model: any) {
     console.log(model);
-    return this.http.put(this.changePasswordUrl, model);
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    let options = { headers: headers };
+    return this.http.put(this.changePasswordUrl, model, options);
   }
 
   deleteAccount(model: any) {
