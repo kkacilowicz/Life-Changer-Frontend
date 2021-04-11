@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { AlertService } from 'ngx-alerts';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { IUser } from 'src/app/shared/models/user';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -12,20 +13,23 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class UserEditComponent implements OnInit {
   model: any = {}; // potem dodac dane do edycji
 
+  userInfo: IUser | undefined;
 
-  constructor(private authService: AuthService, private alertService: AlertService,
+  constructor(private alertService: AlertService,
     public progressBar: ProgressBarService,
-    private userService: UserService) { }
+    public userService: UserService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.userService.user();
+  }
 
-  onSubmit() {
+
+  onSubmit(f: NgForm) {
     this.progressBar.startLoading();
     this.alertService.info('Updating Account');
     const updateUserObserver = {
       next: x => {
-        console.log('User logged in');
-        this.alertService.success('User logged in');
+        this.alertService.success('Profile updated');
         this.progressBar.completeLoading();
         this.progressBar.setSucces();
       },
@@ -36,7 +40,6 @@ export class UserEditComponent implements OnInit {
         this.progressBar.setError();
       }
     };
-    // this.authService.login(f.value).subscribe(updateUserObserver);
+    // this.userService.update(f.value).subscribe(updateUserObserver);
   }
-
 }

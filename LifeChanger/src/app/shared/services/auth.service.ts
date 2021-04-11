@@ -12,8 +12,8 @@ import { IUser } from '../models/user';
 
 export class AuthService {
   apiUrl: string = environment.apiUrl;
-  changePasswordUrl = this.apiUrl + 'change-password'
-  confirmEmailUrl = "localhost:5001/api/Email/confirm/";
+  changePasswordUrl = this.apiUrl + 'changepassword'
+  confirmEmailUrl = "localhost:5001/api/Email/confirm";
   helper = new JwtHelperService();
   token;
   decodedToken: any;
@@ -30,8 +30,7 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.helper.decodeToken(user.token);
-          this.currentUser = user.given_name;
-
+          this.currentUser = user.given_name; //chwilowo undefined
         }
       })
     )
@@ -46,6 +45,7 @@ export class AuthService {
   }
 
   resetPassword(model: any) {
+    console.log(model);
     let headers = new HttpHeaders({
       'changePasswordUrl': this.changePasswordUrl
     });
@@ -59,20 +59,13 @@ export class AuthService {
 
   changePassword(model: any) {
     console.log(model);
-    return this.http.post(this.changePasswordUrl, model);
+    return this.http.put(this.changePasswordUrl, model);
   }
 
   deleteAccount(model: any) {
     console.log(model);
     return this.http.post(this.changePasswordUrl, model); //zmienic end pointa na usuwanie konta
   }
-
-  // getUser() {
-  //   return this.http.get("end point")
-  //   .pipe(
-  //     catchError(this.h)
-  //     );
-  // }
 
   loggedIn() {
     this.token = localStorage.getItem('token');

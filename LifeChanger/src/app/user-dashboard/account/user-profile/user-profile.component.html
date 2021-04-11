@@ -4,32 +4,32 @@
     <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">Username:</label>
           <div class="col-sm-10">
-            <input type="text" readonly="" class="form-control-plaintext" id="staticUserName" value="{{authService.decodedToken?.given_name}}">
+            <input type="text" readonly="" class="form-control-plaintext" id="staticUserName" value="{{userService.userInfo.userName}}">
           </div>
         </div>
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Email:</label>
           <div class="col-sm-10">
-            <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{authService.decodedToken?.email}}">
+            <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{userService.userInfo.email}}">
           </div>
         </div>
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Phone Number:</label>
           <div class="col-sm-10">
-            <input type="text" readonly="" class="form-control-plaintext" id="staticPhoneNumber" value="email@example.com">
+            <input type="text" readonly="" class="form-control-plaintext" id="staticPhoneNumber" value="{{userService.userInfo.phoneNumber}}">
           </div>
         </div>
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Gender:</label>
           <div class="col-sm-10">
-            <input type="text" readonly="" class="form-control-plaintext" id="staticGender" value="email@example.com">
+            <input type="text" readonly="" class="form-control-plaintext" id="staticGender" value="{{userService.userInfo.gender}}">
           </div>
         </div>
         <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label">Password:</label>
+          <label for="staticEmail" class="col-sm-2 col-form-label">Birth Date:</label>
           <div class="col-sm-10">
-            <input type="text" readonly="" class="form-control-plaintext" id="staticPassword" value="email@example.com">
-          </div>
+            <input type="text" readonly="" class="form-control-plaintext" id="staticPassword" value="{{userService.userInfo.birthDate}}">
+        </div>
       </div>
     </form>
     <p class="lead">

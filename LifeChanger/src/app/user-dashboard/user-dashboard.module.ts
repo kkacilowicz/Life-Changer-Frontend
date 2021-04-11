@@ -5,6 +5,7 @@ import { UserDashboardRoutingModule } from './user-dashboard-routing.module';
 import { UserEditComponent } from './account/user-edit/user-edit.component';
 import { UserProfileComponent } from './account/user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     UserDashboardRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   exports: [UserEditComponent]
 })

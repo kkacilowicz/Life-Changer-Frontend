@@ -16,8 +16,12 @@ export class ChangePasswordComponent implements OnInit {
     public progressBar: ProgressBarService) { }
 
   ngOnInit(): void {
-    this.model.token = this.route.snapshot.queryParamMap.get('token');
-    this.model.userId = this.route.snapshot.queryParamMap.get('userId');
+    //dogadac z grzesiem czy potrzebne
+    // this.model.token = this.route.snapshot.queryParamMap.get('token');
+    // this.model.userId = this.route.snapshot.queryParamMap.get('userId');
+
+    //grzesiek mowi ze ma ale na wszelki zostawiam
+    // this.model.token = localStorage.getItem('token');
   }
 
 

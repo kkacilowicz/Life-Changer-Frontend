@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {  AuthService } from '../../../shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { IUser } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,9 +10,10 @@ import {  AuthService } from '../../../shared/services/auth.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.user();
   }
-
 }
+

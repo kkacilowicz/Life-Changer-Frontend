@@ -7,6 +7,7 @@ import { NgProgressModule } from '@ngx-progressbar/core'
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertModule } from 'ngx-alerts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgProgressModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AlertModule.forRoot({ maxMessages: 5, timeout: 5000, positionX: 'right', positionY: 'top' })
   ],
   exports: [
