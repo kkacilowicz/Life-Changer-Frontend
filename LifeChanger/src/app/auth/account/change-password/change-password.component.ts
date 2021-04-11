@@ -15,14 +15,7 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private route: ActivatedRoute, private authService: AuthService, private alertService: AlertService,
     public progressBar: ProgressBarService) { }
 
-  ngOnInit(): void {
-    //dogadac z grzesiem czy potrzebne
-    // this.model.token = this.route.snapshot.queryParamMap.get('token');
-    // this.model.userId = this.route.snapshot.queryParamMap.get('userId');
-
-    //grzesiek mowi ze ma ale na wszelki zostawiam
-    // this.model.token = localStorage.getItem('token');
-  }
+  ngOnInit(): void { }
 
 
   modifyPassword() {

@@ -26,15 +26,19 @@ export class UserService {
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
-    return this.httpClient.get<IUser>(this.userUrl, { headers: headers }).pipe(
-      map((user: IUser) => {
-        if (user) {
-          console.log(user);
-        }
-        return user;
-      })
-    )
+    return this.httpClient.get<IUser>(this.userUrl, { headers: headers })
   }
+
+
+  // .pipe(
+  //   map((user: IUser) => {
+  //     if (user) {
+  //       console.log(user);
+  //     }
+  //     return user;
+  //   })
+  // )
+
   user() {
     this.getUser().subscribe((data: IUser) => this.userInfo = {
       email: (data as any).email,

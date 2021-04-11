@@ -1,17 +1,37 @@
 <div class="homePage">
-  <div class="bg">
-    <div class = "modal-dialog modal-dialog-centered text-center ">
+    <div class = "containter modal-dialog modal-dialog-centered text-center ">
       <div class = "col-sm-12 main-section">
         <div class = "modal-content">
-          <h2> Edit User Profile </h2>
+          <div class="title">
+            <h2> Edit User Profile </h2>
+          </div>
           <form   class="col-12" #f="ngForm" (ngSubmit)="onSubmit(f)">
-            <div class="form-group1">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.userName}}">
             </div>
-            <div class="form-group2">
-              <input type="text" name="email" ngModel required #email="ngModel" name = "email" id = "email" placeholder=" Email">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.email}}">
             </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Phone Number</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.phoneNumber}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Gender</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.gender}}">
+            </div>
+            <!-- <div class="custom-control custom-radio">
+              <input type="radio" id="male" name="male" class="custom-control-input" checked="">
+              <label class="custom-control-label" for="male">Male</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="female" name="female" class="custom-control-input" >
+              <label class="custom-control-label" for="female">Female</label>
+            </div> -->
             <div>
-              <a [routerLink]="['/preferences']" routerLinkActive="active">{{userService.userData().userName}}</a>
+              <a [routerLink]="['my-profile']" routerLinkActive="active">Cancel</a>
             </div>
             <div>
               <a [routerLink]="['/preferences']" routerLinkActive="active">Edit preferences</a>
@@ -19,10 +39,9 @@
             <div>
               <a [routerLink]="['/delete-account']" routerLinkActive="active">Delete account</a>
             </div>
-          <button type="submit" class="buttonstyle"> <i class="fas fa-user-edit"></i> Update Account</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-user-edit"></i> Update Account</button>
           </form>
         </div>
       </div>
     </div>
-  </div>
 </div>
