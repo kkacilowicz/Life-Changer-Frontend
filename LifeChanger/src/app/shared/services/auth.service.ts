@@ -44,6 +44,11 @@ export class AuthService {
     return this.http.post(this.apiUrl + 'register', model, options)
   }
 
+  preferences(model: any) {
+    console.log(model);
+    return this.http.post(this.apiUrl + 'preferences', model)
+  }
+
   resetPassword(model: any) {
     console.log(model);
     let headers = new HttpHeaders({

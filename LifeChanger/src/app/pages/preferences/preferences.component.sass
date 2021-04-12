@@ -27,7 +27,15 @@
     width: 30vh
     padding-right: 5vh
     height: 43vh
-    border-radius: 25px
+    cursor: pointer
+    border-radius: 5px
+    position: relative
+    display: block
+ 
+
+input
+    &[type=checkbox]:checked ~ .title
+        border: 5px solid red
 
 .title
     background-color: #A27C7C
@@ -41,6 +49,8 @@
     font-size: 3.31vh
     font-family: 'Margarine', cursive
     color: white
+
+
 
 .marg
     padding: 2vh 1vh 1vh 1vh
@@ -71,3 +81,12 @@
     background-position: center
     background-size: cover
 
+.button 
+    font-size: 100px
+
+.checkbox
+    position: absolute
+    top: 10px
+    right: 10px
+    z-index: 1
+    opacity: 1

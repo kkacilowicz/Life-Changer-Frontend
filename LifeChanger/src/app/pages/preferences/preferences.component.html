@@ -2,12 +2,37 @@
 
     <div class="label"> Choose the area of life you want to improve </div>
    
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
    <div class="container">
-       <div class="area love"> <div class="title marg"> Love </div> <div class="text"> Option recommended for people in a relationship  </div>    </div>
-       <div class="area sport"> <div class="title marg"> Sport & Health </div>  </div>
-       <div class="area culture"> <div class="title"> Culture & Entertainment </div>   </div>
-   </div>
+
+       <label class="area love">
+           <input type="checkbox" class="checkbox" name="Name" value="Love"  id="areaL"  ngModel #areaL="ngModel">
+                <div> 
+                    <div class="title marg"> Love </div> 
+                    <div class="text"> Option recommended for people in a relationship  </div>    
+                </div>
+       </label>
+
+       <label class="area sport">
+            <input type="checkbox" class="checkbox" name="Name" value="Sport and health"  id="areaS"  ngModel  #areaS="ngModel">
+                <div> 
+                    <div class="title marg"> Sport & Health </div>  
+                </div>
+        </label>
+
+        
+       <label class="area culture">
+            <input type="checkbox" class="checkbox" name="Name" value="Culture and entertainment"  id="areaC"  ngModel  #areaC="ngModel">
+                <div> 
+                    <div class="title"> Culture & Entertainment </div>   
+                </div>
+        </label>
+        
+       <button type="submit" [disabled]="f.invalid" class="button"> Next </button>
    
-   
+    </div>
+
+</form>
+
    </div>
    
