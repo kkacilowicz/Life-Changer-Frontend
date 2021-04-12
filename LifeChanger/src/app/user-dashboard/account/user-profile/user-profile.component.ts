@@ -15,5 +15,10 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.user();
   }
+
+
+  goEdit() {
+    this.authService.changePage('/profile-edit');
+  }
 }
 

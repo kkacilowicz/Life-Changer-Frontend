@@ -1,20 +1,48 @@
-.profile-container
-  position: relative
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -75%)
-  width: 40vw
-  .display-3, .lead
-    text-align: center
-    .lead
-      margin-top: 50px
-    h1
-      margin-bottom: 15px
-    form
+body
+  background: rgb(99, 39, 120)
+
+.form-control:focus
+  box-shadow: none
+  border-color: #BA68C8
+
+.profile-button
+  background: rgb(99, 39, 120)
+  box-shadow: none
+  border: none
+
+  &:hover
+    background: #682773
+
+  &:focus
+    background: #682773
+    box-shadow: none
+
+  &:active
+    background: #682773
+    box-shadow: none
+
+.back:hover
+  color: #682773
+  cursor: pointer
+
+.labels
+  font-size: 11px
+
+.add-experience:hover
+  background: #BA68C8
+  color: #fff
+  cursor: pointer
+  border: solid 1px #BA68C8
+
+.container
+  width: 70vw
+  max-width: 500px
+  .py-5
+    padding-top: 2rem !important
+  .title
+    h2
       margin: 0 auto
-      padding-left: 5%
-      div
-        label
-          font-weight: 700
-          input
-            padding-left: 5px
+      text-align: center
+  .col-md-12
+    width: 75%
+    margin: 5px auto
