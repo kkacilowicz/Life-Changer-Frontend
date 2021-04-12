@@ -2,11 +2,11 @@
 
     <div class="label"> Choose the area of life you want to improve </div>
    
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
    <div class="container">
 
-       <label class="area love">
-           <input type="checkbox" class="checkbox" name="Name" value="Love"  id="areaL"  ngModel #areaL="ngModel">
+       <label class="area love" >
+           <input type="checkbox" class="checkbox" name="Name"  formControlName="name" (change)="getAreaId($event,option1)" >
                 <div> 
                     <div class="title marg"> Love </div> 
                     <div class="text"> Option recommended for people in a relationship  </div>    
@@ -14,7 +14,7 @@
        </label>
 
        <label class="area sport">
-            <input type="checkbox" class="checkbox" name="Name" value="Sport and health"  id="areaS"  ngModel  #areaS="ngModel">
+            <input type="checkbox" class="checkbox" name="Name"   formControlName="name" (change)="getAreaId($event,option2)">
                 <div> 
                     <div class="title marg"> Sport & Health </div>  
                 </div>
@@ -22,13 +22,13 @@
 
         
        <label class="area culture">
-            <input type="checkbox" class="checkbox" name="Name" value="Culture and entertainment"  id="areaC"  ngModel  #areaC="ngModel">
+            <input type="checkbox" class="checkbox" name="Name"   formControlName="name" (change)="getAreaId($event,option3)">
                 <div> 
                     <div class="title"> Culture & Entertainment </div>   
                 </div>
         </label>
         
-       <button type="submit" [disabled]="f.invalid" class="button"> Next </button>
+       <button type="submit" class="button"> Next </button>
    
     </div>
 
