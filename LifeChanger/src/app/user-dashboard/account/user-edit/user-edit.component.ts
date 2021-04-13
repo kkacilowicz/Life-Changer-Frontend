@@ -11,8 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./user-edit.component.sass']
 })
 export class UserEditComponent implements OnInit {
-  model: any = {}; // potem dodac dane do edycji
-
+  model: { op: string, path: string, value: string }[] = [];
   userInfo: IUser | undefined;
 
   constructor(private alertService: AlertService,
@@ -23,8 +22,34 @@ export class UserEditComponent implements OnInit {
     this.userService.user();
   }
 
+  onChange(e) {
+    if (e.target.value.length !== 0) {
+      switch (e.target.name) {
+        case "userName": {
+          if ("userName" !== this.userService.userInfo.userName) {
+            this.model.splice(0, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
+          }
+          break;
+        }
+        case "phoneNumber": {
+          if ("phoneNumber" !== this.userService.userInfo.phoneNumber) {
+            this.model.splice(1, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
+          }
+          break;
+        }
+        case "gender": {
+          if ("gender" !== this.userService.userInfo.gender) {
+            this.model.splice(2, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
+          }
+          break;
+        }
+      }
+    }
+    console.log(this.model);
+  }
 
-  onSubmit(f: NgForm) {
+  Submit() {
+    console.log(this.model);
     this.progressBar.startLoading();
     this.alertService.info('Updating Account');
     const updateUserObserver = {
@@ -40,6 +65,6 @@ export class UserEditComponent implements OnInit {
         this.progressBar.setError();
       }
     };
-    // this.userService.update(f.value).subscribe(updateUserObserver);
+    this.userService.updateUser(this.model).subscribe(updateUserObserver);
   }
 }

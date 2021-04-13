@@ -17,9 +17,6 @@ export class AuthService {
   helper = new JwtHelperService();
   token;
   decodedToken: any;
-  currentUser: IUser | undefined;
-
-
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -30,7 +27,7 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.helper.decodeToken(user.token);
-          this.currentUser = user.given_name; //chwilowo undefined
+          console.log(this.decodedToken);
         }
       })
     )
@@ -43,8 +40,6 @@ export class AuthService {
     let options = { headers: headers };
     return this.http.post(this.apiUrl + 'register', model, options)
   }
-
-
 
   resetPassword(model: any) {
     console.log(model);
@@ -67,10 +62,21 @@ export class AuthService {
     let options = { headers: headers };
     return this.http.put(this.changePasswordUrl, model, options);
   }
-
-  deleteAccount(model: any) {
+  changeEmail(model: any) {
     console.log(model);
-    return this.http.post(this.changePasswordUrl, model); //zmienic end pointa na usuwanie konta
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    let options = { headers: headers };
+    return this.http.put(this.apiUrl + 'changeemail', model, options);
+  }
+
+  deleteAccount() {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    let options = { headers: headers };
+    return this.http.delete(this.apiUrl, options);
   }
 
   loggedIn() {

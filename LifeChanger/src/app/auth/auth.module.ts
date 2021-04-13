@@ -11,11 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
 import { DeleteComponent } from './account/delete/delete.component';
+import { ChangeEmailComponent } from './account/change-email/change-email.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent,],
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent, ChangeEmailComponent,],
   imports: [
     CommonModule,
     AuthRoutingModule,
