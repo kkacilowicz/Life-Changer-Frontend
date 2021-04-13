@@ -48,6 +48,7 @@ export class PreferencesComponent implements OnInit {
    
     this.form.patchValue({Id : this.selectedItems})
     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
+    this.Preferences.changePage('details');
   }
 
   getAreaId(e:any, id:number)

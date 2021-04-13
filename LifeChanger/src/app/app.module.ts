@@ -9,12 +9,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { PreferencesComponent } from './pages/preferences/preferences.component';
 import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailsComponent } from './pages/preferences/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PreferencesComponent
+    PreferencesComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
