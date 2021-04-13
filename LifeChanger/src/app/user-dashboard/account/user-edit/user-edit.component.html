@@ -26,15 +26,16 @@
                   <div class="col-md-12">
                     <label class="labels">Gender</label>
                     <div class="form-check">
-                      <input class="form-check-input" (change)="onChange($event)" type="radio" name="gender" id="sexFemale" value="female" checked ngModel required #sexFemale="ngModel">
+                      <input class="form-check-input" (change)="onChange($event)" type="radio" name="gender" id="sexFemale" value="female"   [checked]="!checkGender() ">
+                      <!-- ngModel  #sexFemale="ngModel" -->
                     <label class="form-check-label" for="sexFemale" >
                       <i class="fas fa-female"></i> Female
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" (change)="onChange($event)" type="radio" name="gender" id="male"  value="male"
-                    ngModel required #male="ngModel" >
-
+                    [checked]="checkGender()">
+                     <!-- ngModel required #male="ngModel" -->
                     <label class="form-check-label" for="male">
                       <i class="fas fa-male"></i> Male
                     </label>

@@ -24,9 +24,10 @@ export class UserEditComponent implements OnInit {
     this.userService.user();
   }
 
-  // checkGender() {
-  //   return (this.userService.userInfo.gender == 'male') ? false : true;
-  // }
+  checkGender() {
+    console.log(this.userService.userInfo.gender === 'Male' ? true : false);
+    return (this.userService.userInfo.gender === 'Male') ? true : false;
+  }
 
 
   onChange(e) {
