@@ -3,19 +3,19 @@
       <div class="form-container">
         <div class="p-3 py-5">
               <div class="title d-flex justify-content-between align-items-center mb-3">
-                  <h2 >Profile Settings</h2>
+                  <a class="cancel" [routerLink]="['/my-profile']" routerLinkActive="active"><i class="fas fa-arrow-left"></i></a><h2 >Delete Account</h2>
               </div>
-              <form #f="ngForm" (ngSubmit)="onSubmit()">
+              <form>
               <div class="row mt-3">
                 <div class="col-md-12"><label class="labels">Password</label>
-                  <input type="text" name="password" ngModel required #password="ngModel" class="form-control" placeholder="Enter Password" >
+                  <input type="password" name="password" ngModel required #password="ngModel" class="form-control" placeholder="Enter Password" >
                 </div>
                   <div class="col-md-12"><label class="labels">Confirm Password</label>
-                    <input type="text" name="confirmPassword" ngModel required #confirmPassword="ngModel" class="form-control" placeholder="Confirm Password" >
+                    <input type="password" name="confirmPassword" ngModel required #confirmPassword="ngModel" class="form-control" placeholder="Confirm Password" >
                   </div>
               </div>
               <div class="mt-4 text-center">
-                <button type="submit" [disabled]="f.invalid" class="btn btn-primary profile-button"> Delete Account</button>
+                <button type="submit" (click)="onSubmit()" [disabled]="password.touched&&password.errors?.required || confirmPassword.touched&&confirmPassword.errors?.required" class="btn btn-primary profile-button"> <i class="fas fa-trash-alt"></i>Delete Account</button>
               </div>
             </form>
             </div>

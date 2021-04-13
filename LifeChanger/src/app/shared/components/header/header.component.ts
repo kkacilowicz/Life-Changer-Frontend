@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    this.authService.decodedToken = null;
     this.alertService.success("Logged Out");
     this.authService.changePage('')
   }

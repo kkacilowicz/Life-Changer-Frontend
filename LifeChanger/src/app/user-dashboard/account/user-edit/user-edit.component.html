@@ -1,73 +1,53 @@
-<!-- <div class="homePage">
-    <div class = "containter modal-dialog modal-dialog-centered text-center ">
-      <div class = "col-sm-12 main-section">
-        <div class = "modal-content">
-          <div class="title">
-            <h2> Edit User Profile </h2>
-          </div>
-          <form   class="col-12" #f="ngForm" (ngSubmit)="onSubmit(f)">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Username</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.userName}}">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.email}}">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Phone Number</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.phoneNumber}}">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Gender</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{userService.userInfo.gender}}">
-            </div>
-            <!-- <div class="custom-control custom-radio">
-              <input type="radio" id="male" name="male" class="custom-control-input" checked="">
-              <label class="custom-control-label" for="male">Male</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="female" name="female" class="custom-control-input" >
-              <label class="custom-control-label" for="female">Female</label>
-            </div> -->
-            <!-- <div>
-              <a [routerLink]="['my-profile']" routerLinkActive="active">Cancel</a>
-            </div>
-            <div>
-              <a [routerLink]="['/preferences']" routerLinkActive="active">Edit preferences</a>
-            </div>
-            <div>
-              <a [routerLink]="['/delete-account']" routerLinkActive="active">Delete account</a>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-user-edit"></i> Update Account</button>
-          </form>
-        </div>
-      </div>
-    </div>
-</div> -->
 
-<div class="container rounded bg-white mt-5 mb-5">
+<div class="container rounded bg-white mt-3 mb-5">
   <div class="row">
       <div class="form-container">
         <div class="p-3 py-5">
               <div class="title d-flex justify-content-between align-items-center mb-3">
-                  <h2 >Profile Settings</h2>
+                <a class="cancel" [routerLink]="['/my-profile']" routerLinkActive="active"><i class="fas fa-arrow-left"></i></a><h2 >Profile Settings</h2>
               </div>
-              <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+              <form >
               <div class="row mt-3">
-                <div class="col-md-12"><label class="labels">Username</label>
-                  <input type="text" class="form-control" placeholder="Enter Username" value="{{userService.userInfo.userName}}">
+                <div class="col-md-12">
+                  <label class="labels">Username</label>
+                  <input type="text" (change)="onChange($event)" name = "userName" class="form-control" placeholder="Enter new Username" value="{{userService.userInfo.userName}}">
                 </div>
-                  <div class="col-md-12"><label class="labels">PhoneNumber</label><input type="text" class="form-control" placeholder="Enter Phone number" value="{{userService.userInfo.phoneNumber}}"></div>
-                  <div class="col-md-12"><label class="labels">Email </label><input type="text" class="form-control" placeholder="Enter Rmail" value="{{userService.userInfo.email}}"></div>
-                  <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control" placeholder="Enter Gender" value="{{userService.userInfo.gender}}"></div>
-                  <div class="col-md-12"><label class="labels">Birth Date</label><input type="text" class="form-control" placeholder="education" value="{{userService.userInfo.birthDate}}"></div>
+                  <div class="col-md-12">
+                    <label class="labels">PhoneNumber</label>
+                    <input type="text" (change)="onChange($event)" ngModel required #phoneNumber="ngModel" name = "phoneNumber" class="form-control" placeholder="Enter Phone number" value="{{userService.userInfo.phoneNumber}}" required pattern="[0-9]{9}">
+                    <div *ngIf="phoneNumber.touched&&phoneNumber.errors?.pattern" class="bgAlert">Wrong phone number</div>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Email </label>
+                    <a [routerLink]="['/change-email']" routerLinkActive="active">
+                      <input type="text" readonly="" name = "email" class="form-control" value="{{userService.userInfo.email}}"></a>
+                  </div>
+
+                  <div class="col-md-12">
+                    <label class="labels">Gender</label>
+                    <div class="form-check">
+                      <input class="form-check-input" (change)="onChange($event)" type="radio" name="gender" id="sexFemale" value="female" checked ngModel required #sexFemale="ngModel">
+                    <label class="form-check-label" for="sexFemale" >
+                      <i class="fas fa-female"></i> Female
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" (change)="onChange($event)" type="radio" checked="" name="gender" id="sexMale" value="male" ngModel required #sexMale="ngModel" >
+                    <label class="form-check-label" for="sexMale">
+                      <i class="fas fa-male"></i> Male
+                    </label>
+                  </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Birth Date</label>
+                    <input readonly="" type="text" class="form-control" placeholder="Birth Date" value="{{userService.userInfo.birthDate}}">
+                  </div>
               </div>
               <div class="mt-5 text-center">
-                <a [routerLink]="['/my-profile']" routerLinkActive="active">Cancel</a>
-                <a [routerLink]="['/delete-account']" routerLinkActive="active">Delete account</a>
-                <a [routerLink]="['/preferences']" routerLinkActive="active">Edit preferences</a>
-                <button type="submit" class="btn btn-primary profile-button"><i class="fas fa-user-edit"></i> Update Account</button>
+                <a class="btn btn-primary profile-button" [routerLink]="['/delete-account']" routerLinkActive="active"><i class="fas fa-trash-alt"></i>Delete account</a>
+                <a *ngIf="!model?.length" class="btn btn-primary profile-button" [routerLink]="['/preferences']" routerLinkActive="active"><i class="fas fa-cogs"></i>Edit preferences</a>
+
+                  <button *ngIf="model?.length" (click)="Submit()" [disabled]="phoneNumber.touched&&phoneNumber.errors?.pattern" type="submit" class="btn btn-primary profile-button"><i class="fas fa-user-edit"></i> Update Account</button>
               </div>
             </form>
             </div>

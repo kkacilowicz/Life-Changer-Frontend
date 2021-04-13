@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { IUser } from './../models/user'
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  userUrl = environment.apiUrl + 'userinfo';
+  userUrl = environment.apiUrl;
 
   userInfo: IUser = {
     email: '',
@@ -26,18 +26,8 @@ export class UserService {
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
-    return this.httpClient.get<IUser>(this.userUrl, { headers: headers })
+    return this.httpClient.get<IUser>(this.userUrl + 'userinfo', { headers: headers })
   }
-
-
-  // .pipe(
-  //   map((user: IUser) => {
-  //     if (user) {
-  //       console.log(user);
-  //     }
-  //     return user;
-  //   })
-  // )
 
   user() {
     this.getUser().subscribe((data: IUser) => this.userInfo = {
@@ -48,6 +38,52 @@ export class UserService {
       birthDate: (data as any).birthDate,
     });
   }
+
+  updateUser(model: any) {
+    console.log(model);
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+      .set('content-type', 'application/json-patch+json');
+    let options = { headers: headers };
+    return this.httpClient.patch(this.userUrl + 'updateuser', model, options).pipe(
+      map((user: any) => {
+        if (user) {
+          localStorage.setItem('token', user.token);
+        }
+      })
+    )
+  }
 }
 
 
+
+
+// updateUser(model: any) {
+  //   // console.log(model);
+  //   // let headers = new HttpHeaders({
+  //   //   'Authorization': `Bearer ${localStorage.getItem('token')}`
+  //   // });
+  //   // return this.httpClient.patch(this.userUrl + 'updateuser', { headers: headers })
+
+  //   console.log(model);
+  //   return this.httpClient.patch(this.userUrl + 'updateuser', model).pipe(
+  //     map((user: any) => {
+  //       if (user) {
+  //         localStorage.setItem('token', user.token);
+  //       }
+  //     })
+  //   )
+  // }
+
+
+
+  //   console.log(model);
+  //   const formData = new FormData();
+  //   formData.append('model.name', model.value);
+  //   return this.httpClient.patch(this.userUrl, formData).pipe(
+  //     map((response: any) => {
+  //       if (response) {
+  //       }
+  //     })
+  //   );
