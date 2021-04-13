@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Rum+Raisin&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Margarine&family=Rum+Raisin&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300&display=swap')
-    
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap')
+
 .background
     background-color: #F9D6C0
     position: absolute
@@ -22,26 +23,25 @@
     flex-flow: row wrap
 
 .area
-    background-color: black
     margin-top: 12vh
     width: 30vh
     padding-right: 5vh
     height: 43vh
     cursor: pointer
-    border-radius: 5px
+    border-bottom-right-radius: 25px
+    border-bottom-left-radius: 25px
+    border-top-right-radius: 25px
     position: relative
     display: block
+    border: 5px solid #5F0336
  
 
-input
-    &[type=checkbox]:checked ~ .title
-        border: 5px solid red
 
 .title
     background-color: #A27C7C
     opacity: 0.97
-    width: 30vh
-    height: 10vh
+    width: calc( 30vh - 10px )
+    height: calc( 10vh - 10px  )
     border-bottom-left-radius: 24px
     border-bottom-right-radius: 24px
     margin: 33vh 0 0 0
@@ -82,11 +82,49 @@ input
     background-size: cover
 
 .button 
-    font-size: 100px
+    background-color: #F9D7EA
+    margin-top: 2vh
+    margin-left: 40vw
+    margin-right: 40vw
+    height: 8vh
+    width: 20vw
+    color: #5F0336
+    padding-top: 0px
+    font-size: 2.5vw
+    font-family: 'Margarine', cursive
+    border-radius: 2vh
+    border: 0.75vh solid #A27C7C
+    &:hover
+        border-style: dashed
+        border-color: #5F0336
 
 .checkbox
     position: absolute
     top: 10px
     right: 10px
     z-index: 1
-    opacity: 1
+    opacity: 0
+    &:checked ~ .tickmark
+        border-color: #5F0336 transparent transparent #5F0336
+        
+
+            
+
+.tickmark
+    position: absolute
+    top: 0px
+    left: 0px
+    border: 60px solid
+    border-color: #A27C7C transparent transparent #A27C7C
+    &::before
+        content: ""
+        position: absolute
+        top: -40px
+        left: -40px
+        width: 45px
+        height: 20px
+        border: 6px solid
+        border-color: transparent transparent #fff #fff 
+        transform: rotate(-45deg)
+
+

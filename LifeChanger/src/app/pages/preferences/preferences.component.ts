@@ -30,7 +30,7 @@ export class PreferencesComponent implements OnInit {
     this.selectedItems = new Array<number>();
 
     this.form = this.fb.group({
-      id : [''],
+      Id : [''],
     })
 
  
@@ -46,7 +46,7 @@ export class PreferencesComponent implements OnInit {
       }
     };
    
-    this.form.patchValue({id : this.selectedItems})
+    this.form.patchValue({Id : this.selectedItems})
     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
   }
 
@@ -59,7 +59,6 @@ export class PreferencesComponent implements OnInit {
     else{
       this.selectedItems = this.selectedItems.filter(m=>m!=id);
     }
-    
     return this.selectedItems;
   }
 
