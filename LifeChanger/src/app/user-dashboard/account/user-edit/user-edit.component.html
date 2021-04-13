@@ -32,8 +32,10 @@
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" (change)="onChange($event)" type="radio" checked="" name="gender" id="sexMale" value="male" ngModel required #sexMale="ngModel" >
-                    <label class="form-check-label" for="sexMale">
+                    <input class="form-check-input" (change)="onChange($event)" type="radio" name="gender" id="male"  value="male"
+                    ngModel required #male="ngModel" >
+
+                    <label class="form-check-label" for="male">
                       <i class="fas fa-male"></i> Male
                     </label>
                   </div>
