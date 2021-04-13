@@ -25,11 +25,8 @@ export class UserEditComponent implements OnInit {
   }
 
   checkGender() {
-    console.log(this.userService.userInfo.gender === 'Male' ? true : false);
     return (this.userService.userInfo.gender === 'Male') ? true : false;
   }
-
-
   onChange(e) {
     if (e.target.value.length !== 0) {
       switch (e.target.name) {
