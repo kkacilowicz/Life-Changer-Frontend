@@ -66,9 +66,12 @@ export class AuthService {
     return this.http.put(this.changePasswordUrl, model, options);
   }
 
-  deleteAccount(model: any) {
-    console.log(model);
-    return this.http.post(this.changePasswordUrl, model); //zmienic end pointa na usuwanie konta
+  deleteAccount() {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    let options = { headers: headers };
+    return this.http.delete(this.apiUrl, options);
   }
 
   loggedIn() {

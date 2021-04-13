@@ -18,8 +18,7 @@ export class DeleteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //dodac usuwanie tokenu
-  onSubmit(f: NgForm) {
+  onSubmit() {
     this.progressBar.startLoading();
     this.alertService.info('Deleting account');
     const deleteAccountObserver = {
@@ -36,6 +35,6 @@ export class DeleteComponent implements OnInit {
         this.progressBar.setError();
       }
     };
-    this.authService.deleteAccount(f.value).subscribe(deleteAccountObserver);
+    this.authService.deleteAccount().subscribe(deleteAccountObserver);
   }
 }
