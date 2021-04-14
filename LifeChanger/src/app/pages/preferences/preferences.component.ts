@@ -2,18 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import {  AuthService } from 'src/app/shared/services/auth.service';
+import { DetailsComponent } from './details/details.component';
 
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.component.html',
-  styleUrls: ['./preferences.component.sass']
+  styleUrls: ['./preferences.component.sass'],
+  
 })
 
 
 export class PreferencesComponent implements OnInit {
 
   form!: FormGroup;
+  areaList= "love";
+
+  
 
   constructor(
     public Preferences: PreferencesService, 

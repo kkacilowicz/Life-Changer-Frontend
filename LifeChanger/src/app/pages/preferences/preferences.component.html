@@ -1,5 +1,7 @@
 <div *ngIf="authService.loggedIn();" class="background">
 
+   
+
     <div class="label"> Choose the area of life you want to improve </div>
    
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -31,8 +33,9 @@
                 </div>
         </label>
     </div>
-    <button type="submit"  class="button"> NEXT </button>
+    <button type="submit"   class="button"> NEXT  </button>
 </form>
+
 
    </div>
    

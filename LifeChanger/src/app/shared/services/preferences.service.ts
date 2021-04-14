@@ -15,10 +15,16 @@ export class PreferencesService {
 
   preferences(model: any) {
     console.log(model);
-    return this.http.post(this.preUrl, model)
+    return this.http.post(this.preUrl, model);
   }
 
   changePage(path: string) {
     this.router.navigateByUrl(path);
   }
+
+  details(model: any) {
+    console.log(model);
+    return this.http.post(this.preUrl + 'LikedPreferences', model);
+  }
+
 }
