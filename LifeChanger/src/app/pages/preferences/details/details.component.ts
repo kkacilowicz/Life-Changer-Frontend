@@ -47,22 +47,22 @@ export class DetailsComponent implements OnInit {
   option4 = 50;
   option5 = 32;
   option6 = 31;
-  option7 = 7;
-  option8 = 8;
-  option9 = 9;
-  option10 = 10;
-  option11 = 11;
-  option12 = 12;
-  option13 = 13;
-  option14 = 14;
-  option15 = 15;
-  option16 = 16;
-  option17 = 17;
-  option18 = 18;
-  option19 = 19;
-  option20 = 20;
-  option21 = 21;
-  option22 = 22;
+  option7 = 2;
+  option8 = 3;
+  option9 = 4;
+  option10 = 5;
+  option11 = 6;
+  option12 = 7;
+  option13 = 8;
+  option14 = 26;
+  option15 = 27;
+  option16 = 9;
+  option17 = 10;
+  option18 = 11;
+  option19 = 13;
+  option20 = 14;
+  option21 = 15;
+  option22 = 16;
 
   ngOnInit(): void {
     
