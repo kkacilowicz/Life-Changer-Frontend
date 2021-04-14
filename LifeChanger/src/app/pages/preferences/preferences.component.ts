@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import {  AuthService } from 'src/app/shared/services/auth.service';
-import { DetailsComponent } from './details/details.component';
+import { templateSourceUrl } from '@angular/compiler';
 
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.sass'],
+  
   
 })
 
@@ -21,6 +22,8 @@ export class PreferencesComponent implements OnInit {
   love!: boolean;
   sport!: boolean;
   culture!: boolean;
+
+  choose: boolean = false;
   
   //areaList = [this.love, this.sport, this. culture];
 
@@ -35,8 +38,8 @@ export class PreferencesComponent implements OnInit {
   areaList: boolean[]=[];
   selectedItems: number[] = [];
   option1 = 1;
-  option2 = 2;
-  option3 = 3;
+  option2 = 3;
+  option3 = 2;
 
   ngOnInit(): void {
     this.selectedItems = new Array<number>();
@@ -44,41 +47,43 @@ export class PreferencesComponent implements OnInit {
     this.love =false;
     this.culture = false;
     this.sport = false;
-
+   
     this.form = this.fb.group({
-      Categories : [''],
+      categories : [''],
     })
 
  
   }
 
-  onSubmit() {
-   const preferencesObserver = {
-      next: x => {
-        console.log('Preferences OK');
-     },
-     error: err => {
-        console.log(err);
-      }
-    };
-   
-    this.areaList.push(this.love);
-    this.areaList.push(this.sport);
-    this.areaList.push(this.culture);
-    console.log(this.areaList)
-    this.form.patchValue({Categories : this.selectedItems})
-    this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
-    this.Preferences.changePage('details');
-  }
 
-  getAreaId(e:any, Categories:number)
+  onSubmit() {
+    const preferencesObserver = {
+       next: x => {
+         console.log('Preferences OK');
+         this.authService.changePage('details');
+      },
+      error: err => {
+         console.log(err);
+       }
+     };
+    
+     this.areaList.push(this.love);
+     this.areaList.push(this.sport);
+     this.areaList.push(this.culture);
+     console.log(this.areaList)
+     this.form.patchValue({categories : this.selectedItems})
+     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
+     
+   }
+
+  getAreaId(e:any, categories:number)
   {
     if(e.target.checked)
     {
-      this.selectedItems.push(Categories);
+      this.selectedItems.push(categories);
     }
     else{
-      this.selectedItems = this.selectedItems.filter(m=>m!=Categories);
+      this.selectedItems = this.selectedItems.filter(m=>m!=categories);
     }
     return this.selectedItems;
   }
@@ -103,7 +108,7 @@ export class PreferencesComponent implements OnInit {
     else{
       this.sport=true;
     }
-    console.log(this.sport)
+   // console.log(this.sport)
     return this.sport;
   }
 
@@ -115,7 +120,7 @@ export class PreferencesComponent implements OnInit {
     else{
       this.culture=true;
     }
-    console.log(this.culture)
+   // console.log(this.culture)
     return this.culture;
   }
 

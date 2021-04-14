@@ -14,17 +14,32 @@ export class PreferencesService {
 
 
   preferences(model: any) {
+
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+    .set('content-type', 'application/json');
+
+    let options = { headers: headers };
     console.log(model);
-    return this.http.post(this.preUrl, model);
+
+    return this.http.post(this.preUrl + 'GeneratePreferences' , model,options);
   }
 
-  changePage(path: string) {
-    this.router.navigateByUrl(path);
+  sendPreference(model: any){
+    
+
   }
 
   details(model: any) {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+    .set('content-type', 'application/json');
+
+    let options = { headers: headers };
     console.log(model);
-    return this.http.post(this.preUrl + 'LikedPreferences', model);
+    return this.http.post(this.preUrl + 'LikedPreferences', model,options);
   }
 
 }

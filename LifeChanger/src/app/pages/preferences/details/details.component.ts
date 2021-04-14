@@ -27,7 +27,9 @@ export class DetailsComponent implements OnInit {
                   '../../../assets/Images/Preferences/culture/teatr.jpg',
                   ]
 
- area = [true, false, true]
+ @Input()
+ area:boolean[]=[true, true, true]; 
+
  form!: FormGroup;
 
  constructor(
@@ -40,11 +42,11 @@ export class DetailsComponent implements OnInit {
   threeElementsSport: number[] = [];
   threeElementsCulture: number[] = [];
   option1 = 1;
-  option2 = 2;
-  option3 = 3;
-  option4 = 4;
-  option5 = 5;
-  option6 = 6;
+  option2 = 28;
+  option3 = 37;
+  option4 = 50;
+  option5 = 32;
+  option6 = 31;
   option7 = 7;
   option8 = 8;
   option9 = 9;
@@ -63,12 +65,13 @@ export class DetailsComponent implements OnInit {
   option22 = 22;
 
   ngOnInit(): void {
+    
     this.selectedDetails = new Array<number>();
     this.threeElements = new Array<number>();
     this.threeElementsSport = new Array<number>();
     this.threeElementsCulture = new Array<number>();
     this.form = this.fb.group({
-      Categories : [''],
+      categories : [''],
     })
    
   }
@@ -85,7 +88,7 @@ export class DetailsComponent implements OnInit {
        }
      };
     
-     this.form.patchValue({Categories : this.selectedDetails})
+     this.form.patchValue({categories : this.selectedDetails})
      this.Preferences.details(this.form.value).subscribe(detailsObserver);
    }
   
