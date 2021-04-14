@@ -325,6 +325,9 @@
 
     </div>
 
-    <button type="submit" class="button"> SEND </button>
+    <button type="submit" [disabled]="selectedDetails.length==0" class="button"> SEND </button>
+    <div *ngIf="selectedDetails.length==0" class="info">
+      To be able to send you have to select pictures 
+    </div>
   </form>
 </div>

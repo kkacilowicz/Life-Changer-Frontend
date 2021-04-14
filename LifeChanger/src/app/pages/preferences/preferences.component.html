@@ -33,7 +33,12 @@
                 </div>
         </label>
     </div>
-    <button type="submit"   class="button"> NEXT  </button>
+    <button type="submit" [disabled]="selectedItems.length==0" class="button"> NEXT </button>
+    <div *ngIf="selectedItems.length==0" class="info">
+      To be able to send you have to select area of life
+    </div>
+
+
 </form>
 
 

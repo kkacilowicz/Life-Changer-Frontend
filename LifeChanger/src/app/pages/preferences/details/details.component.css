@@ -83,3 +83,12 @@ img {
   border-style: dashed;
   border-color: #5F0336;
 }
+
+.info {
+  margin-top: 1vh;
+  text-align: center;
+  padding: 1vh 0vh 1vh 2vh;
+  font-family: 'Kiwi Maru', serif;
+  font-size: 19px;
+  font-weight: bold;
+}
