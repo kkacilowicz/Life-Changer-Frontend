@@ -16,12 +16,17 @@ export class UserEditComponent implements OnInit {
 
   constructor(private alertService: AlertService,
     public progressBar: ProgressBarService,
-    public userService: UserService) { }
+    public userService: UserService) {
+
+  }
 
   ngOnInit(): void {
     this.userService.user();
   }
 
+  checkGender() {
+    return (this.userService.userInfo.gender === 'Male') ? true : false;
+  }
   onChange(e) {
     if (e.target.value.length !== 0) {
       switch (e.target.name) {
@@ -67,4 +72,5 @@ export class UserEditComponent implements OnInit {
     };
     this.userService.updateUser(this.model).subscribe(updateUserObserver);
   }
+
 }
