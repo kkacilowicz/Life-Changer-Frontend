@@ -49,8 +49,9 @@ export class AuthService {
     return this.http.post(this.apiUrl + 'resetpassword', model, options)
   }
 
-  confirmEmail(model: any) {
-    return this.http.post(this.confirmEmailUrl, model);
+  confirmEmail() {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
+    return this.http.post(this.confirmEmailUrl, headers);
   }
 
   changePassword(model: any) {

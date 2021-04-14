@@ -27,6 +27,11 @@ export class UserEditComponent implements OnInit {
   checkGender() {
     return (this.userService.userInfo.gender === 'Male') ? true : false;
   }
+
+  // phoneValidate(e) {
+  //   return (e.target.value.length !== 9) ? true : false;
+  // }
+
   onChange(e) {
     if (e.target.value.length !== 0) {
       switch (e.target.name) {
@@ -37,7 +42,7 @@ export class UserEditComponent implements OnInit {
           break;
         }
         case "phoneNumber": {
-          if ("phoneNumber" !== this.userService.userInfo.phoneNumber) {
+          if ("phoneNumber" !== this.userService.userInfo.phoneNumber && e.target.value.length == 9) {
             this.model.splice(1, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
           }
           break;
@@ -62,6 +67,7 @@ export class UserEditComponent implements OnInit {
         this.alertService.success('Profile updated');
         this.progressBar.completeLoading();
         this.progressBar.setSucces();
+        this.model.length = 0;
       },
       error: err => {
         console.log(err);

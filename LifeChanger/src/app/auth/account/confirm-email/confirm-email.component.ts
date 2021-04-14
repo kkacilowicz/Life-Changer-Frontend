@@ -18,15 +18,19 @@ export class ConfirmEmailComponent implements OnInit {
     public progressBar: ProgressBarService) { }
 
   ngOnInit(): void {
-    this.urlParams.token = this.route.snapshot.queryParamMap.get('token');
-    this.urlParams.userId = this.route.snapshot.queryParamMap.get('userId');
+    // this.urlParams.token = this.route.snapshot.queryParamMap.get('token');
+    // this.urlParams.userId = this.route.snapshot.queryParamMap.get('userId');
     this.confirmEmail();
   }
 
   confirmEmail() {
+    console.log("Co przekazane?");
+    console.log(this.urlParams.userId);
+    console.log(this.urlParams.token);
     this.progressBar.startLoading();
     this.alertService.info('Confirming email');
-    this.authService.confirmEmail(this.urlParams).subscribe(() => {
+    // this.authService.confirmEmail(this.urlParams).subscribe(() => {
+    this.authService.confirmEmail().subscribe(() => {
       console.log("succes");
       this.progressBar.completeLoading();
       this.progressBar.setSucces();
