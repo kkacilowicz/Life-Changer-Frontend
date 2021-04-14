@@ -1,6 +1,5 @@
 <div *ngIf="authService.loggedIn();" class="background">
 
-   
 
     <div class="label"> Choose the area of life you want to improve </div>
    
@@ -8,7 +7,7 @@
    <div class="container">
 
        <label class="area love" >
-           <input type="checkbox" class="checkbox"   formControlName="Id" (change)="getAreaId($event,option1)" >
+           <input type="checkbox" class="checkbox"   formControlName="Categories" (change)="getAreaId($event,option1)" (change)="changeOptionLove()"  >
            <div class="tickmark"></div>
                 <div> 
                     <div class="title marg"> Love </div> 
@@ -17,7 +16,7 @@
        </label>
 
        <label class="area sport">
-            <input type="checkbox" class="checkbox"  formControlName="Id" (change)="getAreaId($event,option2)">
+            <input type="checkbox" class="checkbox"  formControlName="Categories" (change)="getAreaId($event,option2)" (change)="changeOptionSport()">
             <div class="tickmark"></div>
                 <div> 
                     <div class="title marg"> Sport & Health </div>  
@@ -26,7 +25,7 @@
 
         
        <label class="area culture">
-            <input type="checkbox" class="checkbox"   formControlName="Id" (change)="getAreaId($event,option3)">
+            <input type="checkbox" class="checkbox"   formControlName="Categories" (change)="getAreaId($event,option3)" (change)="changeOptionCulture()" >
             <div class="tickmark"></div>
                 <div> 
                     <div class="title"> Culture & Entertainment </div>   
