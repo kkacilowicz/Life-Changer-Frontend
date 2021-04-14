@@ -1,38 +1,53 @@
 <div *ngIf="authService.loggedIn();" class="background">
 
-    <div class="label"> Choose the area of life you want to improve </div>
-   
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-   <div class="container">
+    <div *ngIf="!choose">
+        <div class="label"> Choose the area of life you want to improve </div>
 
-       <label class="area love" >
-           <input type="checkbox" class="checkbox"   formControlName="Id" (change)="getAreaId($event,option1)" >
-           <div class="tickmark"></div>
-                <div> 
-                    <div class="title marg"> Love </div> 
-                    <div class="text"> Option recommended for people in a relationship  </div>    
-                </div>
-       </label>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="container">
 
-       <label class="area sport">
-            <input type="checkbox" class="checkbox"  formControlName="Id" (change)="getAreaId($event,option2)">
-            <div class="tickmark"></div>
-                <div> 
-                    <div class="title marg"> Sport & Health </div>  
-                </div>
-        </label>
+                <label class="area love">
+                    <input type="checkbox" class="checkbox" formControlName="categories"
+                        (change)="getAreaId($event,option1)" (change)="changeOptionLove()">
+                    <div class="tickmark"></div>
+                    <div>
+                        <div class="title marg"> Love </div>
+                        <div class="text"> Option recommended for people in a relationship </div>
+                    </div>
+                </label>
 
-        
-       <label class="area culture">
-            <input type="checkbox" class="checkbox"   formControlName="Id" (change)="getAreaId($event,option3)">
-            <div class="tickmark"></div>
-                <div> 
-                    <div class="title"> Culture & Entertainment </div>   
-                </div>
-        </label>
+                <label class="area sport">
+                    <input type="checkbox" class="checkbox" formControlName="categories"
+                        (change)="getAreaId($event,option2)" (change)="changeOptionSport()">
+                    <div class="tickmark"></div>
+                    <div>
+                        <div class="title marg"> Sport & Health </div>
+                    </div>
+                </label>
+
+
+                <label class="area culture">
+                    <input type="checkbox" class="checkbox" formControlName="categories"
+                        (change)="getAreaId($event,option3)" (change)="changeOptionCulture()">
+                    <div class="tickmark"></div>
+                    <div>
+                        <div class="title"> Culture & Entertainment </div>
+                    </div>
+                </label>
+            </div>
+
+
+
+
+            <button type="submit" [disabled]="selectedItems.length==0" class="button"> NEXT </button>
+            <div *ngIf="selectedItems.length==0" class="info">
+                To be able to send you have to select area of life
+            </div>
+        </form>
+
+
     </div>
-    <button type="submit"  class="button"> NEXT </button>
-</form>
 
-   </div>
-   
+
+
+</div>

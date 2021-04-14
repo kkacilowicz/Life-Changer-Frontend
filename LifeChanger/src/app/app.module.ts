@@ -9,12 +9,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { PreferencesComponent } from './pages/preferences/preferences.component';
 import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailsComponent } from './pages/preferences/details/details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PreferencesComponent
+    PreferencesComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     SharedModule,
     AuthModule,
-    UserDashboardModule
+    UserDashboardModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
