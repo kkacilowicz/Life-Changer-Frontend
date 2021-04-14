@@ -9,7 +9,7 @@ import { PreferencesService } from 'src/app/shared/services/preferences.service'
 })
 export class DetailsComponent implements OnInit {
 
-  //images = ['../../../assets/Images/Preferences/s1.png', '../../../assets/Images/Preferences/l1.jpg', '../../../assets/Images/Preferences/c1.jpg']
+  
   loveImages = ['../../../assets/Images/Preferences/love/jedzenie.jpg','../../../assets/Images/Preferences/love/rzezba.jpg',
                 '../../../assets/Images/Preferences/love/kino.jpg','../../../assets/Images/Preferences/love/film.jpg',
                 '../../../assets/Images/Preferences/love/rower.jpg','../../../assets/Images/Preferences/love/spacer.jpg',]
@@ -27,7 +27,7 @@ export class DetailsComponent implements OnInit {
                   '../../../assets/Images/Preferences/culture/teatr.jpg',
                   ]
 
- area = [true, true, true]
+ area = [true, false, true]
  form!: FormGroup;
 
  constructor(
@@ -36,6 +36,9 @@ export class DetailsComponent implements OnInit {
 ) { }
 
   selectedDetails: number[] = [];
+  threeElements: number[] = [];
+  threeElementsSport: number[] = [];
+  threeElementsCulture: number[] = [];
   option1 = 1;
   option2 = 2;
   option3 = 3;
@@ -61,7 +64,9 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedDetails = new Array<number>();
-
+    this.threeElements = new Array<number>();
+    this.threeElementsSport = new Array<number>();
+    this.threeElementsCulture = new Array<number>();
     this.form = this.fb.group({
       Categories : [''],
     })
@@ -94,5 +99,41 @@ export class DetailsComponent implements OnInit {
        this.selectedDetails = this.selectedDetails.filter(m=>m!=id);
      }
      return this.selectedDetails;
+   }
+
+   checkThreeElementsL(e:any, id:number)
+   {
+     if(e.target.checked)
+     {
+       this.threeElements.push(id);
+     }
+     else{
+       this.threeElements= this.threeElements.filter(m=>m!=id);
+     }
+     return this.threeElements;
+   }
+
+   checkThreeElementsS(e:any, id:number)
+   {
+     if(e.target.checked)
+     {
+       this.threeElementsSport.push(id);
+     }
+     else{
+       this.threeElementsSport= this.threeElementsSport.filter(m=>m!=id);
+     }
+     return this.threeElementsSport;
+   }
+
+   checkThreeElementsC(e:any, id:number)
+   {
+     if(e.target.checked)
+     {
+       this.threeElementsCulture.push(id);
+     }
+     else{
+       this.threeElementsCulture= this.threeElementsCulture.filter(m=>m!=id);
+     }
+     return this.threeElementsCulture;
    }
 }

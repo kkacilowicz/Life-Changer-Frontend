@@ -18,9 +18,9 @@ export class PreferencesComponent implements OnInit {
   form!: FormGroup;
 
 
-  love: boolean;
-  sport: boolean;
-  culture: boolean;
+  love!: boolean;
+  sport!: boolean;
+  culture!: boolean;
   
   //areaList = [this.love, this.sport, this. culture];
 
