@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgProgress } from '@ngx-progressbar/core';
 import { AlertService } from 'ngx-alerts';
 import { AuthService } from '../../services/auth.service';
+import { GoogleActionsService } from '../../services/google-actions.service';
 import { ProgressBarService } from '../../services/progress-bar.service';
 
 
@@ -12,7 +13,7 @@ import { ProgressBarService } from '../../services/progress-bar.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public authService: AuthService, private alertService: AlertService, private progress: NgProgress, public progressBar: ProgressBarService) { }
+  constructor(public authService: AuthService, private alertService: AlertService, private progress: NgProgress, public progressBar: ProgressBarService, public googleService: GoogleActionsService) { }
 
   ngOnInit(): void {
     this.progressBar.progressRef = this.progress.ref("progressBar")

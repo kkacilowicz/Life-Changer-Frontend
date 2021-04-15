@@ -80,7 +80,8 @@ export class AuthService {
   }
 
   loggedIn() {
-    this.token = localStorage.getItem('token');
+    // this.token = localStorage.getItem('token');
+
     return !this.helper.isTokenExpired(this.token);
   }
 

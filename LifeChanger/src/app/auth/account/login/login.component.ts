@@ -4,6 +4,10 @@ import { AlertService } from 'ngx-alerts';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { GoogleActionsService } from 'src/app/shared/services/google-actions.service';
+import { UseExistingWebDriver } from 'protractor/built/driverProviders';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,10 +15,31 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private alertService: AlertService,
-    public progressBar: ProgressBarService) { }
+  // User = this.googleService.user;
+  // isSignedIn = this.googleService.isSignedIn;
+
+  User!: SocialUser;
+  isSignedIn!: boolean;
+
+  constructor(private authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService, public googleService: GoogleActionsService) { }
 
   ngOnInit(): void {
+    this.socialAuthService.authState.subscribe((user) => {
+      this.User = user;
+      this.isSignedIn = (this.User != null);
+      console.log(this.User);
+    });
+  }
+
+  googleLogin() {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(User => {
+      localStorage.setItem('socialToken', User.authToken);
+      console.log(User);
+    })
+  }
+
+  logout() {
+    this.socialAuthService.signOut();
   }
 
   onSubmit(f: NgForm) {

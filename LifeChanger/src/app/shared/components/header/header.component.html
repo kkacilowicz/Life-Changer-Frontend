@@ -15,10 +15,11 @@
         <li class="nav-item" *ngIf="!authService.loggedIn();">
           <a class="nav-link" [routerLink]="['login']" routerLinkActive="active"> <i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
-        <div class="dropdown" *ngIf="authService.loggedIn();">
+        <div class="dropdown"  *ngIf="authService.loggedIn();">
           Center
           <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <i id="user-icon" class="fas fa-user"></i>Welcome {{authService.decodedToken?.given_name}}
+            <i id="user-icon" class="fas fa-user"></i> Welcome {{authService.decodedToken?.given_name}}
+
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <li><a class="dropdown-item" [routerLink]="['my-profile']" routerLinkActive="active"><i class="fas fa-user"></i>Your profile</a></li>
