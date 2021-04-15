@@ -8,16 +8,30 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { PreferencesComponent } from './pages/preferences/preferences.component';
 import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DetailsComponent } from './pages/preferences/details/details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+// import { SocialLoginModule, GoogleLoginProvider, SocialAuthServiceConfig } from 'angularx-social-login';
+// import { HttpClientModule } from '@angular/common/http';
+// import { DemoComponentComponent } from './demo-component/demo-component.component';
+
+// const config = new SocialAuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider('1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com')
+//   }
+// ]);
+
+// export function provideConfig() {
+//   return config;
+// }
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PreferencesComponent,
-    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -27,9 +41,27 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     AuthModule,
     UserDashboardModule,
-    NgbModule
+    NgbModule,
+    // SocialLoginModule,
+    // HttpClientModule,
   ],
-  providers: [],
+  // providers: [
+  //   {
+  //     provide: 'SocialAuthServiceConfig',
+  //     useValue: {
+  //       // provideConfig
+  //       autoLogin: false,
+  //       providers: [
+  //         {
+  //           id: GoogleLoginProvider.PROVIDER_ID,
+  //           provider: new GoogleLoginProvider(
+  //             '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com'
+  //           )
+  //         },
+  //       ]
+  //     } as SocialAuthServiceConfig
+  //   }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

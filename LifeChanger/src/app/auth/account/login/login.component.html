@@ -19,6 +19,7 @@
             </div>
           <button type="submit"  [disabled]="f.invalid" class="buttonstyle"> <i class="fas fa-sign-in-alt"></i> Get Started </button>
           </form>
+          <button type="button" (click)="signInWithGoogle()" class="btn btn-block btn-primary">Sign In with Google</button>
           <div class="col-12 forgot">
           <a [routerLink]="['/reset-password']" class="forgot"> Forgot password ? </a>
           </div>
