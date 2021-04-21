@@ -23,10 +23,7 @@ export class PreferencesComponent implements OnInit {
   sport!: boolean;
   culture!: boolean;
 
-  choose: boolean = false;
-
-  //areaList = [this.love, this.sport, this. culture];
-
+  choose: boolean = false; // value = true when areas of life are selected 
 
 
   constructor(
@@ -35,11 +32,12 @@ export class PreferencesComponent implements OnInit {
     public fb: FormBuilder
   ) { }
 
-  areaList: boolean[] = [];
-  selectedItems: number[] = [];
-  option1 = 1;
-  option2 = 3;
-  option3 = 2;
+
+  selectedItems: number[] = []; // list of selected areas of life
+  areaList: boolean[] = []; // list of selected areas of life used for display 
+  option1 = 1;  // id love
+  option2 = 3;  // id sport
+  option3 = 2;  // id culture
 
   ngOnInit(): void {
     this.selectedItems = new Array<number>();
@@ -60,7 +58,6 @@ export class PreferencesComponent implements OnInit {
     const preferencesObserver = {
       next: x => {
         console.log('Preferences OK');
-        this.authService.changePage('details');
       },
       error: err => {
         console.log(err);
@@ -70,7 +67,9 @@ export class PreferencesComponent implements OnInit {
     this.areaList.push(this.love);
     this.areaList.push(this.sport);
     this.areaList.push(this.culture);
-    console.log(this.areaList)
+   // console.log(this.areaList)
+    this.choose=true;
+    console.log(this.choose)
     this.form.patchValue({ categories: this.selectedItems })
     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
 
@@ -118,7 +117,4 @@ export class PreferencesComponent implements OnInit {
     // console.log(this.culture)
     return this.culture;
   }
-
-
-
 }

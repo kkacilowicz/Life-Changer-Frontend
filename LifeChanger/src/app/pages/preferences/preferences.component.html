@@ -1,6 +1,6 @@
 <div *ngIf="authService.loggedIn();" class="background">
 
-    <div *ngIf="!choose">
+    <div *ngIf="!choose" >
         <div class="label"> Choose the area of life you want to improve </div>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -39,15 +39,39 @@
 
 
 
-            <button type="submit" [disabled]="selectedItems.length==0" class="button"> NEXT </button>
+            <button type="submit" [disabled]="selectedItems.length==0" class="button" > NEXT </button>
             <div *ngIf="selectedItems.length==0" class="info">
-                To be able to send you have to select area of life
+                You must select options to send
             </div>
         </form>
-
 
     </div>
 
 
+<div *ngIf="areaList[0]">
+    <app-love></app-love>
+    <div *ngIf="areaList[0]&&areaList[1]&&areaList[2]">
+        <app-sport></app-sport>
+        <app-culture></app-culture>
+    </div>
+    <div *ngIf="areaList[0]&&areaList[1]&&!areaList[2]">
+        <app-sport></app-sport>
+    </div>
+    <div *ngIf="areaList[0]&&!areaList[1]&&areaList[2]">
+        <app-culture></app-culture>
+    </div>
+</div>
+
+
+<div *ngIf="areaList[1]&&!areaList[0]">
+    <app-sport></app-sport>
+    <div *ngIf="areaList[1]&&areaList[2]">
+        <app-culture></app-culture>
+    </div>
+</div>
+ 
+<div *ngIf="areaList[2]&&!areaList[1]&&!areaList[0]">
+    <app-culture></app-culture>
+</div>
 
 </div>

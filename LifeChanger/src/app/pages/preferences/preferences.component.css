@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 .background {
-  background-color: #F9D6C0;
+  background-color: #F9E3B2;
   position: absolute;
   width: 100vw;
   height: calc( 100vh - 56px);
@@ -14,7 +14,7 @@
 .label {
   text-align: center;
   font-size: 50px;
-  padding-top: 4%;
+  padding-top: 4vh;
   font-family: 'Gloria Hallelujah', cursive;
 }
 
@@ -25,10 +25,10 @@
 }
 
 .area {
-  margin-top: 12vh;
-  width: 30vh;
+  margin-top: 7vh;
+  width: 35vh;
   padding-right: 5vh;
-  height: 43vh;
+  height: 45vh;
   cursor: pointer;
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
@@ -40,11 +40,11 @@
 .title {
   background-color: #A27C7C;
   opacity: 0.97;
-  width: 30vh;
+  width: 35vh;
   height: 10vh;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
-  margin: 33vh 0 0 0;
+  margin: 35vh 0 0 0;
   text-align: center;
   font-size: 3.31vh;
   font-family: 'Margarine', cursive;
@@ -88,7 +88,7 @@
 
 .button {
   background-color: #F9D7EA;
-  margin-top: 2vh;
+  margin-top: 6vh;
   margin-left: 40vw;
   margin-right: 40vw;
   height: 8vh;
