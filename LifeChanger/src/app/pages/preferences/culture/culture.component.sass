@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Margarine&family=Rum+Raisin&display=swap')
+
+.container
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-around
+
+img 
+    width: 40vh
+    height: 50vh
+    margin-right: 5vh
+    margin-top: 3vh
+    border-radius: 7px
+    cursor: pointer
+
+
+.label 
+    text-align: center
+    font-size: 50px
+    padding-top: 2%
+    font-family: 'Orelega One', cursive
+
+.button 
+    background-color: #F9D7EA
+    margin-top: 2vh
+    margin-left: 40vw
+    margin-right: 40vw
+    height: 8vh
+    width: 20vw
+    color: #5F0336
+    padding-top: 0px
+    font-size: 2.5vw
+    font-family: 'Margarine', cursive
+    border-radius: 2vh
+    border: 0.75vh solid #A27C7C
+    &:hover
+        border-style: dashed
+        border-color: #5F0336
+        ~ .info
+            opacity: 1
+
+.checkbox
+    opacity: 0
+    &:checked ~ img
+        border: 10px solid red
+
+
+.info
+    color: red
+    margin-top: 1vh
+    text-align: center
+    padding: 1vh 0vh 1vh 2vh
+    font-family: 'Kiwi Maru', serif
+    font-size: 25px
+    font-weight: bold
+    opacity: 0
+   

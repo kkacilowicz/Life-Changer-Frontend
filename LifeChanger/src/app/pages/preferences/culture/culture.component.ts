@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PreferencesService } from 'src/app/shared/services/preferences.service';
 
 @Component({
   selector: 'app-culture',
@@ -14,17 +16,51 @@ export class CultureComponent implements OnInit {
                   ]             
 
 
-  constructor() { }
+  constructor(
+    public Preferences: PreferencesService, 
+    public fb: FormBuilder
+  ) { }
 
-  option16 = 9;
-  option17 = 10;
-  option18 = 11;
-  option19 = 13;
-  option20 = 14;
-  option21 = 15;
-  option22 = 16;
+  form!: FormGroup;   // form 
+  selectedDetails: number[] = [];  // list of selected items
+  option1 = 9;
+  option2 = 10;
+  option3 = 11;
+  option4 = 13;
+  option5 = 14;
+  option6 = 15;
+  option7 = 16;
 
   ngOnInit(): void {
+    this.selectedDetails = new Array<number>();
+    this.form = this.fb.group({
+      categories: [''],
+    })
+  }
+  
+  onSubmit() {
+    const detailsObserver = {
+      next: x => {
+        console.log('Details love OK');
+      },
+      error: err => {
+        console.log(err);
+      }
+    };
+
+    this.form.patchValue({ categories: this.selectedDetails })
+    console.log(this.selectedDetails)
+    this.Preferences.details(this.form.value).subscribe(detailsObserver);
+  }
+
+  getDetailId(e: any, id: number) {
+    if (e.target.checked) {
+      this.selectedDetails.push(id);
+    }
+    else {
+      this.selectedDetails = this.selectedDetails.filter(m => m != id);
+    }
+    return this.selectedDetails;
   }
 
 }
