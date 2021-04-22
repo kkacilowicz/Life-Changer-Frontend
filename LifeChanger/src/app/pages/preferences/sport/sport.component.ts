@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sport',
@@ -16,6 +17,10 @@ export class SportComponent implements OnInit {
   '../../../assets/Images/Preferences/sport/rolki.jpg','../../../assets/Images/Preferences/sport/bieg.jpg',
   '../../../assets/Images/Preferences/sport/silownia.jpg',]
 
+  task = true
+
+  @Output()
+  eventSport = new EventEmitter<boolean>();
 
   constructor(
     public Preferences: PreferencesService, 
@@ -45,13 +50,14 @@ export class SportComponent implements OnInit {
   onSubmit() {
     const detailsObserver = {
       next: x => {
-        console.log('Details love OK');
+        console.log('Details Sport OK');
       },
       error: err => {
         console.log(err);
       }
     };
 
+    this.eventSport.emit(this.task);
     this.form.patchValue({ categories: this.selectedDetails })
     console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);

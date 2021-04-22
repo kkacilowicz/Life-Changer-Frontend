@@ -49,7 +49,7 @@
 
 
 <div *ngIf="areaList[0]">
-    <app-love></app-love>
+    <app-love (eventLove) = "selectedLove($event)"></app-love>
     <div *ngIf="areaList[0]&&areaList[1]&&areaList[2]">
         <app-sport></app-sport>
         <app-culture></app-culture>
@@ -64,14 +64,14 @@
 
 
 <div *ngIf="areaList[1]&&!areaList[0]">
-    <app-sport></app-sport>
+    <app-sport (eventSport)="selectedSport($event)"></app-sport>
     <div *ngIf="areaList[1]&&areaList[2]">
         <app-culture></app-culture>
     </div>
 </div>
  
 <div *ngIf="areaList[2]&&!areaList[1]&&!areaList[0]">
-    <app-culture></app-culture>
+    <app-culture (eventTask)="selected($event)"></app-culture>
 </div>
 
 </div>

@@ -75,6 +75,22 @@ export class PreferencesComponent implements OnInit {
 
   }
 
+  selected(task: boolean){
+    console.log("Odbieram z kultury:")
+    console.log(task)
+  }
+
+  selectedLove(task: boolean){
+    console.log("Odbieram z Love:")
+    console.log(task)
+  }
+
+  selectedSport(task: boolean){
+    console.log("Odbieram z Sportu:")
+    console.log(task)
+  }
+
+
   getAreaId(e: any, categories: number) {
     if (e.target.checked) {
       this.selectedItems.push(categories);

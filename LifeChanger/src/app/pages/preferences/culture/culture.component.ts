@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-culture',
@@ -15,6 +16,10 @@ export class CultureComponent implements OnInit {
                   '../../../assets/Images/Preferences/culture/teatr.jpg',
                   ]             
 
+  task = true
+  
+  @Output()
+  eventTask = new EventEmitter<boolean>();
 
   constructor(
     public Preferences: PreferencesService, 
@@ -37,19 +42,22 @@ export class CultureComponent implements OnInit {
       categories: [''],
     })
   }
-  
+
   onSubmit() {
     const detailsObserver = {
       next: x => {
-        console.log('Details love OK');
+        console.log('Details Culture OK');
       },
       error: err => {
         console.log(err);
       }
     };
 
+    this.eventTask.emit(this.task);
+  //  console.log("poszlo")
+
     this.form.patchValue({ categories: this.selectedDetails })
-    console.log(this.selectedDetails)
+   // console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
   }
 
@@ -62,5 +70,6 @@ export class CultureComponent implements OnInit {
     }
     return this.selectedDetails;
   }
+
 
 }

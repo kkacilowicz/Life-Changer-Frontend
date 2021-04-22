@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
-
+import { EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -16,6 +16,10 @@ export class LoveComponent implements OnInit {
     '../../../assets/Images/Preferences/love/rower.jpg', '../../../assets/Images/Preferences/love/spacer.jpg',]
 
 
+  task = true
+
+  @Output()
+  eventLove = new EventEmitter<boolean>();
 
   constructor(
     public Preferences: PreferencesService, 
@@ -49,6 +53,7 @@ export class LoveComponent implements OnInit {
       }
     };
 
+    this.eventLove.emit(this.task)
     this.form.patchValue({ categories: this.selectedDetails })
     console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);

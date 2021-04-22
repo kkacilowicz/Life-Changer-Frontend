@@ -39,7 +39,7 @@
 
     </div>
 
-    <button type="submit" [disabled]="selectedDetails.length!=3" class="button"> Next </button>
+    <button type="submit" [disabled]="selectedDetails.length!=3"  class="button"> Next </button>
     <div *ngIf="selectedDetails.length!=3" class="info">
         You choose : {{selectedDetails.length}} pictures. You must select 3 options to send.
     </div>
