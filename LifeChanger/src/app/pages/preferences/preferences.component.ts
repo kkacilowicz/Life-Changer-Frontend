@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
+import { AlertService } from 'ngx-alerts';
 
 
 @Component({
@@ -31,6 +31,7 @@ export class PreferencesComponent implements OnInit {
 
 
   constructor(
+    private alertService: AlertService,
     public Preferences: PreferencesService,
     public authService: AuthService,
     public fb: FormBuilder
@@ -65,42 +66,36 @@ export class PreferencesComponent implements OnInit {
     const preferencesObserver = {
       next: x => {
         console.log('Preferences OK');
+        this.alertService.success('Sent correctly ');
       },
       error: err => {
         console.log(err);
+        this.alertService.danger(err.error.message);
       }
     };
 
     this.areaList.push(this.love);
     this.areaList.push(this.sport);
     this.areaList.push(this.culture);
-   // console.log(this.areaList)
     this.choose=true;
-    console.log(this.choose)
     this.form.patchValue({ categories: this.selectedItems })
     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
 
   }
 
   selected(task: boolean){
-    console.log("Odbieram z kultury:")
-    console.log(task)
     this.cultureOutput = task
     this.loveOutput = false
     this.sportOutput = false
   }
 
   selectedLove(task: boolean){
-    console.log("Odbieram z Love:")
-    console.log(task)
     this.loveOutput = task;
     this.cultureOutput = false
     this.sportOutput = false
   }
 
   selectedSport(task: boolean){
-    console.log("Odbieram z Sportu:")
-    console.log(task)
     this.sportOutput = task;
     this.cultureOutput = false
     this.loveOutput = false
@@ -124,7 +119,7 @@ export class PreferencesComponent implements OnInit {
     else {
       this.love = true;
     }
-    //console.log(this.love)
+    
     return this.love;
   }
 
@@ -135,7 +130,7 @@ export class PreferencesComponent implements OnInit {
     else {
       this.sport = true;
     }
-    // console.log(this.sport)
+
     return this.sport;
   }
 
@@ -146,7 +141,6 @@ export class PreferencesComponent implements OnInit {
     else {
       this.culture = true;
     }
-    // console.log(this.culture)
     return this.culture;
   }
 }

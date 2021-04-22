@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-culture',
@@ -29,6 +30,7 @@ export class CultureComponent implements OnInit {
   eventCulture = new EventEmitter<boolean>();
 
   constructor(
+    private alertService: AlertService,
     public authService: AuthService,
     public Preferences: PreferencesService, 
     public fb: FormBuilder
@@ -55,19 +57,19 @@ export class CultureComponent implements OnInit {
     const detailsObserver = {
       next: x => {
         console.log('Details Culture OK');
+        this.authService.changePage('')
+        this.alertService.success('Sent correctly ');
       },
       error: err => {
         console.log(err);
+        this.alertService.danger(err.error.message);
       }
     };
 
     this.eventCulture.emit(this.task);
-  //  console.log("poszlo")
-
     this.form.patchValue({ categories: this.selectedDetails })
-   // console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    this.authService.changePage('')
+    
   }
 
   getDetailId(e: any, id: number) {

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-love',
@@ -28,6 +28,7 @@ export class LoveComponent implements OnInit {
   eventLove = new EventEmitter<boolean>();
 
   constructor(
+    private alertService: AlertService,
     public authService: AuthService,
     public Preferences: PreferencesService, 
     public fb: FormBuilder
@@ -56,20 +57,24 @@ export class LoveComponent implements OnInit {
     const detailsObserver = {
       next: x => {
         console.log('Details love OK');
+        this.buttonClick=true
+        if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
+          this.authService.changePage('')
+        }
+        this.alertService.success('Sent correctly ');
       },
       error: err => {
         console.log(err);
+        this.alertService.danger(err.error.message);
       }
+      
     };
 
     
     this.eventLove.emit(this.task)
     this.form.patchValue({ categories: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    this.buttonClick=true
-    if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
-      this.authService.changePage('')
-    }
+
     
   }
 

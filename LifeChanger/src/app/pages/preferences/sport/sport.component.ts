@@ -2,10 +2,8 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { EventEmitter } from '@angular/core';
-import { templateJitUrl } from '@angular/compiler';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-sport',
@@ -32,6 +30,7 @@ export class SportComponent implements OnInit {
   eventSport = new EventEmitter<boolean>();
 
   constructor(
+    private alertService: AlertService,
     public Preferences: PreferencesService, 
     public fb: FormBuilder,
     public authService: AuthService,
@@ -56,30 +55,28 @@ export class SportComponent implements OnInit {
       categories: [''],
     })
     this.buttonClick=false
-    console.log("To odbieram z love:", this.preferencesList)
   }
 
   onSubmit() {
     const detailsObserver = {
       next: x => {
         console.log('Details Sport OK');
-        
+        this.eventSport.emit(this.task);
+        this.buttonClick=true
+        if(this.preferencesList[1]==true && this.preferencesList[2]==false){
+          this.authService.changePage('')
+        }
+        this.alertService.success('Sent correctly ');
       },
       error: err => {
         console.log(err);
+        this.alertService.danger(err.error.message);
       }
     };
-
     this.eventSport.emit(this.task);
     this.form.patchValue({ categories: this.selectedDetails })
     console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    this.buttonClick=true
-    if(this.preferencesList[1]==true && this.preferencesList[2]==false){
-      this.authService.changePage('')
-    }
-    
-    
   }
 
   getDetailId(e: any, id: number) {
