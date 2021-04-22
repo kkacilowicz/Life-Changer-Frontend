@@ -19,7 +19,7 @@ export class CultureComponent implements OnInit {
   task = true
   
   @Output()
-  eventTask = new EventEmitter<boolean>();
+  eventCulture = new EventEmitter<boolean>();
 
   constructor(
     public Preferences: PreferencesService, 
@@ -53,7 +53,7 @@ export class CultureComponent implements OnInit {
       }
     };
 
-    this.eventTask.emit(this.task);
+    this.eventCulture.emit(this.task);
   //  console.log("poszlo")
 
     this.form.patchValue({ categories: this.selectedDetails })
