@@ -49,29 +49,16 @@
 
 
 <div *ngIf="areaList[0]">
-    <app-love (eventLove) = "selectedLove($event)"></app-love>
-    <div *ngIf="areaList[0]&&areaList[1]&&areaList[2]">
-        <app-sport></app-sport>
-        <app-culture></app-culture>
-    </div>
-    <div *ngIf="areaList[0]&&areaList[1]&&!areaList[2]">
-        <app-sport></app-sport>
-    </div>
-    <div *ngIf="areaList[0]&&!areaList[1]&&areaList[2]">
-        <app-culture></app-culture>
-    </div>
+    <app-love (eventLove) = "selectedLove($event)" [preferencesList]="areaList" ></app-love>
 </div>
 
-
 <div *ngIf="areaList[1]&&!areaList[0]">
-    <app-sport (eventSport)="selectedSport($event)"></app-sport>
-    <div *ngIf="areaList[1]&&areaList[2]">
-        <app-culture></app-culture>
-    </div>
+    <app-sport (eventSport)="selectedSport($event)" [preferencesList]="areaList"></app-sport>
 </div>
  
 <div *ngIf="areaList[2]&&!areaList[1]&&!areaList[0]">
-    <app-culture (eventCulture)="selected($event)"></app-culture>
+    <app-culture (eventCulture)="selected($event)" [preferencesList]="areaList"></app-culture>
 </div>
+
 
 </div>

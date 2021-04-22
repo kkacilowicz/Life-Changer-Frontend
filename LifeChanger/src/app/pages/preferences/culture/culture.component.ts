@@ -1,7 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-culture',
@@ -17,11 +18,18 @@ export class CultureComponent implements OnInit {
                   ]             
 
   task = true
-  
+
+
+
+  @Input()
+  preferencesList;
+
+
   @Output()
   eventCulture = new EventEmitter<boolean>();
 
   constructor(
+    public authService: AuthService,
     public Preferences: PreferencesService, 
     public fb: FormBuilder
   ) { }
@@ -59,6 +67,7 @@ export class CultureComponent implements OnInit {
     this.form.patchValue({ categories: this.selectedDetails })
    // console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
+    this.authService.changePage('')
   }
 
   getDetailId(e: any, id: number) {

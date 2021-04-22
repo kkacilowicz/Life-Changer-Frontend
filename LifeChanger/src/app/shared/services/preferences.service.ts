@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PreferencesService {
   preUrl: string = environment.preUrl;
 
@@ -26,10 +27,6 @@ export class PreferencesService {
     return this.http.post(this.preUrl + 'GeneratePreferences' , model,options);
   }
 
-  sendPreference(model: any){
-    
-
-  }
 
   details(model: any) {
     let headers = new HttpHeaders({
@@ -41,5 +38,6 @@ export class PreferencesService {
     console.log(model);
     return this.http.post(this.preUrl + 'LikedPreferences', model,options);
   }
+
 
 }

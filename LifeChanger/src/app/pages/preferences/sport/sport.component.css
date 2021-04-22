@@ -51,7 +51,7 @@ img {
 }
 
 .checkbox:checked ~ img {
-  border: 10px solid red;
+  border: 10px solid #81C827;
 }
 
 .info {

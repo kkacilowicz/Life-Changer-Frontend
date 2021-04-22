@@ -1,7 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 @Component({
@@ -17,11 +18,17 @@ export class LoveComponent implements OnInit {
 
 
   task = true
+  buttonClick!: boolean
+
+  @Input()
+  preferencesList;
+
 
   @Output()
   eventLove = new EventEmitter<boolean>();
 
   constructor(
+    public authService: AuthService,
     public Preferences: PreferencesService, 
     public fb: FormBuilder
   ) { }
@@ -41,6 +48,8 @@ export class LoveComponent implements OnInit {
     this.form = this.fb.group({
       categories: [''],
     })
+    this.buttonClick=false
+    console.log("To odbieram z preferences:", this.preferencesList)
   }
 
   onSubmit() {
@@ -53,10 +62,15 @@ export class LoveComponent implements OnInit {
       }
     };
 
+    
     this.eventLove.emit(this.task)
     this.form.patchValue({ categories: this.selectedDetails })
-    console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
+    this.buttonClick=true
+    if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
+      this.authService.changePage('')
+    }
+    
   }
 
   getDetailId(e: any, id: number) {

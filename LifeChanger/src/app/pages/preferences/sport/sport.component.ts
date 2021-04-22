@@ -1,7 +1,11 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { EventEmitter } from '@angular/core';
+import { templateJitUrl } from '@angular/compiler';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
+import { AuthService } from 'src/app/shared/services/auth.service';
+
 
 @Component({
   selector: 'app-sport',
@@ -18,14 +22,20 @@ export class SportComponent implements OnInit {
   '../../../assets/Images/Preferences/sport/silownia.jpg',]
 
   task = true
+  buttonClick!: boolean
+
+  @Input()
+  preferencesList;
+  
 
   @Output()
   eventSport = new EventEmitter<boolean>();
 
   constructor(
     public Preferences: PreferencesService, 
-    public fb: FormBuilder
-  ) { }
+    public fb: FormBuilder,
+    public authService: AuthService,
+    ) { }
 
   form!: FormGroup;   // form 
   selectedDetails: number[] = [];  // list of selected items
@@ -45,12 +55,15 @@ export class SportComponent implements OnInit {
     this.form = this.fb.group({
       categories: [''],
     })
+    this.buttonClick=false
+    console.log("To odbieram z love:", this.preferencesList)
   }
 
   onSubmit() {
     const detailsObserver = {
       next: x => {
         console.log('Details Sport OK');
+        
       },
       error: err => {
         console.log(err);
@@ -61,6 +74,12 @@ export class SportComponent implements OnInit {
     this.form.patchValue({ categories: this.selectedDetails })
     console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
+    this.buttonClick=true
+    if(this.preferencesList[1]==true && this.preferencesList[2]==false){
+      this.authService.changePage('')
+    }
+    
+    
   }
 
   getDetailId(e: any, id: number) {

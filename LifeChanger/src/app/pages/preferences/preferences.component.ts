@@ -23,6 +23,10 @@ export class PreferencesComponent implements OnInit {
   sport!: boolean;
   culture!: boolean;
 
+  loveOutput!: boolean;
+  sportOutput!: boolean;
+  cultureOutput!: boolean; 
+
   choose: boolean = false; // value = true when areas of life are selected 
 
 
@@ -45,6 +49,9 @@ export class PreferencesComponent implements OnInit {
     this.love = false;
     this.culture = false;
     this.sport = false;
+    this.loveOutput = false;
+    this.cultureOutput = false;
+    this.sportOutput = false;
 
     this.form = this.fb.group({
       categories: [''],
@@ -78,16 +85,25 @@ export class PreferencesComponent implements OnInit {
   selected(task: boolean){
     console.log("Odbieram z kultury:")
     console.log(task)
+    this.cultureOutput = task
+    this.loveOutput = false
+    this.sportOutput = false
   }
 
   selectedLove(task: boolean){
     console.log("Odbieram z Love:")
     console.log(task)
+    this.loveOutput = task;
+    this.cultureOutput = false
+    this.sportOutput = false
   }
 
   selectedSport(task: boolean){
     console.log("Odbieram z Sportu:")
     console.log(task)
+    this.sportOutput = task;
+    this.cultureOutput = false
+    this.loveOutput = false
   }
 
 
