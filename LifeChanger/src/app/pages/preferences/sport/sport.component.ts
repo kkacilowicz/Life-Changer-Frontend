@@ -61,12 +61,12 @@ export class SportComponent implements OnInit {
     const detailsObserver = {
       next: x => {
         console.log('Details Sport OK');
-        this.eventSport.emit(this.task);
+        this.alertService.success('Sent correctly ');
         this.buttonClick=true
         if(this.preferencesList[1]==true && this.preferencesList[2]==false){
           this.authService.changePage('')
         }
-        this.alertService.success('Sent correctly ');
+        
       },
       error: err => {
         console.log(err);
