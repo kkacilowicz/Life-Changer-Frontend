@@ -56,34 +56,3 @@ export class UserService {
   }
 }
 
-
-
-
-// updateUser(model: any) {
-  //   // console.log(model);
-  //   // let headers = new HttpHeaders({
-  //   //   'Authorization': `Bearer ${localStorage.getItem('token')}`
-  //   // });
-  //   // return this.httpClient.patch(this.userUrl + 'updateuser', { headers: headers })
-
-  //   console.log(model);
-  //   return this.httpClient.patch(this.userUrl + 'updateuser', model).pipe(
-  //     map((user: any) => {
-  //       if (user) {
-  //         localStorage.setItem('token', user.token);
-  //       }
-  //     })
-  //   )
-  // }
-
-
-
-  //   console.log(model);
-  //   const formData = new FormData();
-  //   formData.append('model.name', model.value);
-  //   return this.httpClient.patch(this.userUrl, formData).pipe(
-  //     map((response: any) => {
-  //       if (response) {
-  //       }
-  //     })
-  //   );

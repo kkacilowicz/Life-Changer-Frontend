@@ -9,6 +9,9 @@ import { PreferencesComponent } from './pages/preferences/preferences.component'
 import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SocialLoginModule } from 'angularx-social-login'
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { SocialAuthServiceConfig } from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -24,8 +27,24 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     AuthModule,
     UserDashboardModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

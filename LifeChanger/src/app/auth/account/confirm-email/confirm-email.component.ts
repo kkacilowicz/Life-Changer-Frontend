@@ -11,8 +11,8 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
 })
 export class ConfirmEmailComponent implements OnInit {
 
-  emailConfirmed: boolean = true;
-  urlParams: any = {};
+  // emailConfirmed: boolean = true;
+  // urlParams: any = {};
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private alertService: AlertService,
     public progressBar: ProgressBarService) { }
@@ -20,29 +20,33 @@ export class ConfirmEmailComponent implements OnInit {
   ngOnInit(): void {
     // this.urlParams.token = this.route.snapshot.queryParamMap.get('token');
     // this.urlParams.userId = this.route.snapshot.queryParamMap.get('userId');
-    this.confirmEmail();
+    // this.confirmEmail();
   }
 
-  confirmEmail() {
-    console.log("Co przekazane?");
-    console.log(this.urlParams.userId);
-    console.log(this.urlParams.token);
-    this.progressBar.startLoading();
-    this.alertService.info('Confirming email');
-    // this.authService.confirmEmail(this.urlParams).subscribe(() => {
-    this.authService.confirmEmail().subscribe(() => {
-      console.log("succes");
-      this.progressBar.completeLoading();
-      this.progressBar.setSucces();
-      this.alertService.success('Email confirmed');
-      this.emailConfirmed = true;
-    }, error => {
-      console.log(error);
-      this.progressBar.completeLoading();
-      this.progressBar.setError();
-      this.emailConfirmed = false;
-      this.alertService.danger(error.message);
-    })
-  }
+
 
 }
+
+
+
+// confirmEmail() {
+//   console.log("Co przekazane?");
+//   console.log(this.urlParams.userId);
+//   console.log(this.urlParams.token);
+//   this.progressBar.startLoading();
+//   this.alertService.info('Confirming email');
+//   // this.authService.confirmEmail(this.urlParams).subscribe(() => {
+//   this.authService.confirmEmail().subscribe(() => {
+//     console.log("succes");
+//     this.progressBar.completeLoading();
+//     this.progressBar.setSucces();
+//     this.alertService.success('Email confirmed');
+//     this.emailConfirmed = true;
+//   }, error => {
+//     console.log(error);
+//     this.progressBar.completeLoading();
+//     this.progressBar.setError();
+//     this.emailConfirmed = false;
+//     this.alertService.danger(error.message);
+//   })
+// }

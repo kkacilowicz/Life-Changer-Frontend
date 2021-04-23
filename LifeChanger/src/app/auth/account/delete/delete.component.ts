@@ -18,23 +18,27 @@ export class DeleteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    this.progressBar.startLoading();
-    this.alertService.info('Deleting account');
-    const deleteAccountObserver = {
-      next: x => {
-        this.alertService.success('Account deleted');
-        this.progressBar.completeLoading();
-        this.progressBar.setSucces();
-        localStorage.removeItem('token');
-        this.authService.changePage('')
-      },
-      error: err => {
-        this.alertService.danger(err.error.message);
-        this.progressBar.completeLoading();
-        this.progressBar.setError();
-      }
-    };
-    this.authService.deleteAccount().subscribe(deleteAccountObserver);
-  }
+
 }
+
+
+
+// onSubmit() {
+//   this.progressBar.startLoading();
+//   this.alertService.info('Deleting account');
+//   const deleteAccountObserver = {
+//     next: x => {
+//       this.alertService.success('Account deleted');
+//       this.progressBar.completeLoading();
+//       this.progressBar.setSucces();
+//       localStorage.removeItem('token');
+//       this.authService.changePage('')
+//     },
+//     error: err => {
+//       this.alertService.danger(err.error.message);
+//       this.progressBar.completeLoading();
+//       this.progressBar.setError();
+//     }
+//   };
+//   this.authService.deleteAccount().subscribe(deleteAccountObserver);
+// }

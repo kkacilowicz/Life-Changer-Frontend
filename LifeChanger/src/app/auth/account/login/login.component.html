@@ -1,9 +1,9 @@
-<div class="homePage">
+<!-- <div class="homePage">
   <div class="bg">
     <div class = "modal-dialog modal-dialog-centered text-center ">
       <div class = "col-sm-12 main-section">
         <div class = "modal-content">
-          <h2> Welcome </h2>
+          <h2 (click)= "logout()"> Welcome </h2>
           <p> Sing in by entering the information below </p>
           <form class="col-12" #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div class="form-group1">
@@ -30,12 +30,15 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+
+
+<div class="mt-5 text-center">
+  <button *ngIf="!authService.isSignedIn" class="btn btn-primary profile-button" type="button" (click)="googleLogin()"><i class="fab fa-google"></i>Login with Google
+  </button>
 </div>
-
-
-
-
-
 
 
 
