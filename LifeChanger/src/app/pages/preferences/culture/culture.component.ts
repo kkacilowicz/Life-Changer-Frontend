@@ -37,19 +37,19 @@ export class CultureComponent implements OnInit {
   ) { }
 
   form!: FormGroup;   // form 
-  selectedDetails: number[] = [];  // list of selected items
-  option1 = 9;
-  option2 = 10;
-  option3 = 11;
-  option4 = 13;
-  option5 = 14;
-  option6 = 15;
-  option7 = 16;
+  selectedDetails: string[] = [];  // list of selected items
+  option1 = "book";
+  option2 = "music";
+  option3 = "gamer";
+  option4 = "party";
+  option5 = "arts";
+  option6 = "concert";
+  option7 = "film";
 
   ngOnInit(): void {
-    this.selectedDetails = new Array<number>();
+    this.selectedDetails = new Array<string>();
     this.form = this.fb.group({
-      categories: [''],
+      images: [''],
     })
   }
 
@@ -67,12 +67,12 @@ export class CultureComponent implements OnInit {
     };
 
     this.eventCulture.emit(this.task);
-    this.form.patchValue({ categories: this.selectedDetails })
+    this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
     
   }
 
-  getDetailId(e: any, id: number) {
+  getDetailId(e: any, id: string) {
     if (e.target.checked) {
       this.selectedDetails.push(id);
     }

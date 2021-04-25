@@ -36,21 +36,21 @@ export class LoveComponent implements OnInit {
 
 
   form!: FormGroup;   // form 
-  selectedDetails: number[] = [];  // list of selected items
-  option1 = 1;
-  option2 = 28;
-  option3 = 37;
-  option4 = 50;
-  option5 = 32;
-  option6 = 31;
+  selectedDetails: string[] = [];  // list of selected items
+  option1 = "food";
+  option2 = "monument";
+  option3 = "cienema";
+  option4 = "couple film";
+  option5 = "couple staff";
+  option6 = "walking couple";
 
   ngOnInit(): void {
-    this.selectedDetails = new Array<number>();
+    this.selectedDetails = new Array<string>();
     this.form = this.fb.group({
-      categories: [''],
+      images: [''],
     })
     this.buttonClick=false
-    console.log("To odbieram z preferences:", this.preferencesList)
+  //  console.log("To odbieram z preferences:", this.preferencesList)
   }
 
   onSubmit() {
@@ -72,13 +72,13 @@ export class LoveComponent implements OnInit {
 
     
     this.eventLove.emit(this.task)
-    this.form.patchValue({ categories: this.selectedDetails })
+    this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
 
     
   }
 
-  getDetailId(e: any, id: number) {
+  getDetailId(e: any, id: string) {
     if (e.target.checked) {
       this.selectedDetails.push(id);
     }

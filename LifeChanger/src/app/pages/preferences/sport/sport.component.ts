@@ -37,22 +37,22 @@ export class SportComponent implements OnInit {
     ) { }
 
   form!: FormGroup;   // form 
-  selectedDetails: number[] = [];  // list of selected items
-  option1 = 2;
-  option2 = 3;
-  option3 = 4;
-  option4 = 5;
-  option5 = 6;
-  option6 = 7;
-  option7 = 8;
-  option8 = 26;
-  option9 = 27;
+  selectedDetails: string[] = [];  // list of selected items
+  option1 = "aerobics";
+  option2 = "swimming";
+  option3 = "bike";
+  option4 = "nordic-walking";
+  option5 = "walking";
+  option6 = "roller skates";
+  option7 = "run";
+  option8 = "gym";
+  option9 = "relax";
 
 
   ngOnInit(): void {
-    this.selectedDetails = new Array<number>();
+    this.selectedDetails = new Array<string>();
     this.form = this.fb.group({
-      categories: [''],
+      images: [''],
     })
     this.buttonClick=false
   }
@@ -74,12 +74,12 @@ export class SportComponent implements OnInit {
       }
     };
     this.eventSport.emit(this.task);
-    this.form.patchValue({ categories: this.selectedDetails })
+    this.form.patchValue({ images: this.selectedDetails })
     console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
   }
 
-  getDetailId(e: any, id: number) {
+  getDetailId(e: any, id: string) {
     if (e.target.checked) {
       this.selectedDetails.push(id);
     }
