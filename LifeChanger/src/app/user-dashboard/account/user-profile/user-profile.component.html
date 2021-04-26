@@ -10,7 +10,16 @@
                   <div class="col-md-12"><label class="labels">PhoneNumber</label><input readonly="" type="text" class="form-control" value="{{userService.userInfo.phoneNumber}}"></div>
                   <div class="col-md-12"><label class="labels">Email </label><input readonly="" type="text" class="form-control"value="{{userService.userInfo.email}}"></div>
                   <div class="col-md-12"><label class="labels">Gender</label><input readonly="" type="text" class="form-control" value="{{userService.userInfo.gender}}"></div>
-                  <div class="col-md-12"><label class="labels">Birth Date</label><input readonly="" type="text" class="form-control" value="{{userService.userInfo.birthDate}}"></div>
+                  <div class="col-md-12"><label class="labels">Birth Date</label>
+                    <input readonly="" type="text" class="form-control" value="{{userService.userInfo.birthDate}}"></div>
+
+                   
+                    <h4> Selected areas of life </h4>
+                    <div *ngFor=" let category of userService.userPref.categories">
+                          {{category.name}}
+                    </div>
+                
+
               </div>
               <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="goEdit()"><i class="fas fa-edit"></i>Edit Profile</button></div>
             </div>
