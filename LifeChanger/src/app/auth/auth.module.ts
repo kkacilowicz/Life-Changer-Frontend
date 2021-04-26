@@ -12,40 +12,19 @@ import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.com
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
 import { DeleteComponent } from './account/delete/delete.component';
 import { ChangeEmailComponent } from './account/change-email/change-email.component';
-
-// import { SocialLoginModule } from 'angularx-social-login'
-// import { GoogleLoginProvider } from 'angularx-social-login';
-// import { SocialAuthServiceConfig } from 'angularx-social-login';
-
+import { GoogleLoginComponent } from './account/google-login/google-login.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent, ChangeEmailComponent,],
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent, ChangeEmailComponent, GoogleLoginComponent,],
   imports: [
     CommonModule,
     AuthRoutingModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    // SocialLoginModule
   ],
-  // providers: [
-  //   {
-  //     provide: 'SocialAuthServiceConfig',
-  //     useValue: {
-  //       autoLogin: false,
-  //       providers: [
-  //         {
-  //           id: GoogleLoginProvider.PROVIDER_ID,
-  //           provider: new GoogleLoginProvider(
-  //             '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com'
-  //           )
-  //         }
-  //       ]
-  //     } as SocialAuthServiceConfig,
-  //   }
-  // ],
   exports: [
     LoginComponent,
     RegisterComponent,

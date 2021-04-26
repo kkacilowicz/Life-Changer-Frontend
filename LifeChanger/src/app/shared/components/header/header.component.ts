@@ -18,17 +18,19 @@ export class HeaderComponent implements OnInit {
     this.progressBar.progressRef = this.progress.ref("progressBar")
   }
 
-  logout(){
-    this.socialAuthService.signOut();
-    if(this.socialAuthService.signOut()){
-      this.authService.changePage('');
-    }
-  }
+  // logout(){
+  //   this.socialAuthService.signOut();
+  //   if(this.socialAuthService.signOut()){
+  //     this.authService.changePage('');
+  //   }
+  // }
+  logout() {
+  this.socialAuthService.signOut();
+  localStorage.removeItem('token');
+  this.authService.decodedToken = null;
+  this.alertService.success("Logged Out");
+  this.authService.changePage('')
+}
 
 }
-// logout() {
-//   localStorage.removeItem('token');
-//   this.authService.decodedToken = null;
-//   this.alertService.success("Logged Out");
-//   this.authService.changePage('')
-// }
+

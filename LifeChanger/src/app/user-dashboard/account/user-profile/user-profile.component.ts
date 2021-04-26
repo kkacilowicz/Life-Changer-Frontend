@@ -13,8 +13,8 @@ export class UserProfileComponent implements OnInit {
   constructor(public authService: AuthService, public userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.user();
-    this.authService.User.email;
+    // this.userService.user();
+    // this.authService.User.email;
   }
 
   goEdit() {

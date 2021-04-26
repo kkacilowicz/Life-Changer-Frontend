@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    // "types": ["gapi", "gapi2"],
     "noImplicitAny": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

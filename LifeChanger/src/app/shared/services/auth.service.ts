@@ -15,26 +15,51 @@ export class AuthService {
   apiUrl: string = environment.apiUrl;
   // changePasswordUrl = this.apiUrl + 'changepassword'
   // confirmEmailUrl = "localhost:5001/api/Email/confirm";
-  // helper = new JwtHelperService();
-  // token;
+  helper = new JwtHelperService();
+  serverToken;
   decodedToken: any;
+
+  sendObj = {
+    token: 'string',
+    provider: 'string',
+}
 
   User!: SocialUser;
   isSignedIn!: boolean;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
 
-  loggedIn(){
-    return this.isSignedIn;
   }
+  // loggedIn(){
+  //   return this.isSignedIn;
+  // }
 
   changePage(path: string) {
     this.router.navigateByUrl(path);
   }
 
   sendGoogleToken(){
-    return this.http.post(this.apiUrl ,this.User.authToken);
+    this.sendObj.token = this.User.idToken;
+    this.sendObj.provider = this.User.provider;
+
+    return this.http.post(this.apiUrl + 'ExternalLogin' ,this.sendObj)
+    .pipe(
+      map((user: any) => {
+        if (user) {
+          console.log(user);
+          localStorage.setItem('token', user.token);
+          this.decodedToken = this.helper.decodeToken(user.token);
+          console.log(this.decodedToken);
+        }
+      })
+    )
   }
+  loggedIn() {
+  this.serverToken = localStorage.getItem('token');
+
+  return !this.helper.isTokenExpired(this.serverToken);
+  }
+
 }
 
 

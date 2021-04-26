@@ -12,6 +12,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule } from 'angularx-social-login'
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { SocialAuthServiceConfig } from 'angularx-social-login';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SocialAuthServiceConfig } from 'angularx-social-login';
           }
         ]
       } as SocialAuthServiceConfig,
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
