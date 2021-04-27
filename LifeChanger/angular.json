@@ -35,6 +35,7 @@
             ],
             "styles": [
               "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.sass"
             ],
             "scripts": []
@@ -98,6 +99,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.sass"
             ],

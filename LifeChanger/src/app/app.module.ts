@@ -14,11 +14,24 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { SocialAuthServiceConfig } from 'angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 
+
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction';
+import { CalendarComponent } from './pages/calendar/calendar.component';
+
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PreferencesComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +41,8 @@ import { CookieService } from 'ngx-cookie-service';
     SharedModule,
     AuthModule,
     UserDashboardModule,
-    SocialLoginModule
+    SocialLoginModule,
+    FullCalendarModule
   ],
   providers: [
     {
