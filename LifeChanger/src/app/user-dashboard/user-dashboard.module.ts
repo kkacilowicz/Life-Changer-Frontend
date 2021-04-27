@@ -6,10 +6,11 @@ import { UserEditComponent } from './account/user-edit/user-edit.component';
 import { UserProfileComponent } from './account/user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UserEditPreferencesComponent } from './account/user-edit-preferences/user-edit-preferences.component';
 
 
 @NgModule({
-  declarations: [UserEditComponent, UserProfileComponent],
+  declarations: [UserEditComponent, UserProfileComponent, UserEditPreferencesComponent],
   imports: [
     CommonModule,
     UserDashboardRoutingModule,
