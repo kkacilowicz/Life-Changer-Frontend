@@ -40,13 +40,16 @@ export class PreferencesService {
   }
 
   
-  deletePreferences(model: any ) {
+  deletePreferences(model:any ) {
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
+    })
+    .set('content-type', 'application/json');
     
     let options = { headers: headers };
-    return this.http.delete(this.preUrl + 'UserCategories', model);
+    console.log("model", model)
+    console.log("http:", this.preUrl + 'UserCategories/' + [model] );
+    return this.http.delete(this.preUrl + 'UserCategories/' + [model], options);
   }
 
 }
