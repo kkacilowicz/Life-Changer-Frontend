@@ -9,67 +9,91 @@
         Your chosen areas of life :
     </div>
 
+    <div *ngIf="userService.userPref.categories.length==0" class="areas">
+        Oh no, you don't have chosen areas of life  
+    </div>
+
     <div *ngFor=" let category of userService.userPref.categories" class="areas">
       * {{category.name}}
     </div>
 
     <div class="space_button">
-    <button class="btn btn-primary profile-button"> Delete area of life </button>
+    <button *ngIf="userService.userPref.categories.length>1" type="button" (click)="clickButtonDelete()"
+    class="btn btn-primary profile-button"> Delete area of life </button>
 
-    <button *ngIf="userService.userPref.categories.length<3" type="button" (click)="clickButtonAdd()" class="btn btn-primary profile-button"> Add new area of life </button>
+    <button *ngIf="userService.userPref.categories.length<3" type="button" (click)="clickButtonAdd()" 
+    class="btn btn-primary profile-button"> Add new area of life </button>
 </div>
 
 
-<div *ngIf="buttonAddClicked"> 
-    <form  (ngSubmit)="onSubmit()">
+<div  *ngIf="buttonAddClicked"> 
+    <form  [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div *ngIf="userService.userPref.categories.length==0">
+            <div>
+                <input type="checkbox" id="option1" formControlName="categories"
+                (change)="getAreaId($event,option1)" (change)="changeOptionLove() ">
+                <label for="option1"> Love </label>
+            </div>
+            <div >
+                <input type="checkbox" id="option2" formControlName="categories"
+                (change)="getAreaId($event,option2)" (change)="changeOptionSport()">
+                <label for="option2"> Sport and health  </label>
+            </div>
+            <div>
+                <input type="checkbox" id="option3" formControlName="categories"
+                (change)="getAreaId($event,option3)" (change)="changeOptionCulture()">
+                <label for="option3"> Culture and enterntainment </label>
+            </div>
+        </div>
+
         <div *ngIf="userService.userPref.categories.length==1">
             <div *ngIf="userService.userPref.categories[0].name!='Love'">
-                <input type="checkbox" id="option1" (change)="changeOptionLove()">
+                <input type="checkbox" id="option1" formControlName="categories"
+                (change)="getAreaId($event,option1)" (change)="changeOptionLove() ">
                 <label for="option1"> Love </label>
             </div>
             <div *ngIf="userService.userPref.categories[0].name!='Sport and health'">
-                <input type="checkbox" id="option2" (change)="changeOptionSport()">
+                <input type="checkbox" id="option2" formControlName="categories"
+                (change)="getAreaId($event,option2)" (change)="changeOptionSport()">
                 <label for="option2"> Sport and health  </label>
             </div>
             <div *ngIf="userService.userPref.categories[0].name!='Culture and enterntainment'">
-                <input type="checkbox" id="option3" (change)="changeOptionCulture()">
+                <input type="checkbox" id="option3" formControlName="categories"
+                (change)="getAreaId($event,option3)" (change)="changeOptionCulture()">
                 <label for="option3"> Culture and enterntainment </label>
             </div>
         </div>
 
         <div *ngIf="userService.userPref.categories.length==2">
             <div *ngIf="userService.userPref.categories[0].name=='Love'&&userService.userPref.categories[1].name=='Sport and health'">
-                <input type="checkbox" id="option3" (change)="changeOptionCulture()">
+                <input type="checkbox" id="option3" formControlName="categories"
+                (change)="getAreaId($event,option3)" (change)="changeOptionCulture()">
                 <label for="option3"> Culture and enterntainment </label>
             </div>
             <div *ngIf="userService.userPref.categories[0].name=='Love'&&userService.userPref.categories[1].name=='Culture and enterntainment'">
-                <input type="checkbox" id="option2" (change)="changeOptionSport()">
+                <input type="checkbox" id="option2" formControlName="categories"
+                (change)="getAreaId($event,option2)" (change)="changeOptionSport()">
                 <label for="option2"> Sport and health  </label>
             </div>
             <div *ngIf="userService.userPref.categories[0].name=='Culture and enterntainment'&&userService.userPref.categories[1].name=='Sport and health'">
-                <input type="checkbox" id="option1" (change)="changeOptionLove()">
+                <input type="checkbox" id="option1" formControlName="categories"
+                (change)="getAreaId($event,option1)" (change)="changeOptionLove()">
                 <label for="option1"> Love </label>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary profile-button " > Next  </button>
-    
+        <button type="submit" class="btn btn-primary profile-button "  > Next  </button>
     </form>
 </div>
 
+<div *ngIf="buttonDeleteClicked">
+    Akuku !!!
 
 </div>
 
-<div *ngIf="areaList[0]">
-    <app-ed-love></app-ed-love>
 </div>
 
-<div *ngIf="areaList[1]&&!areaList[0]">
-    <app-sport  [preferencesList]="areaList"></app-sport>
-</div>
- 
-<div *ngIf="areaList[2]&&!areaList[1]&&!areaList[0]">
-    <app-culture  [preferencesList]="areaList"></app-culture>
-</div>
+
 
 </div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
-
+import { AlertService } from 'ngx-alerts';
+import { PreferencesService } from 'src/app/shared/services/preferences.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   
@@ -10,27 +13,43 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UserEditPreferencesComponent implements OnInit {
 
- 
+  form!: FormGroup;
   love!: boolean;
   sport!: boolean;
   culture!: boolean;
   areaList: boolean[] = []; // list of selected areas of life used for display 
+  selectedItems: number[] = []; // list of selected areas of life
+  option1 = 1;  // id love
+  option2 = 3;  // id sport
+  option3 = 2;  // id culture
+
+
 
   constructor(
+    public authService: AuthService,
+    private alertService: AlertService,
     public userService: UserService, 
+    public Preferences: PreferencesService,
+    public fb: FormBuilder
   
     ) { }
 
   buttonAddClicked !: boolean;
+  buttonDeleteClicked !: boolean;
 
   ngOnInit(): void {
+    this.selectedItems = new Array<number>();
     this.userService.preferences();
     this.buttonAddClicked=false;
     this.love = false;
     this.culture = false;
     this.sport = false;
     this.areaList = new Array<boolean>();
+    this.buttonDeleteClicked=false;
 
+    this.form = this.fb.group({
+      categories: [''],
+    })
 
   }
 
@@ -38,11 +57,20 @@ export class UserEditPreferencesComponent implements OnInit {
   clickButtonAdd(){
     if(this.buttonAddClicked==false){
       this.buttonAddClicked=true;
-      console.log("buttonAdd" , this.buttonAddClicked)
     }
     else{
       this.buttonAddClicked=false;
-      console.log("buttonAdd" , this.buttonAddClicked)
+    }
+  }
+
+  clickButtonDelete(){
+    if(this.buttonDeleteClicked==false){
+      this.buttonDeleteClicked=true;
+
+    }
+    else{
+      this.buttonDeleteClicked=false;
+      
     }
   }
 
@@ -81,10 +109,34 @@ export class UserEditPreferencesComponent implements OnInit {
 
   onSubmit() {
 
+    const preferencesObserver = {
+      next: x => {
+        console.log('Edit Preferences OK');
+        this.alertService.success('Sent correctly ');
+        this.authService.changePage('/my-profile')
+      },
+      error: err => {
+        console.log(err);
+        this.alertService.danger(err.error.message);
+      }
+    };
+
     this.areaList.push(this.love);
     this.areaList.push(this.sport);
     this.areaList.push(this.culture);
-   console.log("areaList", this.areaList)
-
+    console.log("areaList", this.areaList)
+    this.form.patchValue({ categories: this.selectedItems })
+    this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
   }
+
+  getAreaId(e: any, categories: number) {
+    if (e.target.checked) {
+      this.selectedItems.push(categories);
+    }
+    else {
+      this.selectedItems = this.selectedItems.filter(m => m != categories);
+    }
+    return this.selectedItems;
+  }
+
 }
