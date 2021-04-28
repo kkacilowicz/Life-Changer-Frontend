@@ -18,20 +18,24 @@ export class ChangeEmailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  modifyEmail() {
-    this.progressBar.startLoading();
-    this.alertService.info('Changing email');
-    this.authService.changeEmail(this.model).subscribe(() => {
-      console.log("succes");
-      this.progressBar.completeLoading();
-      this.progressBar.setSucces();
-      this.alertService.success('Email changed');
-    }, error => {
-      console.log(error);
-      this.alertService.danger(error.message);
-      this.progressBar.completeLoading();
-      this.progressBar.setError();
-    })
-  }
+
 
 }
+
+
+
+// modifyEmail() {
+//   this.progressBar.startLoading();
+//   this.alertService.info('Changing email');
+//   this.authService.changeEmail(this.model).subscribe(() => {
+//     console.log("succes");
+//     this.progressBar.completeLoading();
+//     this.progressBar.setSucces();
+//     this.alertService.success('Email changed');
+//   }, error => {
+//     console.log(error);
+//     this.alertService.danger(error.message);
+//     this.progressBar.completeLoading();
+//     this.progressBar.setError();
+//   })
+// }

@@ -1,9 +1,9 @@
-<div class="homePage">
+<!-- <div class="homePage">
   <div class="bg">
     <div class = "modal-dialog modal-dialog-centered text-center ">
       <div class = "col-sm-12 main-section">
         <div class = "modal-content">
-          <h2> Welcome </h2>
+          <h2 (click)= "logout()"> Welcome </h2>
           <p> Sing in by entering the information below </p>
           <form class="col-12" #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div class="form-group1">
@@ -17,6 +17,10 @@
              <input  type="password" name="password" ngModel required #password="ngModel" class ="form-control" id="loginPassword" placeholder="Enter password">
              <div *ngIf="password.touched&&password.errors?.required" class="bgAlert">This field is required</div>
             </div>
+            <div class="mt-5 text-center">
+              <button *ngIf="!isSignedIn" class="btn btn-primary profile-button" type="button" (click)="googleLogin()"><i class="fab fa-google"></i>Login with Google
+              </button>
+            </div>
           <button type="submit"  [disabled]="f.invalid" class="buttonstyle"> <i class="fas fa-sign-in-alt"></i> Get Started </button>
           </form>
           <div class="col-12 forgot">
@@ -26,8 +30,7 @@
       </div>
     </div>
   </div>
-</div>
-
+</div> -->
 
 
 

@@ -1,0 +1,59 @@
+$white: #fff
+$google-blue: #4285f4
+$button-active-blue: #1669F2
+
+.homePage
+  position: relative
+  height: 92.5vh
+  background-image: url("../../../../assets/Images/background.jpg")
+  background-position: center center
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-size: cover
+  .bg
+    position: absolute
+    background-color: rgba(0, 63, 114, .3)
+    width: 100vw
+    height: 100%
+    left: 0
+
+.google-btn
+  position: absolute
+  top: 15%
+  left: 50%
+  cursor: pointer
+  transform: translate(-50%, -50%)
+  width: 200px
+  height: 42px
+  background-color: $google-blue
+  border-radius: 2px
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25)
+  .google-icon-wrapper
+    position: absolute
+    margin-top: 1px
+    margin-left: 1px
+    width: 40px
+    height: 40px
+    border-radius: 2px
+    background-color: $white
+
+  .google-icon
+    position: absolute
+    margin-top: 11px
+    margin-left: 11px
+    width: 18px
+    height: 18px
+
+  .btn-text
+    float: right
+    margin: 11px 11px 0 0
+    color: $white
+    font-size: 14px
+    letter-spacing: 0.2px
+    font-family: "Roboto"
+
+  &:hover
+    box-shadow: 0 0 6px $google-blue
+
+  &:active
+    background: $button-active-blue

@@ -12,11 +12,12 @@ import { ConfirmEmailComponent } from './account/confirm-email/confirm-email.com
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
 import { DeleteComponent } from './account/delete/delete.component';
 import { ChangeEmailComponent } from './account/change-email/change-email.component';
+import { GoogleLoginComponent } from './account/google-login/google-login.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent, ChangeEmailComponent,],
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirmEmailComponent, ChangePasswordComponent, DeleteComponent, ChangeEmailComponent, GoogleLoginComponent,],
   imports: [
     CommonModule,
     AuthRoutingModule,

@@ -24,59 +24,59 @@ export class UserEditComponent implements OnInit {
     this.userService.user();
   }
 
-  checkGender() {
-    return (this.userService.userInfo.gender === 'Male') ? true : false;
-  }
+  // checkGender() {
+  //   return (this.userService.userInfo.gender === 'Male') ? true : false;
+  // }
 
   // phoneValidate(e) {
   //   return (e.target.value.length !== 9) ? true : false;
   // }
 
-  onChange(e) {
-    if (e.target.value.length !== 0) {
-      switch (e.target.name) {
-        case "userName": {
-          if ("userName" !== this.userService.userInfo.userName) {
-            this.model.splice(0, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
-          }
-          break;
-        }
-        case "phoneNumber": {
-          if ("phoneNumber" !== this.userService.userInfo.phoneNumber && e.target.value.length == 9) {
-            this.model.splice(1, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
-          }
-          break;
-        }
-        case "gender": {
-          if ("gender" !== this.userService.userInfo.gender) {
-            this.model.splice(2, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
-          }
-          break;
-        }
-      }
-    }
-    console.log(this.model);
-  }
+  // onChange(e) {
+  //   if (e.target.value.length !== 0) {
+  //     switch (e.target.name) {
+  //       case "userName": {
+  //         if ("userName" !== this.userService.userInfo.userName) {
+  //           this.model.splice(0, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
+  //         }
+  //         break;
+  //       }
+  //       case "phoneNumber": {
+  //         if ("phoneNumber" !== this.userService.userInfo.phoneNumber && e.target.value.length == 9) {
+  //           this.model.splice(1, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
+  //         }
+  //         break;
+  //       }
+  //       case "gender": {
+  //         if ("gender" !== this.userService.userInfo.gender) {
+  //           this.model.splice(2, 1, { op: 'replace', path: `/${e.target.name}`, value: e.target.value });
+  //         }
+  //         break;
+  //       }
+  //     }
+  //   }
+  //   console.log(this.model);
+  // }
 
-  Submit() {
-    console.log(this.model);
-    this.progressBar.startLoading();
-    this.alertService.info('Updating Account');
-    const updateUserObserver = {
-      next: x => {
-        this.alertService.success('Profile updated');
-        this.progressBar.completeLoading();
-        this.progressBar.setSucces();
-        this.model.length = 0;
-      },
-      error: err => {
-        console.log(err);
-        this.alertService.danger(err.error.message);
-        this.progressBar.completeLoading();
-        this.progressBar.setError();
-      }
-    };
-    this.userService.updateUser(this.model).subscribe(updateUserObserver);
-  }
+  // Submit() {
+  //   console.log(this.model);
+  //   this.progressBar.startLoading();
+  //   this.alertService.info('Updating Account');
+  //   const updateUserObserver = {
+  //     next: x => {
+  //       this.alertService.success('Profile updated');
+  //       this.progressBar.completeLoading();
+  //       this.progressBar.setSucces();
+  //       this.model.length = 0;
+  //     },
+  //     error: err => {
+  //       console.log(err);
+  //       this.alertService.danger(err.error.message);
+  //       this.progressBar.completeLoading();
+  //       this.progressBar.setError();
+  //     }
+  //   };
+  //   this.userService.updateUser(this.model).subscribe(updateUserObserver);
+  // }
 
 }

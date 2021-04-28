@@ -17,21 +17,24 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(f: NgForm) {
-    this.progressBar.startLoading();
-    this.alertService.info('Reseting password');
-    const resetPasswordObserver = {
-      next: x => {
-        this.alertService.success('Check email to change the password');
-        this.progressBar.completeLoading();
-        this.progressBar.setSucces();
-      },
-      error: err => {
-        this.alertService.danger(err.error.message);
-        this.progressBar.completeLoading();
-        this.progressBar.setError();
-      }
-    };
-    this.authService.resetPassword(f.value).subscribe(resetPasswordObserver);
-  }
+
 }
+
+
+// onSubmit(f: NgForm) {
+//   this.progressBar.startLoading();
+//   this.alertService.info('Reseting password');
+//   const resetPasswordObserver = {
+//     next: x => {
+//       this.alertService.success('Check email to change the password');
+//       this.progressBar.completeLoading();
+//       this.progressBar.setSucces();
+//     },
+//     error: err => {
+//       this.alertService.danger(err.error.message);
+//       this.progressBar.completeLoading();
+//       this.progressBar.setError();
+//     }
+//   };
+//   this.authService.resetPassword(f.value).subscribe(resetPasswordObserver);
+// }

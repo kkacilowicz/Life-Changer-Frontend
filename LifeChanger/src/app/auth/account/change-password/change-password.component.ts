@@ -17,20 +17,24 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void { }
 
-
-  modifyPassword() {
-    this.progressBar.startLoading();
-    this.alertService.info('Changing password');
-    this.authService.changePassword(this.model).subscribe(() => {
-      console.log("succes");
-      this.progressBar.completeLoading();
-      this.progressBar.setSucces();
-      this.alertService.success('Password changed');
-    }, error => {
-      console.log(error);
-      this.alertService.danger(error.message);
-      this.progressBar.completeLoading();
-      this.progressBar.setError();
-    })
-  }
 }
+
+
+
+
+
+// modifyPassword() {
+//   this.progressBar.startLoading();
+//   this.alertService.info('Changing password');
+//   this.authService.changePassword(this.model).subscribe(() => {
+//     console.log("succes");
+//     this.progressBar.completeLoading();
+//     this.progressBar.setSucces();
+//     this.alertService.success('Password changed');
+//   }, error => {
+//     console.log(error);
+//     this.alertService.danger(error.message);
+//     this.progressBar.completeLoading();
+//     this.progressBar.setError();
+//   })
+// }

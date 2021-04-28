@@ -17,23 +17,27 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(f: NgForm) {
-    this.progressBar.startLoading();
-    this.alertService.info('Creating new account');
-    const registerObserver = {
-      next: x => {
-        console.log('User created');
-        this.alertService.success('Check your email');
-        this.progressBar.completeLoading();
-        this.progressBar.setSucces();
-      },
-      error: err => {
-        console.log(err);
-        this.progressBar.completeLoading();
-        this.progressBar.setError();
-        this.alertService.danger(err.error.message);
-      }
-    };
-    this.authService.register(f.value).subscribe(registerObserver);
-  }
+
 }
+
+
+
+// onSubmit(f: NgForm) {
+//   this.progressBar.startLoading();
+//   this.alertService.info('Creating new account');
+//   const registerObserver = {
+//     next: x => {
+//       console.log('User created');
+//       this.alertService.success('Check your email');
+//       this.progressBar.completeLoading();
+//       this.progressBar.setSucces();
+//     },
+//     error: err => {
+//       console.log(err);
+//       this.progressBar.completeLoading();
+//       this.progressBar.setError();
+//       this.alertService.danger(err.error.message);
+//     }
+//   };
+//   this.authService.register(f.value).subscribe(registerObserver);
+// }
