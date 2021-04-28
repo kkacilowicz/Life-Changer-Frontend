@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AlertService } from 'ngx-alerts';
+import { UserService } from 'src/app/shared/services/user.service'
 
 
 @Component({
@@ -34,6 +35,7 @@ export class PreferencesComponent implements OnInit {
     private alertService: AlertService,
     public Preferences: PreferencesService,
     public authService: AuthService,
+    public userService:UserService,
     public fb: FormBuilder
   ) { }
 
@@ -57,6 +59,8 @@ export class PreferencesComponent implements OnInit {
     this.form = this.fb.group({
       categories: [''],
     })
+
+    this.userService.preferences();
 
 
   }

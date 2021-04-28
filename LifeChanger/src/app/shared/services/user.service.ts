@@ -4,13 +4,16 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { IUser } from './../models/user'
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
+import { userPreferences } from '../models/userPreferences';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userUrl = environment.apiUrl;
+  preUrl = environment.preUrl;
 
   userInfo: IUser = {
     email: '',
@@ -19,6 +22,12 @@ export class UserService {
     birthDate: '',
     phoneNumber: '',
   }
+
+  userPref: userPreferences = {
+    userName!: '',
+    categories!: [{"name":''} , {"name":''}, {"name":''} ],
+  } 
+
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
 
@@ -37,6 +46,21 @@ export class UserService {
       gender: (data as any).gender,
       birthDate: (data as any).birthDate,
     });
+  }
+
+  getPreferences(): Observable<userPreferences>{
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.httpClient.get<userPreferences>(this.preUrl + 'UserCategories', { headers: headers })
+  }
+
+  preferences(){
+    this.getPreferences().subscribe((data: userPreferences)=> this.userPref ={
+      userName : (data as any ).userName,
+      categories: (data as any).categories,     
+    });
+
   }
 
   updateUser(model: any) {
