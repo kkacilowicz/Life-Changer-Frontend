@@ -41,6 +41,7 @@
   box-shadow: none;
   border: none;
   margin-top: 1%;
+  text-align: center;
 }
 
 .profile-button:hover {
@@ -55,4 +56,24 @@
 .profile-button:active {
   background: orange;
   box-shadow: none;
+}
+
+form {
+  border: 5px solid #632778;
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 5%;
+  padding: 2%;
+  background-color: #e5adfc;
+  border-radius: 10px;
+}
+
+label {
+  font-size: 20px;
+  margin-right: 1%;
+}
+
+input {
+  margin-right: 2%;
 }

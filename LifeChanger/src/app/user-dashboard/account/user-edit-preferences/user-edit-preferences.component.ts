@@ -129,6 +129,21 @@ export class UserEditPreferencesComponent implements OnInit {
     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
   }
 
+  onDelete(){
+    const preferencesDeleteObserver = {
+      next: x => {        
+      this.alertService.success('Account deleted');
+      this.authService.changePage('/my-profile');
+      },
+      error: err => {
+        this.alertService.danger(err.error.message);
+      }
+    };
+    console.log(this.selectedItems)
+      this.Preferences.deletePreferences(this.selectedItems).subscribe(preferencesDeleteObserver);
+    
+  }
+
   getAreaId(e: any, categories: number) {
     if (e.target.checked) {
       this.selectedItems.push(categories);

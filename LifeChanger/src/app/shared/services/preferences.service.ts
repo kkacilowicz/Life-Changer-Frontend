@@ -39,5 +39,14 @@ export class PreferencesService {
     return this.http.post(this.preUrl + 'LikedPreferences', model,options);
   }
 
+  
+  deletePreferences(model: any ) {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    
+    let options = { headers: headers };
+    return this.http.delete(this.preUrl + 'UserCategories', model);
+  }
 
 }
