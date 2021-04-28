@@ -22,6 +22,7 @@ export class UserEditPreferencesComponent implements OnInit {
   option1 = 1;  // id love
   option2 = 3;  // id sport
   option3 = 2;  // id culture
+  choose !: boolean;
 
 
 
@@ -46,6 +47,7 @@ export class UserEditPreferencesComponent implements OnInit {
     this.sport = false;
     this.areaList = new Array<boolean>();
     this.buttonDeleteClicked=false;
+    this.choose=false;
 
     this.form = this.fb.group({
       categories: [''],
@@ -118,7 +120,7 @@ export class UserEditPreferencesComponent implements OnInit {
       next: x => {
         console.log('Edit Preferences OK');
         this.alertService.success('Sent correctly ');
-        this.authService.changePage('/my-profile')
+       // this.authService.changePage('/my-profile')
       },
       error: err => {
         console.log(err);
@@ -130,6 +132,7 @@ export class UserEditPreferencesComponent implements OnInit {
     this.areaList.push(this.sport);
     this.areaList.push(this.culture);
     console.log("areaList", this.areaList)
+    this.choose=true;
     this.form.patchValue({ categories: this.selectedItems })
     this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
   }
