@@ -26,12 +26,23 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   interactionPlugin
 ]);
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoveComponent } from './pages/preferences/love/love.component';
+import { SportComponent } from './pages/preferences/sport/sport.component';
+import { CultureComponent } from './pages/preferences/culture/culture.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PreferencesComponent,
+
     CalendarComponent,
+
+    LoveComponent,
+    SportComponent,
+    CultureComponent,
   ],
   imports: [
     BrowserModule,

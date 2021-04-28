@@ -45,7 +45,7 @@
               </div>
               <div class="mt-5 text-center">
                 <a class="btn btn-primary profile-button" [routerLink]="['/delete-account']" routerLinkActive="active"><i class="fas fa-trash-alt"></i>Delete account</a>
-                <a *ngIf="!model?.length" class="btn btn-primary profile-button" [routerLink]="['/preferences']" routerLinkActive="active"><i class="fas fa-cogs"></i>Edit preferences</a>
+                <a *ngIf="!model?.length" class="btn btn-primary profile-button" [routerLink]="['/edit-preferences']" routerLinkActive="active"><i class="fas fa-cogs"></i>Edit preferences</a>
                   <button *ngIf="model?.length"  (click)="Submit()"   type="submit" class="btn btn-primary profile-button"><i class="fas fa-user-edit"></i> Update Account</button>
               </div>
             </form>
