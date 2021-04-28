@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService) { }
 
   helper = new JwtHelperService();
 
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit {
 
 //   }
 
-}
+}}
 
 
 

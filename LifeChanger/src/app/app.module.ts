@@ -30,6 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoveComponent } from './pages/preferences/love/love.component';
 import { SportComponent } from './pages/preferences/sport/sport.component';
 import { CultureComponent } from './pages/preferences/culture/culture.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { CultureComponent } from './pages/preferences/culture/culture.component'
     AuthModule,
     UserDashboardModule,
     SocialLoginModule,
-    FullCalendarModule
+    FullCalendarModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [
     {

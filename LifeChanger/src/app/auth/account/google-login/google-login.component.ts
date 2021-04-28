@@ -3,6 +3,7 @@ import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-soc
 import { AlertService } from 'ngx-alerts';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { UserService } from 'src/app/shared/services/user.service'
 
 import {IUser} from '../../../shared/models/user'
 
@@ -18,7 +19,7 @@ export class GoogleLoginComponent implements OnInit {
 
   givenUser!: IUser;
 
-  constructor(public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService) { }
+  constructor(private userService:UserService, public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService) { }
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((user) => {
@@ -36,7 +37,13 @@ export class GoogleLoginComponent implements OnInit {
 
   sendToken(){
     if(this.authService.sendGoogleToken().subscribe()){
-      this.authService.changePage('preferences');
+      if(this.userService.userPref.categories.length==0){
+        console.log("dlugosc:", this.userService.userPref.categories.length)
+        this.authService.changePage('preferences');
+      }else {
+        this.authService.changePage('');
+      }
+
     }
 
   }
