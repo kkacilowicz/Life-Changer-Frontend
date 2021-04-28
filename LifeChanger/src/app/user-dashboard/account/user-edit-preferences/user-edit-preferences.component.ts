@@ -140,7 +140,7 @@ export class UserEditPreferencesComponent implements OnInit {
   onDelete(){
     const preferencesDeleteObserver = {
       next: x => {        
-      this.alertService.success('Account deleted');
+      this.alertService.success('Area deleted');
       this.authService.changePage('/my-profile');
       },
       error: err => {
@@ -148,10 +148,15 @@ export class UserEditPreferencesComponent implements OnInit {
       }
     };
     console.log(this.selectedItems)
-    this.form.patchValue({ categories: this.selectedItems })
-    console.log(this.form.value)
-    this.Preferences.deletePreferences(this.form.value).subscribe(preferencesDeleteObserver);
-    
+    if(this.selectedItems.indexOf(3)!=-1){
+      this.Preferences.deletePreferences(3).subscribe(preferencesDeleteObserver);
+    }
+    if(this.selectedItems.indexOf(2)!=-1){
+      this.Preferences.deletePreferences(2).subscribe(preferencesDeleteObserver);
+    }
+    if(this.selectedItems.indexOf(1)!=-1){
+      this.Preferences.deletePreferences(1).subscribe(preferencesDeleteObserver);
+    }
   }
 
   getAreaId(e: any, categories: number) {

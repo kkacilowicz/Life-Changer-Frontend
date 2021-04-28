@@ -24,6 +24,9 @@
           <div *ngFor=" let category of userService.userPref.categories" class="col-md-12">
             {{category.name}}
           </div>
+          <div *ngIf="userService.userPref.categories.length==0" class="areas">
+            Oh no, you don't have chosen areas of life
+         </div>
 
 
         </div>
