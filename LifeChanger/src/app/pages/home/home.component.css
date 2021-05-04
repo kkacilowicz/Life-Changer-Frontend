@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Girassol&family=Permanent+Marker&family=Vast+Shadow&display=swap");
+.homePage {
+  position: relative;
+  overflow: auto;
+  height: calc( 100vh - 56px);
+  background-image: url("../../../assets/Images/background.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.homePage .bg {
+  position: absolute;
+  overflow: auto;
+  background-color: rgba(0, 5, 0, 0.48);
+  width: 100vw;
+  height: calc( 100vh - 56px);
+  left: 0;
+}
+
+.homePage h1 {
+  text-align: center;
+  font-size: 14vh;
+  color: #FEA784;
+  font-family: 'Vast Shadow', cursive;
+}
+
+.question1 {
+  margin-left: 2vw;
+  margin-top: 4vh;
+  text-align: left;
+  font-size: 5vh;
+  color: #F5E2D4;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.question2 {
+  margin-top: 6vh;
+  margin-right: 2vw;
+  text-align: right;
+  font-size: 5vh;
+  color: #F5E2D4;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.question3 {
+  margin-top: 6vh;
+  text-align: center;
+  margin-right: 5vw;
+  font-size: 5vh;
+  color: #F5E2D4;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.button {
+  margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+}
+
+.and {
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 6vh;
+  color: #F5E2D4;
+  font-family: 'Permanent Marker', cursive;
+}
