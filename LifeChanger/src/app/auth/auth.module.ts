@@ -27,6 +27,7 @@ import { GoogleLoginComponent } from './account/google-login/google-login.compon
   ],
   exports: [
     LoginComponent,
+    GoogleLoginComponent,
     RegisterComponent,
     ResetPasswordComponent
   ]
