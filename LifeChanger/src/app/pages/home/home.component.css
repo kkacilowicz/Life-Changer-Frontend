@@ -21,8 +21,9 @@
 
 .homePage h1 {
   text-align: center;
-  font-size: 14vh;
-  color: #FEA784;
+  margin-top: 4vh;
+  font-size: 8vh;
+  color: #E1E839;
   font-family: 'Vast Shadow', cursive;
 }
 
