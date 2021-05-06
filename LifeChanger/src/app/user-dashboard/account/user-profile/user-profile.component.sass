@@ -1,4 +1,28 @@
 
+.background
+  position: relative
+  overflow: auto
+  height: calc( 100vh - 56px )
+  background-image: url('../../../../assets/Images/User_Profil/background1.jpg')
+  background-position: top
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-size: cover
+  .bg
+    position: absolute
+    overflow: auto
+    //background-color: rgba(158, 19, 104, 0.18)
+    //background-color: rgba(255, 202, 236, 0.2)
+    background-color: rgba(0, 0, 0, 0.48)
+    width: 100vw
+    height: calc( 100vh - 56px )
+    left: 0
+
+.profil
+  background-color: #E2DED8
+  border-radius: 45px
+  border: 5px solid #6A655E
+
 .form-control:focus
   box-shadow: none
   border-color: #BA68C8
@@ -79,3 +103,6 @@
         opacity: .7
   i
     margin-right: 7px
+
+  label
+    font-weight: bold

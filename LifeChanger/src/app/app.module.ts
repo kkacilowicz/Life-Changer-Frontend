@@ -32,6 +32,7 @@ import { SportComponent } from './pages/preferences/sport/sport.component';
 import { CultureComponent } from './pages/preferences/culture/culture.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MainComponent } from './pages/main/main.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     LoveComponent,
     SportComponent,
     CultureComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

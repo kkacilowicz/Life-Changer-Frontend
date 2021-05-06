@@ -13,7 +13,7 @@
 .homePage .bg {
   position: absolute;
   overflow: auto;
-  background-color: rgba(0, 5, 0, 0.48);
+  background-color: rgba(0, 0, 0, 0.48);
   width: 100vw;
   height: calc( 100vh - 56px);
   left: 0;
@@ -21,7 +21,7 @@
 
 .homePage h1 {
   text-align: center;
-  margin-top: 4vh;
+  margin-top: vh;
   font-size: 8vh;
   color: #E1E839;
   font-family: 'Vast Shadow', cursive;
