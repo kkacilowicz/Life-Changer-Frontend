@@ -17,9 +17,6 @@ export class LoginComponent implements OnInit {
 
 
 
-
-  constructor(public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService) { }
-
   helper = new JwtHelperService();
 
   constructor(private authService: AuthService, private alertService: AlertService,
@@ -29,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+  }
 //   onSubmit(f: NgForm) {
 //     this.progressBar.startLoading();
 //     this.alertService.info('Checking user info');

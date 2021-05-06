@@ -12,25 +12,20 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule } from 'angularx-social-login'
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { SocialAuthServiceConfig } from 'angularx-social-login';
-import { CookieService } from 'ngx-cookie-service';
 
-
-import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 
-
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin
-]);
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoveComponent } from './pages/preferences/love/love.component';
 import { SportComponent } from './pages/preferences/sport/sport.component';
 import { CultureComponent } from './pages/preferences/culture/culture.component';
+import { SafePipe } from './safe.pipe';
 
+
+const googleLoginOptions = {
+  scope: 'https://www.googleapis.com/auth/calendar.events',
+  access_type: 'offline',
+  redirect_uri: ''
+};
 
 @NgModule({
   declarations: [
@@ -43,6 +38,8 @@ import { CultureComponent } from './pages/preferences/culture/culture.component'
     LoveComponent,
     SportComponent,
     CultureComponent,
+    SafePipe,
+
   ],
   imports: [
     BrowserModule,
@@ -53,7 +50,6 @@ import { CultureComponent } from './pages/preferences/culture/culture.component'
     AuthModule,
     UserDashboardModule,
     SocialLoginModule,
-    FullCalendarModule
   ],
   providers: [
     {
@@ -64,13 +60,13 @@ import { CultureComponent } from './pages/preferences/culture/culture.component'
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com'
+              '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com', googleLoginOptions
             )
           }
         ]
       } as SocialAuthServiceConfig,
     },
-    CookieService
+    SafePipe
   ],
   bootstrap: [AppComponent]
 })

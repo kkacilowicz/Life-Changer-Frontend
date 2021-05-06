@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   logout() {
   this.socialAuthService.signOut();
   localStorage.removeItem('token');
+  localStorage.removeItem('accessToken');
   this.authService.decodedToken = null;
   this.alertService.success("Logged Out");
   this.authService.changePage('')
