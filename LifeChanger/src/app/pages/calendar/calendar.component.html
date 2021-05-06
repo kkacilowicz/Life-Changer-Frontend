@@ -1,7 +1,7 @@
 
 
-<iframe [src] = "calendarUrl | safe" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-<button (click) = "this.calendarService.addEvent()">Dodaj event</button>
+<iframe [src] = "this.calendarService.calendarUrl | safe" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<button (click) = "addEvent()">Dodaj event</button>
 <div class="calendarContainter">
   <div class="calendarNames"
        (click) = "pickCalendar(calendar)"

@@ -17,55 +17,65 @@ export class CalendarComponent implements OnInit {
   calendarArray: { idCalendar: string, nameCalendar: string}[] = [];
   calendarID: string;
 
-  calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
+  // calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
   constructor(private httpClient: HttpClient, public authService: AuthService, private socialAuthService: SocialAuthService, public calendarService: CalendarService, private safePipe: SafePipe, private domSanitizer: DomSanitizer) {
    }
 
   ngOnInit(): void {
     this.showCalendar();
-    this.setCalendarId();
+    this.calendarService.getChoosenCalendarId()
+    this.calendarService.eventsToArray();
   }
 
-
-  setCalendarId(){
-    this.calendarService.getChoosenCalendarId().subscribe(response =>{
-      this.calendarID = response;
-      this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`
-    })
-  }
-
-pickCalendar(pickedCalendar){
+  pickCalendar(pickedCalendar){
   // console.log(pickedCalendar.idCalendar);
-  this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
+    this.calendarService.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
-  const calendarObserver = {
-        next: nxt => {
-          // this.calendarArray.length = 0;
-        },
-        error: err => {
-          console.log(err);
+    const calendarObserver = {
+          next: nxt => {
+            // this.calendarArray.length = 0;
+          },
+          error: err => {
+            console.log(err);
+          }
+        };
+    //odkomentowac jak bedzie url
+    // this.calendarService.sendCalendarId(pickedCalendar.idCalendar).subscribe(calendarObserver);
+  }
+
+  showCalendar() {
+    const calendarObserver = {
+      next: response => {
+        console.log(response.items);
+        for(let i = 0; i < response.items.length; i++)
+        {
+          this.calendarArray.push({idCalendar: response.items[i].id, nameCalendar: response.items[i].summary});
         }
-      };
-  //odkomentowac jak bedzie url
-  // this.calendarService.sendCalendarId(pickedCalendar.idCalendar).subscribe(calendarObserver);
+      },
+      error: err => {
+        console.log(err);
+      }
+    };
+    this.calendarService.getGoogleCalendars().subscribe(calendarObserver);
 }
 
-showCalendar() {
-  const calendarObserver = {
-    next: response => {
-      console.log(response.items);
-      for(let i = 0; i < response.items.length; i++)
-      {
-        this.calendarArray.push({idCalendar: response.items[i].id, nameCalendar: response.items[i].summary});
+  addEvent(){
+    const eventObserver = {
+      next: response => {
+        console.log(response);
+        //   window.location.reload();
+      },
+      error: err => {
+        console.log(err);
       }
-    },
-    error: err => {
-      console.log(err);
-    }
-  };
-  this.calendarService.getGoogleCalendars().subscribe(calendarObserver);
-}
+    };
+    //zmienic na this.calendarService.calendarID jak bedzie dzialas get id z serwera
+    this.calendarService.sendEvent('cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com').subscribe(eventObserver);
+  }
+
+
+
 
 
 
