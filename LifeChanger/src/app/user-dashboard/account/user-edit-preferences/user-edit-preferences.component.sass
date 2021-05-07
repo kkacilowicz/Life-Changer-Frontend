@@ -7,61 +7,123 @@
     width: 100vw
     height: calc( 100vh - 56px)
     overflow: auto
+
 .background
-    background-image: url("../../../../assets/Images/Preferences/edit-prefernces/tlo.png")
+  position: relative
+  overflow: auto
+  height: calc( 100vh - 56px )
+  background-image: url('../../../../assets/Images/User_Profil/background1.jpg')
+  background-position: top
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-size: cover
+  .bg
     position: absolute
-    width: 100vw
-    height: calc( 100vh - 56px)
     overflow: auto
-    background-position: center
-    background-size: cover
+    //background-color: rgba(158, 19, 104, 0.18)
+    //background-color: rgba(255, 202, 236, 0.2)
+    background-color: rgba(0, 0, 0, 0.48)
+    width: 100vw
+    height: calc( 100vh - 56px )
+    left: 0
 
-.container
-    width: 100%
-    height:  calc( 100vh - 56px)
-    background-color: rgba(255,255,255,0.7)
+.profil
+  background-color: #E2DED8
+  border-radius: 45px
+  border: 5px solid #6A655E
 
-.title
-    text-align: center
-    font-size: 50px
-    padding-top: 2%
-    font-family: 'Orelega One', cursive
-
-.areas
-    text-align: center
-    font-size: 40px
-    padding-top: 1%
-    font-family: 'Orelega One', cursive
-
-.space_button
-    display: flex
-    justify-content: space-around
-    padding-top: 2%
+.form-control:focus
+  box-shadow: none
+  border-color: #BA68C8
 
 .profile-button
   background: rgb(99, 39, 120)
   box-shadow: none
   border: none
-  margin-top: 1%
-  text-align: center
 
   &:hover
-    background: orange
+    background: #682773
 
   &:focus
-    background: grey
+    background: #682773
     box-shadow: none
 
   &:active
-    background: orange
+    background: #682773
     box-shadow: none
+
+.back:hover
+  color: #682773
+  cursor: pointer
+
+.labels
+  font-size: 11px
+
+.add-experience:hover
+  background: #BA68C8
+  color: #fff
+  cursor: pointer
+  border: solid 1px #BA68C8
+
+.container
+  width: 70vw
+  max-width: 500px
+  .py-5
+    padding-top: 2rem !important
+  .title
+    h2
+      margin: 0 auto
+      text-align: center
+  .col-md-12
+    width: 75%
+    margin: 5px auto
+
+.mt-5
+  button
+    &:hover
+      opacity: .7
+  i
+    margin-right: 7px
+
+.cancel
+  text-decoration: none
+  i
+    font-size: 30px
+    color: #682773
+    &:hover
+      opacity: .7
+
+
+
+  
+.title_area
+  padding-top: 4vh
+  
+.mt-5
+  justify-content: space-between
+  a
+    &:hover
+      opacity: .7
+  button
+    margin-top: 3%
+    margin-right: 4%
+    i
+      max-width: 14px
+      &:hover
+        opacity: .7
+  i
+    margin-right: 7px
+
+  label
+    font-weight: bold
+    
 
 
 form
   border: 5px solid rgb(99, 39, 120)
-  width: 30%
-  margin-left: 35%
-  margin-right: 35%
+  width: 80%
+  margin-left: 10%
+  margin-right: 10%
   margin-top: 5%
   padding: 2%
   background-color: rgb(229, 173, 252)
