@@ -39,9 +39,9 @@ export class GoogleLoginComponent implements OnInit {
     if(this.authService.sendGoogleToken().subscribe()){
       if(this.userService.userPref.categories.length==0){
         console.log("dlugosc:", this.userService.userPref.categories.length)
-        this.authService.changePage('');
+        this.authService.changePage('/main');
       }else {
-        this.authService.changePage('preferences');
+        this.authService.changePage('/preferences');
       }
 
     }

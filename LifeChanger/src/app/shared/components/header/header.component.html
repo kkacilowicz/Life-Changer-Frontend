@@ -1,33 +1,29 @@
 <ngx-alerts></ngx-alerts>
 <ng-progress id="progressBar" [color]="progressBar.currentColor"></ng-progress>
 
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <div class="navbar-brand logo">Life Changer</div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="dropdownMenuLink">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="!authService.loggedIn();">
-    
-        </li>
-        <div class="dropdown" *ngIf="authService.loggedIn();">
-          Center
-          <a class="btn btn-secondary dropdown-toggle" role="button"  data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <i id="user-icon" class="fas fa-user"></i> Welcome {{authService.decodedToken?.email}}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" [routerLink]="['my-profile']" routerLinkActive="active"><i
-                  class="fas fa-user"></i>Your profile</a></li>
-            <li><a class="dropdown-item" [routerLink]="['edit-preferences']" routerLinkActive="active"><i
-                  class="fas fa-cogs"></i>Edit preferences </a></li>
-            <li><a class="dropdown-item" (click)='logout()'><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-          </ul>
-        </div>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand logo">Life Changer</a>
+  <button *ngIf="authService.loggedIn();" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div *ngIf="authService.loggedIn();" class="collapse navbar-collapse justify-content-end nav-pills" id="navbarNav">
+    <ul class="navbar-nav ml-auto" aria-labelledby="navbarMenu">
+
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['main']" routerLinkActive="active"> Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['my-profile']" routerLinkActive="active" href="#"><i class="fas fa-user"></i>
+          My profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['edit-preferences']" routerLinkActive="active" href="#"><i
+            class="fas fa-cogs"></i> Edit preferences </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link logout" (click)='logout()'><i class="fas fa-sign-out-alt"></i>Logout</a>
+      </li>
+    </ul>
   </div>
-</nav> 
