@@ -12,10 +12,10 @@
             </div>
             <div class="row mt-3">
               <div class="col-md-12"> <label>Username: </label> <br>
-                {{userService.userInfo.userName}} </div>
+                {{userInfo.userName}} </div>
 
               <div class="col-md-12"> <label> Email: </label> <br>
-                {{userService.userInfo.email}}</div>
+                {{userInfo.email}}</div>
 
               <div class="col-md-12"> <label> Selected areas of life: </label> <br>
                 <div *ngFor=" let category of userService.userPref.categories">
@@ -35,6 +35,17 @@
 
 
         </div>
+<<<<<<< HEAD
+=======
+        <div class="mt-5 text-center">
+          <button class="btn btn-primary profile-button" type="button" (click)="goEdit()"><i class="fas fa-edit"></i>Edit Profile</button>
+          <a  class="btn btn-primary profile-button"
+          [routerLink]="['/edit-preferences']" routerLinkActive="active"><i class="fas fa-cogs"></i>Edit preferences</a>
+
+        </div>
+
+
+>>>>>>> origin/googleCalendar
       </div>
     </div>
   </div>
