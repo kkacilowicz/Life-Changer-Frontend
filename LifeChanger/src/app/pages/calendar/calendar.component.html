@@ -1,3 +1,11 @@
-<div class = 'calendar'>
-<full-calendar [options]="calendarOptions"></full-calendar>
+
+
+<iframe [src] = "this.calendarService.calendarUrl | safe" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<button (click) = "addEvent()">Dodaj event</button>
+<div class="calendarContainter">
+  <div class="calendarNames"
+       (click) = "pickCalendar(calendar)"
+       *ngFor="let calendar of calendarArray"
+  >{{calendar.nameCalendar}}
+  </div>
 </div>

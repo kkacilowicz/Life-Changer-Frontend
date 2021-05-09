@@ -41,19 +41,17 @@ export class AuthService {
   sendGoogleToken(){
     this.sendObj.token = this.User.idToken;
     this.sendObj.provider = this.User.provider;
-
     return this.http.post(this.apiUrl + 'ExternalLogin' ,this.sendObj)
     .pipe(
       map((user: any) => {
         if (user) {
-          console.log(user);
           localStorage.setItem('token', user.token);
           this.decodedToken = this.helper.decodeToken(user.token);
-          console.log(this.decodedToken);
         }
       })
     )
   }
+
   loggedIn() {
   this.serverToken = localStorage.getItem('token');
 
