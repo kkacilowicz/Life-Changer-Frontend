@@ -47,7 +47,6 @@ export class GoogleLoginComponent implements OnInit {
       }
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
     }
-
   }
 
 
