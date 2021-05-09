@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,14 @@ export class CalendarService {
   accessToken = localStorage.getItem('accessToken');
   calendarID: string;
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
+  calendarApi: string = environment.apiUrl;
+  sendEventUrl: string = environment.activityUrl + 'ProposeActivity' ;
 
-
+  date = new Date();
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
+
   event = {
-    summary :'string',
+    summary :'',
     start: {
       dateTime: '',
       timeZone: "Europe/Warsaw"
@@ -27,45 +31,49 @@ export class CalendarService {
   }
 
   eventsArray: { summary: string, startTime: string, endTime: string }[] = [];
-  // event = {
-  //   start: {
-  //     dateTime: '2021-05-7T15:00:00+02:00',
-  //     timeZone: "Europe/Warsaw"
-  //   },
-  //   end: {
-  //     dateTime: '2021-05-7T17:00:00+02:00',
-  //     timeZone: "Europe/Warsaw"
-  //   }
-  // }
+
+  eventArray: { name: string, dateStart: string, timeStart: string, dateEnd: string, timeEnd: string }[] = [];
 
   checkNumber(number){
     return number = number < 10 ? `0${number}`:number;
   }
 
-  createEvent(summary,startDate, endDate, startTime, endTime){
-    // startDate.month = startDate.month < 10 ? `0${startDate.month}` : startDate.month;
-    // startDate.day = startDate.day < 10 ? `0${startDate.day}` : startDate.day;
-    // startTime.hour = startTime.hour < 10 ? `0${startTime.hour}` : startTime.hour;
-    // startTime.minute = startTime.minutes < 10 ? `0${startTime.minutes}` : startTime.minutes;
-    // endDate.month = endDate.month < 10 ? `0${endDate.month}` : endDate.month;
-    // endDate.day = endDate.day < 10 ? `0${endDate.day}` : endDate.day;
-    // endTime.hour = endTime.hour < 10 ? `0${endTime.hour}` : endTime.hour;
-    // endTime.minute = endTime.minutes < 10 ? `0${endTime.minutes}` : endTime.minutes;
-    startDate.month = this.checkNumber(startDate.month);
-    startDate.day = this.checkNumber(startDate.day);
-    startTime.hour = this.checkNumber(startTime.hour);
-    startTime.minute = this.checkNumber(startTime.minute);
-    endDate.month = this.checkNumber(endDate.month);
-    endDate.day = this.checkNumber(endDate.day);
-    endTime.hour = this.checkNumber(endTime.hour);
-    endTime.minute = this.checkNumber(endTime.minute);
+  createEvent(summary,startDate, endDate){
 
+    const minDate = {
+      year: startDate.getFullYear(),
+      month: startDate.getMonth()+1,
+      day: startDate.getDate()
+    }
+    const maxDate = {
+      year: endDate.getFullYear(),
+      month: endDate.getMonth()+1,
+      day: endDate.getDate()
+    }
+    const minTime = {
+      hour: startDate.getHours(),
+      minutes: startDate.getMinutes()
+    }
+    const maxTime = {
+      hour: endDate.getHours(),
+      minutes: endDate.getMinutes()
+    }
 
+    minDate.month = this.checkNumber(minDate.month);
+    minDate.day = this.checkNumber(minDate.day);
+    minTime.hour = this.checkNumber(minTime.hour);
+    minTime.minutes = this.checkNumber(minTime.minutes);
+    maxDate.month = this.checkNumber(maxDate.month);
+    maxDate.day = this.checkNumber(maxDate.day);
+    maxTime.hour = this.checkNumber(maxTime.hour);
+    maxTime.minutes = this.checkNumber(maxTime.minutes);
 
     this.event.summary = summary;
-    this.event.start.dateTime = `${startDate.year}-${startDate.month}-${startDate.day}T${startTime.hour}:${startTime.minute}:00+02:00`;
-    this.event.end.dateTime = `${endDate.year}-${endDate.month}-${endDate.day}T${endTime.hour}:${endTime.minute}:00+02:00`;
-    return this.event;
+    this.event.start.dateTime = `${minDate.year}-${minDate.month}-${minDate.day}T${minTime.hour}:${minTime.minutes}:00+02:00`;
+    this.event.end.dateTime = `${maxDate.year}-${maxDate.month}-${maxDate.day}T${maxTime.hour}:${maxTime.minutes}:00+02:00`;
+    this.sendEvent(this.calendarID, this.event).subscribe(response =>{
+      console.log('Dodano event');
+    })
   }
 
 
@@ -80,43 +88,38 @@ export class CalendarService {
   }
 
   sendCalendarId(pickedCalendarId){
-    return this.httpClient.post("endPoint od grzesia",pickedCalendarId);
+    const token = localStorage.getItem('token')
+    let reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      })
+      .set('content-type', 'application/json');
+    return this.httpClient.post(this.calendarApi + 'updatecalendar', JSON.stringify({token: pickedCalendarId}), { headers: reqHeader });
   }
 
   getChoosenCalendarId(){
-    this.httpClient.get<string>('endPoint z id wybranego kalendarza - jesli nie ma to puste').subscribe(response =>{
-      this.calendarID = response;
-      this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`
+    const token = localStorage.getItem('token')
+    let reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      })
+    this.httpClient.get<string>(this.calendarApi + 'calendar', { headers: reqHeader }).subscribe(response =>{
+      console.log(response);
+      this.calendarID = (response = null)? ' ': response;
+      //${this.calendarID} chwilowo nie dziala potem dodam -> chodzi o wybrane id wczesniej
+      this.calendarUrl = `https://calendar.google.com/calendar/embed?src=kacper.791@o2.pl&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`
     });
   }
 
 
-  sendEvent(calendarID){
-    console.log(this.event);
-    const startDate = {
-      year: 2021,
-      month: 5,
-      day: 15
-    }
-    const endDate = {
-      year: 2021,
-      month: 5,
-      day: 15
-    }
-    const startTime = {
-      hour: 18,
-      minutes: 0
-    }
-    const endTime = {
-      hour: 18,
-      minutes: 30
-    }
-    this.event = this.createEvent('Pojscie do baru', startDate, endDate, startTime, endTime);
+  sendEvent(calendarID, event){
     let reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.accessToken,
       });
-    return this.httpClient.post(`https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`, this.event, { headers: reqHeader });
+      //cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com
+    // return this.httpClient.post(`https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`, this.event, { headers: reqHeader });
+    return this.httpClient.post(`https://www.googleapis.com/calendar/v3/calendars/cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com/events`, this.event, { headers: reqHeader });
   }
 
   getCalendarEvents(minTime, maxTime):Observable<any>{
@@ -139,26 +142,36 @@ export class CalendarService {
 
   eventsToArray(){
     const minTime = {
-      year: 2021,
-      month: 5,
-      day: 10,
-      hour: 20,
+      year: this.date.getFullYear(),
+      month: this.date.getMonth() + 1,
+      day: this.date.getDate() + 1,
+      hour: 0,
       minute: 0
     };
     const maxTime = {
-      year: 2021,
-      month: 5,
-      day: 13,
-      hour: 20,
+      year: this.date.getFullYear(),
+      month: this.date.getMonth() + 1,
+      day: this.date.getDate() + 3,
+      hour: 23,
       minute: 0
     };
 
     this.getCalendarEvents(minTime, maxTime).subscribe(response =>{
       for(let i = 0 ; i < response.items.length; i++)
       {
-        this.eventsArray.push({summary: response.items[i].summary, startTime: response.items[i].start.dateTime, endTime: response.items[i].end.dateTime})
-        console.log(this.eventsArray[i]);
+        let minTimeDate = new Date(response.items[i].start.dateTime);
+        let maxTimeDate = new Date(response.items[i].end.dateTime);
+
+        this.eventArray.push({
+          name: response.items[i].summary,
+          dateStart: `${minTimeDate.getDate()}.${minTimeDate.getMonth()+1}.${minTimeDate.getFullYear()}`,
+          timeStart:`${minTimeDate.getHours()}:${minTimeDate.getMinutes()}`,
+          dateEnd:`${maxTimeDate.getDate()}.${maxTimeDate.getMonth()+1}.${maxTimeDate.getFullYear()}`,
+          timeEnd:`${maxTimeDate.getHours()}:${maxTimeDate.getMinutes()}`
+          })
+        console.log(this.eventArray[i]);
       }
+      this.giveCalendarEvents(this.eventArray);
       // console.log(response.items[0]);
       // console.log(`Summary: ${response.items[0].summary}`);
       // console.log(`Start Time: ${response.items[0].start.dateTime}`);
@@ -166,11 +179,34 @@ export class CalendarService {
     })
   }
 
-  getEventOffer(){
-    this.httpClient.get<any>('endpoint z propozycjami eventow').subscribe(response => {
-      this.eventsArray = response;
-    });
-  }
+  giveCalendarEvents(eventArr){
+    const startDate = {
+      day: '',
+      month: '',
+      year: ''
+    }
+    const token = localStorage.getItem('token')
+    let reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      })
+    this.httpClient.post<any>(this.sendEventUrl, eventArr, { headers: reqHeader }).subscribe(response => {
+      console.log(response);
+      // for(let i = 0; i < response.length; i++)
+      // {
+      //   let eventTime = new Date(response);
+      //   createEvent(summary,startDate, endDate, startTime, endTime);
+      //   this.createEvent(response.name,startDate, endDate, startTime, endTime);
+      // }
+      let startDateString = `${response.dateStart}T${response.timeStart}:00`;
+      let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
+      let eventStartTime = new Date(startDateString);
+      let eventEndTime = new Date(endDateString);
+      console.log(eventStartTime);
+      console.log(eventEndTime);
+      this.createEvent(response.name, eventStartTime, eventEndTime);
+    })
+  };
 
 
 }
