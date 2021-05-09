@@ -26,6 +26,7 @@ export class CalendarComponent implements OnInit {
     this.showCalendar();
     this.calendarService.getChoosenCalendarId()
     this.calendarService.eventsToArray();
+    // this.calendarService.giveCalendarEvents()
   }
 
   pickCalendar(pickedCalendar){
@@ -35,19 +36,18 @@ export class CalendarComponent implements OnInit {
     const calendarObserver = {
           next: nxt => {
             // this.calendarArray.length = 0;
+            console.log("Dodano kalendarz do biblioteki");
           },
           error: err => {
             console.log(err);
           }
         };
-    //odkomentowac jak bedzie url
-    // this.calendarService.sendCalendarId(pickedCalendar.idCalendar).subscribe(calendarObserver);
+    this.calendarService.sendCalendarId(pickedCalendar.idCalendar).subscribe(calendarObserver);
   }
 
   showCalendar() {
     const calendarObserver = {
       next: response => {
-        console.log(response.items);
         for(let i = 0; i < response.items.length; i++)
         {
           this.calendarArray.push({idCalendar: response.items[i].id, nameCalendar: response.items[i].summary});
@@ -59,49 +59,5 @@ export class CalendarComponent implements OnInit {
     };
     this.calendarService.getGoogleCalendars().subscribe(calendarObserver);
 }
-
-  addEvent(){
-    const eventObserver = {
-      next: response => {
-        console.log(response);
-        //   window.location.reload();
-      },
-      error: err => {
-        console.log(err);
-      }
-    };
-    //zmienic na this.calendarService.calendarID jak bedzie dzialas get id z serwera
-    this.calendarService.sendEvent('cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com').subscribe(eventObserver);
-  }
-
-
-
-
-
-
-
-  // addEvent(){
-  //   console.log(this.User);
-  //   let reqHeader = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'Bearer ',
-  //     });
-
-  //   this.httpClient.post('https://www.googleapis.com/calendar/v3/calendars/cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com/events', this.event, { headers: reqHeader }).subscribe(response => {
-  //     console.log(response);
-  //   });
-  // }
-  // calendarOptions: CalendarOptions = {
-  //   initialView: 'dayGridMonth',
-  //   dateClick: this.handleDateClick.bind(this), // bind is important!
-  //   events: [
-  //     { title: 'event 1', date: '2019-04-01' },
-  //     { title: 'event 2', date: '2019-04-02' }
-  //   ]
-  // };
-
-  // handleDateClick(arg) {
-  //   alert('date click! ' + arg.dateStr)
-  // }
 
 }

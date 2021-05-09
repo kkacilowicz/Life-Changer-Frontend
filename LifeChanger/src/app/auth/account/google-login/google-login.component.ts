@@ -38,7 +38,7 @@ export class GoogleLoginComponent implements OnInit {
 
   sendToken(){
     if(this.authService.sendGoogleToken().subscribe()){
-      this.authService.changePage('calendar');
+      this.authService.changePage('preferences');
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
     }
 
