@@ -3,6 +3,7 @@
   font-family: 'Chango', cursive;
   color: #E8E5AE;
   cursor: default;
+  margin-left: 2vw;
 }
 
 .logo:hover {
@@ -13,3 +14,7 @@
   cursor: pointer;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #664d03;
+}
