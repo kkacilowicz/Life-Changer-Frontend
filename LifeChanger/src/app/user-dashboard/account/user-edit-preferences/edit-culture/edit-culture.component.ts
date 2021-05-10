@@ -57,19 +57,18 @@ export class EditCultureComponent implements OnInit {
     const detailsObserver = {
       next: x => {
         console.log('Details Culture OK');
-        this.authService.changePage('')
+        this.eventCulture.emit(this.task);
         this.alertService.success('Sent correctly ');
       },
       error: err => {
         console.log(err);
         this.alertService.danger(err.error.message);
+        this.authService.changePage('edit-preferences');
       }
     };
-
-    this.eventCulture.emit(this.task);
     this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    
+    this.authService.changePage('/my-profile');
   }
 
   getDetailId(e: any, id: string) {

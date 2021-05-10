@@ -54,25 +54,25 @@ ngOnInit(): void {
 onSubmit() {
   const detailsObserver = {
     next: x => {
+      
       console.log('Details love OK');
-      this.buttonClick=true
-      if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
-        this.authService.changePage('')
-      }
       this.alertService.success('Sent correctly ');
     },
     error: err => {
       console.log(err);
       this.alertService.danger(err.error.message);
+      this.authService.changePage('edit-preferences')
     }
     
   };
 
-  
+  this.buttonClick=true
   this.eventLove.emit(this.task)
   this.form.patchValue({ images: this.selectedDetails })
   this.Preferences.details(this.form.value).subscribe(detailsObserver);
-
+  if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
+    this.authService.changePage('/my-profile')
+  }
   
 }
 

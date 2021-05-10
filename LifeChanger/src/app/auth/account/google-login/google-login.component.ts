@@ -39,16 +39,16 @@ export class GoogleLoginComponent implements OnInit {
 
   sendToken() {
     if (this.authService.sendGoogleToken().subscribe()) {
-      console.log("Makarena")
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
       console.log('Length:', this.userService.userPref.categories)
       if (localStorage.getItem('accessToken')) {
         console.log('Length:', this.userService.userPref.categories.length)
-        if (this.userService.userPref.categories == [{"name":''} , {"name":''}, {"name":''} ]) {
+        if (this.userService.userPref.categories[0]=={name:""}) {
           this.authService.changePage('preferences')
         }
         else {
           this.authService.changePage('main');
+          console.log('Poz 0', this.userService.userPref.categories[0])
         }
       }
 

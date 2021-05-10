@@ -55,6 +55,11 @@ img {
   border: 10px solid #0CB504;
 }
 
+.checkbox:checked ~ .text {
+  background-color: #0CB504;
+  color: black;
+}
+
 .info {
   color: red;
   margin-top: 1vh;
@@ -64,4 +69,21 @@ img {
   font-size: 25px;
   font-weight: bold;
   opacity: 0;
+}
+
+.text {
+  background-color: #765B5B;
+  width: 40vh;
+  height: 5vh;
+  margin-right: 5vh;
+  position: relative;
+  top: -5vh;
+  right: 0;
+  left: 12.8px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  color: #fff;
+  text-align: center;
+  font-family: 'Margarine', cursive;
+  font-size: 3vh;
 }

@@ -58,24 +58,27 @@ export class EditSportComponent implements OnInit {
 
   onSubmit() {
     const detailsObserver = {
+      
       next: x => {
         console.log('Details Sport OK');
         this.alertService.success('Sent correctly ');
-        this.buttonClick=true
-        if(this.preferencesList[1]==true && this.preferencesList[2]==false){
-          this.authService.changePage('')
-        }
+        
         
       },
       error: err => {
         console.log(err);
         this.alertService.danger(err.error.message);
+        this.authService.changePage('edit-preferences')
       }
     };
+    this.buttonClick=true
     this.eventSport.emit(this.task);
     this.form.patchValue({ images: this.selectedDetails })
     console.log(this.selectedDetails)
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
+    if(this.preferencesList[1]==true && this.preferencesList[2]==false){
+      this.authService.changePage('/my-profile')
+    }
   }
 
   getDetailId(e: any, id: string) {
