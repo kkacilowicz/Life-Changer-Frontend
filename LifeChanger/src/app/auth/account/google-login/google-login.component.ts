@@ -15,7 +15,7 @@ import { UserService } from 'src/app/shared/services/user.service'
 })
 export class GoogleLoginComponent implements OnInit {
 
-  constructor(private userService:UserService ,public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService, private calendarService: CalendarService) { }
+  constructor(private userService: UserService, public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService, private calendarService: CalendarService) { }
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((user) => {
@@ -28,8 +28,8 @@ export class GoogleLoginComponent implements OnInit {
 
   googleLogin() {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(User => {
-    this.sendToken();
-    console.log(User);
+      this.sendToken();
+      console.log(User);
     })
   }
 
@@ -37,15 +37,21 @@ export class GoogleLoginComponent implements OnInit {
     this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  sendToken(){
-    if(this.authService.sendGoogleToken().subscribe()){
-      if (this.userService.userPref.categories.length==0){
-        this.authService.changePage('preferences')
-      }
-      else{
-        this.authService.changePage('main');
-      }
+  sendToken() {
+    if (this.authService.sendGoogleToken().subscribe()) {
+      console.log("Makarena")
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
+      console.log('Length:', this.userService.userPref.categories)
+      if (localStorage.getItem('accessToken')) {
+        console.log('Length:', this.userService.userPref.categories.length)
+        if (this.userService.userPref.categories == [{"name":''} , {"name":''}, {"name":''} ]) {
+          this.authService.changePage('preferences')
+        }
+        else {
+          this.authService.changePage('main');
+        }
+      }
+
     }
   }
 

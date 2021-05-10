@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   localStorage.removeItem('accessToken');
   this.authService.decodedToken = null;
   this.alertService.success("Logged Out");
-  this.authService.changePage('')
+  this.authService.changePage('logout')
 }
 
 }

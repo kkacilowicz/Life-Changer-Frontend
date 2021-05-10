@@ -20,10 +20,11 @@ import { SportComponent } from './pages/preferences/sport/sport.component';
 import { CultureComponent } from './pages/preferences/culture/culture.component';
 import { MainComponent } from './pages/main/main.component';
 import { SafePipe } from './safe.pipe';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 
 const googleLoginOptions = {
-  scope: 'https://www.googleapis.com/auth/calendar.events',
+  scope: 'https://www.googleapis.com/auth/calendar.events.readonly',
   access_type: 'offline',
   redirect_uri: ''
 };
@@ -41,6 +42,7 @@ const googleLoginOptions = {
     CultureComponent,
     MainComponent,
     SafePipe,
+    LogoutComponent,
 
   ],
   imports: [
