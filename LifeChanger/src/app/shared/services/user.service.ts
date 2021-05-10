@@ -4,8 +4,9 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { IUser } from './../models/user'
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { userPreferences } from '../models/userPreferences';
+
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class UserService {
 
   userPref: userPreferences = {
     userName!: '',
-    categories!: [{"name":''} , {"name":''}, {"name":''} ],
+    categories!: [ ],
   } 
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
@@ -46,6 +47,24 @@ export class UserService {
       gender: (data as any).gender,
       birthDate: (data as any).birthDate,
     });
+  }
+
+  async equals(){
+    const promise = await new Promise((resolve) =>{
+      setTimeout(()=>resolve('finished'), 1000)
+    });
+    let category = this.userPref.categories[0]
+    let category1 = this.userPref.categories[1]
+    let category2 = this.userPref.categories[2]
+    if ( category.name =='' && category1.name =='' && category2.name ==''  ){
+      console.log("c0", category.name)
+      console.log("c1",category1.name)
+      console.log("c2",category2.name)
+      return true
+    }
+    else{
+      return false 
+    }
   }
 
   getPreferences(): Observable<userPreferences>{

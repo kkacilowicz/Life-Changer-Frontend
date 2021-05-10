@@ -62,7 +62,7 @@ export class PreferencesComponent implements OnInit {
 
     this.userService.preferences();
 
-
+    
   }
 
 

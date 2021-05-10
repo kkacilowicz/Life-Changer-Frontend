@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
@@ -22,6 +23,8 @@ export class GoogleLoginComponent implements OnInit {
       this.authService.User = user;
       this.authService.isSignedIn = (this.authService.User != null);
     });
+    this.userService.getPreferences()
+    this.userService.preferences()
   }
   helper = new JwtHelperService();
   decodedToken: any;
@@ -40,15 +43,15 @@ export class GoogleLoginComponent implements OnInit {
   sendToken() {
     if (this.authService.sendGoogleToken().subscribe()) {
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
-      console.log('Length:', this.userService.userPref.categories)
+      
       if (localStorage.getItem('accessToken')) {
-        console.log('Length:', this.userService.userPref.categories.length)
-        if (this.userService.userPref.categories[0]=={name:""}) {
+        console.log("table:",this.userService.userPref.categories)
+        console.log("Length:",this.userService.userPref.categories.length )
+        if(this.userService.userPref.categories.length==0){
           this.authService.changePage('preferences')
         }
-        else {
-          this.authService.changePage('main');
-          console.log('Poz 0', this.userService.userPref.categories[0])
+        else{
+          this.authService.changePage('main')
         }
       }
 
