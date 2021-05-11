@@ -9,6 +9,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { AlertService } from 'ngx-alerts';
 
 
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -26,6 +27,7 @@ export class CalendarComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
     this.showCalendar();
     // this.calendarService.getChoosenCalendarId();
     if(this.userService.userPref.categories.length == 0)

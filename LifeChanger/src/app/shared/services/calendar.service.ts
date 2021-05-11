@@ -14,7 +14,9 @@ export class CalendarService {
   calendarID: string;
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
   calendarApi: string = environment.apiUrl;
+
   sendEventUrl: string = environment.activityUrl ;
+
   pickCalendarFlag: boolean = false;
 
   date = new Date();
@@ -193,6 +195,7 @@ export class CalendarService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
       })
+      console.log("eventArray:", eventArr)
       if(eventArr.length == 0 )
       {
         console.log("Wywolalo sie to");
