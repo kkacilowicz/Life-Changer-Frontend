@@ -13,7 +13,7 @@ export class CalendarService {
   calendarID: string;
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
   calendarApi: string = environment.apiUrl;
-  sendEventUrl: string = environment.activityUrl + 'ProposeActivity' ;
+  sendEventUrl: string = environment.activityUrl ;
   pickCalendarFlag: boolean = false;
 
   date = new Date();
@@ -194,8 +194,6 @@ export class CalendarService {
         console.log("Wywolalo sie to");
         let todaysDate = new Date();
         console.log(todaysDate);
-
-
         this.httpClient.post<any>(this.sendEventUrl + 'ProposeActivityOnFreeDay', JSON.stringify({date: `${todaysDate.getFullYear()}.${(todaysDate.getMonth()+1)}.${todaysDate.getDate()}`}) , { headers: reqHeader }).subscribe(response => {
           let startDateString = `${response.dateStart}T${response.timeStart}:00`;
           let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
