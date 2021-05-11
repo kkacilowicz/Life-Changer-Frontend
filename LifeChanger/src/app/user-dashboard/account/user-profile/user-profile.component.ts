@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AuthService } from '../../../shared/services/auth.service';
-import { IUser } from 'src/app/shared/models/user';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.user();
+  
     this.userService.preferences();
     console.log(this.authService.decodedToken);
 

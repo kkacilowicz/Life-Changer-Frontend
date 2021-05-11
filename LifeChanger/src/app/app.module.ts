@@ -25,7 +25,7 @@ import { LoadingComponent } from './pages/loading/loading.component';
 
 
 const googleLoginOptions = {
-  scope: 'https://www.googleapis.com/auth/calendar.events.readonly',
+  scope: 'https://www.googleapis.com/auth/calendar',
   access_type: 'offline',
   redirect_uri: ''
 };

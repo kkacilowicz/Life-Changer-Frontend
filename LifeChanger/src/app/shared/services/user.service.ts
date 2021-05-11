@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
-import { IUser } from './../models/user'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { userPreferences } from '../models/userPreferences';
+import { Router } from '@angular/router';
 
 
 
@@ -16,56 +15,16 @@ export class UserService {
   userUrl = environment.apiUrl;
   preUrl = environment.preUrl;
 
-  userInfo: IUser = {
-    email: '',
-    userName: '',
-    gender: '',
-    birthDate: '',
-    phoneNumber: '',
-  }
 
   userPref: userPreferences = {
     userName!: '',
     categories!: [ ],
   } 
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
 
-  getUser(): Observable<IUser> {
-    let headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.httpClient.get<IUser>(this.userUrl + 'userinfo', { headers: headers })
-  }
 
-  user() {
-    this.getUser().subscribe((data: IUser) => this.userInfo = {
-      email: (data as any).email,
-      userName: (data as any).userName,
-      phoneNumber: (data as any).phoneNumber,
-      gender: (data as any).gender,
-      birthDate: (data as any).birthDate,
-    });
-  }
-
-  async equals(){
-    const promise = await new Promise((resolve) =>{
-      setTimeout(()=>resolve('finished'), 1000)
-    });
-    let category = this.userPref.categories[0]
-    let category1 = this.userPref.categories[1]
-    let category2 = this.userPref.categories[2]
-    if ( category.name =='' && category1.name =='' && category2.name ==''  ){
-      console.log("c0", category.name)
-      console.log("c1",category1.name)
-      console.log("c2",category2.name)
-      return true
-    }
-    else{
-      return false 
-    }
-  }
 
   getPreferences(): Observable<userPreferences>{
     let headers = new HttpHeaders({
@@ -74,11 +33,10 @@ export class UserService {
     return this.httpClient.get<userPreferences>(this.preUrl + 'UserCategories', { headers: headers })
   }
 
+
+
+
  preferences():Promise<void>{
-    // this.getPreferences().subscribe((data: userPreferences)=> this.userPref ={
-    //   userName : (data as any ).userName,
-    //   categories: (data as any).categories,     
-    // });
 
     let resolveRef;
     let rejectRef;
@@ -99,8 +57,26 @@ export class UserService {
     });
     
 
-     return dataPromise
 
+
+
+     return dataPromise
+  }
+
+  changePagePreferences(path: string) {
+    this.router.navigateByUrl(path);
+  }
+
+  checkPreferences(){
+    if(localStorage.getItem('token')){
+    this.preferences().then( () =>{
+    if (this.userPref.categories.length == 0) {
+      this.changePagePreferences('preferences')
+    } else {
+      this.changePagePreferences('main')
+    }
+    });
+  }
   }
 
 
