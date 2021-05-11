@@ -26,11 +26,11 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.showCalendar();
-    this.calendarService.getChoosenCalendarId();
-    // if(this.userService.userPref.categories.length == 0)
-    // {
-    //   this.calendarService.getChoosenCalendarId();
-    // }
+    // this.calendarService.getChoosenCalendarId();
+    if(this.userService.userPref.categories.length == 0)
+    {
+      this.calendarService.getChoosenCalendarId();
+    }
     // else{
     //   alert("We can't offert you events if you didn't choose any preferences");
     // }
