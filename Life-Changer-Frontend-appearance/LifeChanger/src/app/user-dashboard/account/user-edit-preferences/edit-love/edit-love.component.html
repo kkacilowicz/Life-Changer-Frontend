@@ -1,0 +1,59 @@
+<div *ngIf="!buttonClick">
+    <h4 class="label">
+        Select 3 images that show what you like
+    </h4>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="container">
+
+            <label>
+                <input type="checkbox" class="checkbox" formControlName="images"
+                    (change)="getDetailId($event,option1)">
+                <img [src]="loveImages[0]">
+                <div class="text"> Eat together  </div>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" formControlName="images"
+                    (change)="getDetailId($event,option2)">
+                <img [src]="loveImages[1]">
+                <div class="text"> Arts  </div>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" formControlName="images"
+                    (change)="getDetailId($event,option3)">
+                <img [src]="loveImages[2]">
+                <div class="text"> Cultural excursions   </div>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" formControlName="images"
+                    (change)="getDetailId($event,option4)">
+                <img [src]="loveImages[3]">
+                <div class="text"> Watching together  </div>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" formControlName="images"
+                    (change)="getDetailId($event,option5)">
+                <img [src]="loveImages[4]">
+                <div class="text"> Spontaneous trips  </div>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" formControlName="images"
+                    (change)="getDetailId($event,option6)">
+                <img [src]="loveImages[5]">
+                <div class="text"> Walking together  </div>
+            </label>
+
+
+
+
+
+        </div>
+
+        <button type="submit" [disabled]="selectedDetails.length!=3" class="button"> Next </button>
+        <div *ngIf="selectedDetails.length!=3" class="info">
+            You choose : {{selectedDetails.length}} pictures. You must select 3 options to send.
+        </div>
+    </form>
+</div>
+<app-edit-sport *ngIf="buttonClick&&preferencesList[1]==true" [preferencesList]="preferencesList"></app-edit-sport>
+<app-edit-culture *ngIf="buttonClick&&preferencesList[1]==false&&preferencesList[2]==true" [preferencesList]="preferencesList"></app-edit-culture>

@@ -1,0 +1,29 @@
+<ngx-alerts></ngx-alerts>
+<ng-progress id="progressBar" [color]="progressBar.currentColor"></ng-progress>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand logo">Life Changer</a>
+  <button *ngIf="authService.loggedIn();" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div *ngIf="authService.loggedIn();" class="collapse navbar-collapse justify-content-end nav-pills" id="navbarNav">
+    <ul class="navbar-nav ml-auto" aria-labelledby="navbarMenu">
+
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['main']" routerLinkActive="active"> Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['my-profile']" routerLinkActive="active" href="#"><i class="fas fa-user"></i>
+          My profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['edit-preferences']" routerLinkActive="active" href="#"><i
+            class="fas fa-cogs"></i> Edit preferences </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link logout" (click)='logout()'><i class="fas fa-sign-out-alt"></i>Logout</a>
+      </li>
+    </ul>
+  </div>

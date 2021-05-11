@@ -1,0 +1,64 @@
+<div *ngIf="authService.loggedIn()" class="background">
+
+    <div *ngIf="!choose" >
+        <div class="label"> Choose the area of life you want to improve </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="container">
+
+                <label class="area love">
+                    <input type="checkbox" class="checkbox" formControlName="categories"
+                        (change)="getAreaId($event,option1)" (change)="changeOptionLove()">
+                    <div class="tickmark"></div>
+                 
+                        <div class="title marg"> Love </div>
+                        <div class="text"> Option recommended for people in a relationship </div>
+                    
+                </label>
+
+                <label class="area sport">
+                    <input type="checkbox" class="checkbox" formControlName="categories"
+                        (change)="getAreaId($event,option2)" (change)="changeOptionSport()">
+                    <div class="tickmark"></div>
+                    
+                        <div class="title marg"> Sport & Health </div>
+                    
+                </label>
+
+
+                <label class="area culture">
+                    <input type="checkbox" class="checkbox" formControlName="categories"
+                        (change)="getAreaId($event,option3)" (change)="changeOptionCulture()">
+                    <div class="tickmark"></div>
+                    
+                        <div class="title"> Culture & Entertainment </div>
+                    
+                </label>
+            </div>
+
+
+
+
+            <button type="submit" [disabled]="selectedItems.length==0" class="button" > NEXT </button>
+            <div *ngIf="selectedItems.length==0" class="info">
+                You must select options to send
+            </div>
+        </form>
+
+    </div>
+
+
+<div *ngIf="areaList[0]">
+    <app-love (eventLove) = "selectedLove($event)" [preferencesList]="areaList" ></app-love>
+</div>
+
+<div *ngIf="areaList[1]&&!areaList[0]">
+    <app-sport (eventSport)="selectedSport($event)" [preferencesList]="areaList"></app-sport>
+</div>
+ 
+<div *ngIf="areaList[2]&&!areaList[1]&&!areaList[0]">
+    <app-culture (eventCulture)="selected($event)" [preferencesList]="areaList"></app-culture>
+</div>
+
+
+</div>
