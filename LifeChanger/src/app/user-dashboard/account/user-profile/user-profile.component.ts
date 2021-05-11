@@ -25,8 +25,6 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  goEdit() {
-    this.authService.changePage('/profile-edit');
-  }
+
 }
 

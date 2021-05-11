@@ -74,13 +74,36 @@ export class UserService {
     return this.httpClient.get<userPreferences>(this.preUrl + 'UserCategories', { headers: headers })
   }
 
-  preferences(){
-    this.getPreferences().subscribe((data: userPreferences)=> this.userPref ={
-      userName : (data as any ).userName,
-      categories: (data as any).categories,     
+ preferences():Promise<void>{
+    // this.getPreferences().subscribe((data: userPreferences)=> this.userPref ={
+    //   userName : (data as any ).userName,
+    //   categories: (data as any).categories,     
+    // });
+
+    let resolveRef;
+    let rejectRef;
+
+    //create a new promise. Save the resolve and reject reference
+    let dataPromise: Promise<void> = new Promise((resolve, reject) => {
+        resolveRef = resolve;
+        rejectRef = reject;
     });
 
+    this.getPreferences()
+    .subscribe( (data: userPreferences) => {
+          this.userPref = {
+        userName : (data as any ).userName,
+        categories: (data as any).categories,  
+        };
+     resolveRef(null);
+    });
+    
+
+     return dataPromise
+
   }
+
+
 
   updateUser(model: any) {
     console.log(model);
