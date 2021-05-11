@@ -5,6 +5,7 @@ import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-soc
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { SafePipe } from 'src/app/safe.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -20,24 +21,29 @@ export class CalendarComponent implements OnInit {
 
   // calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
-  constructor(private httpClient: HttpClient, public authService: AuthService, private socialAuthService: SocialAuthService, public calendarService: CalendarService, private safePipe: SafePipe, private domSanitizer: DomSanitizer) {
+  constructor(private httpClient: HttpClient,private userService: UserService,  public authService: AuthService, private socialAuthService: SocialAuthService, public calendarService: CalendarService, private safePipe: SafePipe, private domSanitizer: DomSanitizer) {
    }
 
   ngOnInit(): void {
     this.showCalendar();
-    this.calendarService.getChoosenCalendarId()
-    // this.calendarService.eventsToArray();
-    // this.calendarService.giveCalendarEvents()
+    this.calendarService.getChoosenCalendarId();
+    // if(this.userService.userPref.categories.length == 0)
+    // {
+    //   this.calendarService.getChoosenCalendarId();
+    // }
+    // else{
+    //   alert("We can't offert you events if you didn't choose any preferences");
+    // }
   }
 
   pickCalendar(pickedCalendar){
-  // console.log(pickedCalendar.idCalendar);
     this.calendarService.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
     const calendarObserver = {
           next: nxt => {
-            // this.calendarArray.length = 0;
+            this.calendarService.pickCalendarFlag = true;
             console.log("Dodano kalendarz do biblioteki");
+            this.calendarService.getChoosenCalendarId();
           },
           error: err => {
             console.log(err);

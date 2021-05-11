@@ -14,6 +14,7 @@ export class CalendarService {
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
   calendarApi: string = environment.apiUrl;
   sendEventUrl: string = environment.activityUrl + 'ProposeActivity' ;
+  pickCalendarFlag: boolean = false;
 
   date = new Date();
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
@@ -167,32 +168,52 @@ export class CalendarService {
       'Authorization': 'Bearer ' + token,
       })
     this.httpClient.get<any>(this.calendarApi + 'calendar', { headers: reqHeader }).subscribe(response =>{
-      this.calendarID = response.token;
-      // console.log(`Id kalendarza: ${this.calendarID}`);
+      console.log(`Response token ${response.token}`);
+      if(response.token == null)
+      {
+        this.calendarID = ''
+      }else{
+        this.pickCalendarFlag = true;
+        this.calendarID = response.token;
+      }
+      // this.calendarID = response.token;
       this.eventsToArray(this.calendarID);
       this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`
-      
+
     });
   }
 
   giveCalendarEvents(eventArr, calID){
-    const startDate = {
-      day: '',
-      month: '',
-      year: ''
-    }
     const token = localStorage.getItem('token')
     let reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
       })
-    this.httpClient.post<any>(this.sendEventUrl, eventArr, { headers: reqHeader }).subscribe(response => {
-      let startDateString = `${response.dateStart}T${response.timeStart}:00`;
-      let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
-      let eventStartTime = new Date(startDateString);
-      let eventEndTime = new Date(endDateString);
-      this.createEvent(response.name, eventStartTime, eventEndTime, calID);
-    })
+      if(eventArr.length == 0 )
+      {
+        console.log("Wywolalo sie to");
+        let todaysDate = new Date();
+        console.log(todaysDate);
+
+
+        this.httpClient.post<any>(this.sendEventUrl + 'ProposeActivityOnFreeDay', JSON.stringify({date: `${todaysDate.getFullYear()}.${(todaysDate.getMonth()+1)}.${todaysDate.getDate()}`}) , { headers: reqHeader }).subscribe(response => {
+          let startDateString = `${response.dateStart}T${response.timeStart}:00`;
+          let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
+          let eventStartTime = new Date(startDateString);
+          let eventEndTime = new Date(endDateString);
+          this.createEvent(response.name, eventStartTime, eventEndTime, calID);
+        })
+      }
+      else
+      {
+        this.httpClient.post<any>(this.sendEventUrl  + 'ProposeActivity', eventArr, { headers: reqHeader }).subscribe(response => {
+          let startDateString = `${response.dateStart}T${response.timeStart}:00`;
+          let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
+          let eventStartTime = new Date(startDateString);
+          let eventEndTime = new Date(endDateString);
+          this.createEvent(response.name, eventStartTime, eventEndTime, calID);
+        })
+      }
   };
 
 
