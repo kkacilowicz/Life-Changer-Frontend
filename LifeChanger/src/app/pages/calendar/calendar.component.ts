@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from 'src/app/shared/services/user.service';
 
 
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -25,6 +26,7 @@ export class CalendarComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
     this.showCalendar();
     this.calendarService.getChoosenCalendarId();
     // if(this.userService.userPref.categories.length == 0)

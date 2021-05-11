@@ -40,7 +40,16 @@ export class GoogleLoginComponent implements OnInit {
     this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  sendToken() {
+  sendToken(): Promise<void>{
+    let resolveRef;
+    let rejectRef;
+
+    //create a new promise. Save the resolve and reject reference
+    let dataPromise: Promise<void> = new Promise((resolve, reject) => {
+        resolveRef = resolve;
+        rejectRef = reject;
+    });
+
     if (this.authService.sendGoogleToken().subscribe()) {
      
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
@@ -49,6 +58,8 @@ export class GoogleLoginComponent implements OnInit {
         this.authService.changePage('main')
        }
     }
+    return dataPromise;
+
   }
 
 

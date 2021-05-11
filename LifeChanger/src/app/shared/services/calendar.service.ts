@@ -13,7 +13,7 @@ export class CalendarService {
   calendarID: string;
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
   calendarApi: string = environment.apiUrl;
-  sendEventUrl: string = environment.activityUrl + 'ProposeActivity' ;
+  sendEventUrl: string = environment.activityUrl;
   pickCalendarFlag: boolean = false;
 
   date = new Date();
@@ -138,7 +138,7 @@ export class CalendarService {
     const maxTime = {
       year: this.date.getFullYear(),
       month: this.date.getMonth() + 1,
-      day: this.date.getDate() + 3,
+      day: this.date.getDate() + 1,
       hour: 23,
       minute: 0
     };
@@ -189,6 +189,7 @@ export class CalendarService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
       })
+      console.log("eventArray:", eventArr)
       if(eventArr.length == 0 )
       {
         console.log("Wywolalo sie to");
