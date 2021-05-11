@@ -6,6 +6,7 @@ import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { SafePipe } from 'src/app/safe.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',

@@ -13,7 +13,8 @@ export class MainComponent implements OnInit {
 
   
   ngOnInit(): void {
-    
+    this.userService.preferences()  
   }
+
 
 }

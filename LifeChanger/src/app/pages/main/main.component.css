@@ -37,3 +37,19 @@
   padding-top: 4vh;
   font-family: 'Orelega One', cursive;
 }
+
+.information {
+  background-color: rgba(148, 111, 80, 0.9);
+  border-style: solid;
+  border-radius: 10px;
+  border-color: skyblue;
+  border-size: 5px;
+  margin: 10px 10px 10px 10px;
+  color: skyblue;
+}
+
+.information h2 {
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Orelega One', cursive;
+}
