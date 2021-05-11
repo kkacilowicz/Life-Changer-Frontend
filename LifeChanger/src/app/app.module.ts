@@ -21,7 +21,7 @@ import { CultureComponent } from './pages/preferences/culture/culture.component'
 import { MainComponent } from './pages/main/main.component';
 import { SafePipe } from './safe.pipe';
 import { LogoutComponent } from './pages/logout/logout.component';
-import { LoadingComponent } from './pages/loading/loading.component';
+
 
 
 const googleLoginOptions = {
@@ -44,7 +44,7 @@ const googleLoginOptions = {
     MainComponent,
     SafePipe,
     LogoutComponent,
-    LoadingComponent,
+ 
 
   ],
   imports: [
