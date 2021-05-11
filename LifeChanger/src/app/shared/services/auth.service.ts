@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import {UserService} from 'src/app/shared/services/user.service'
 
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
@@ -27,7 +28,7 @@ export class AuthService {
   User!: SocialUser;
   isSignedIn!: boolean;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private userService: UserService ,private http: HttpClient, private router: Router) {
 
   }
   // loggedIn(){
@@ -41,24 +42,25 @@ export class AuthService {
   sendGoogleToken(){
     this.sendObj.token = this.User.idToken;
     this.sendObj.provider = this.User.provider;
-
     return this.http.post(this.apiUrl + 'ExternalLogin' ,this.sendObj)
     .pipe(
       map((user: any) => {
         if (user) {
-          console.log(user);
           localStorage.setItem('token', user.token);
           this.decodedToken = this.helper.decodeToken(user.token);
-          console.log(this.decodedToken);
+          this.userService.checkPreferences()
         }
       })
     )
   }
+
   loggedIn() {
   this.serverToken = localStorage.getItem('token');
 
   return !this.helper.isTokenExpired(this.serverToken);
   }
+
+  
 
 }
 

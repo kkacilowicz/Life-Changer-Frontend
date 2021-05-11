@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserDashboardRoutingModule } from './user-dashboard-routing.module';
-import { UserEditComponent } from './account/user-edit/user-edit.component';
 import { UserProfileComponent } from './account/user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +13,7 @@ import { EditCultureComponent } from './account/user-edit-preferences/edit-cultu
 
 
 @NgModule({
-  declarations: [UserEditComponent, UserProfileComponent, UserEditPreferencesComponent, EditLoveComponent, EditSportComponent, EditCultureComponent],
+  declarations: [ UserProfileComponent, UserEditPreferencesComponent, EditLoveComponent, EditSportComponent, EditCultureComponent],
   imports: [
     CommonModule,
     UserDashboardRoutingModule,
@@ -23,6 +22,6 @@ import { EditCultureComponent } from './account/user-edit-preferences/edit-cultu
     HttpClientModule,
 
   ],
-  exports: [UserEditComponent]
+ 
 })
 export class UserDashboardModule { }

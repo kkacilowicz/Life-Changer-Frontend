@@ -57,7 +57,6 @@ export class CultureComponent implements OnInit {
     const detailsObserver = {
       next: x => {
         console.log('Details Culture OK');
-        this.authService.changePage('')
         this.alertService.success('Sent correctly ');
       },
       error: err => {
@@ -69,6 +68,7 @@ export class CultureComponent implements OnInit {
     this.eventCulture.emit(this.task);
     this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
+    this.authService.changePage('main')
     
   }
 

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { AlertService } from 'ngx-alerts';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 
-import {IUser} from '../../../shared/models/user'
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { CalendarService } from 'src/app/shared/services/calendar.service';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { UserService } from 'src/app/shared/services/user.service'
+
 
 @Component({
   selector: 'app-google-login',
@@ -13,40 +16,40 @@ import {IUser} from '../../../shared/models/user'
 })
 export class GoogleLoginComponent implements OnInit {
 
-  User = this.authService.User;
-  isSignedIn = this.authService.isSignedIn;
-
-  givenUser!: IUser;
-
-  constructor(public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService) { }
+  constructor(private userService: UserService, public authService: AuthService, private alertService: AlertService, public progressBar: ProgressBarService, private socialAuthService: SocialAuthService, private calendarService: CalendarService) { }
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((user) => {
       this.authService.User = user;
       this.authService.isSignedIn = (this.authService.User != null);
     });
+
   }
 
+  helper = new JwtHelperService();
+  decodedToken: any;
 
   googleLogin() {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(User => {
-    this.sendToken();
+      this.sendToken();
+      console.log(User);
     })
   }
 
-  sendToken(){
-    if(this.authService.sendGoogleToken().subscribe()){
-      this.authService.changePage('preferences');
-    }
-
+  refreshToken(): void {
+    this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
 
-
-  // logout() {
-  //   this.socialAuthService.signOut();
-  // }
-
-
+  sendToken() {
+    if (this.authService.sendGoogleToken().subscribe()) {
+     
+      localStorage.setItem('accessToken', this.authService.User.response.access_token);
+      
+      if (localStorage.getItem('accessToken')) {
+        this.authService.changePage('main')
+       }
+    }
+  }
 
 
 }

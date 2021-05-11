@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
-import { IUser } from './../models/user'
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { userPreferences } from '../models/userPreferences';
+import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -15,38 +15,16 @@ export class UserService {
   userUrl = environment.apiUrl;
   preUrl = environment.preUrl;
 
-  userInfo: IUser = {
-    email: '',
-    userName: '',
-    gender: '',
-    birthDate: '',
-    phoneNumber: '',
-  }
 
   userPref: userPreferences = {
     userName!: '',
-    categories!: [{"name":''} , {"name":''}, {"name":''} ],
+    categories!: [ ],
   } 
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
 
-  getUser(): Observable<IUser> {
-    let headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.httpClient.get<IUser>(this.userUrl + 'userinfo', { headers: headers })
-  }
 
-  user() {
-    this.getUser().subscribe((data: IUser) => this.userInfo = {
-      email: (data as any).email,
-      userName: (data as any).userName,
-      phoneNumber: (data as any).phoneNumber,
-      gender: (data as any).gender,
-      birthDate: (data as any).birthDate,
-    });
-  }
 
   getPreferences(): Observable<userPreferences>{
     let headers = new HttpHeaders({
@@ -55,13 +33,53 @@ export class UserService {
     return this.httpClient.get<userPreferences>(this.preUrl + 'UserCategories', { headers: headers })
   }
 
-  preferences(){
-    this.getPreferences().subscribe((data: userPreferences)=> this.userPref ={
-      userName : (data as any ).userName,
-      categories: (data as any).categories,     
+
+
+
+ preferences():Promise<void>{
+
+    let resolveRef;
+    let rejectRef;
+
+    //create a new promise. Save the resolve and reject reference
+    let dataPromise: Promise<void> = new Promise((resolve, reject) => {
+        resolveRef = resolve;
+        rejectRef = reject;
     });
 
+    this.getPreferences()
+    .subscribe( (data: userPreferences) => {
+          this.userPref = {
+        userName : (data as any ).userName,
+        categories: (data as any).categories,  
+        };
+     resolveRef(null);
+    });
+    
+
+
+
+
+     return dataPromise
   }
+
+  changePagePreferences(path: string) {
+    this.router.navigateByUrl(path);
+  }
+
+  checkPreferences(){
+    if(localStorage.getItem('token')){
+    this.preferences().then( () =>{
+    if (this.userPref.categories.length == 0) {
+      this.changePagePreferences('preferences')
+    } else {
+      this.changePagePreferences('main')
+    }
+    });
+  }
+  }
+
+
 
   updateUser(model: any) {
     console.log(model);
