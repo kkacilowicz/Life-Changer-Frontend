@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { AlertService } from 'ngx-alerts';
+
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
@@ -23,9 +24,11 @@ export class GoogleLoginComponent implements OnInit {
       this.authService.User = user;
       this.authService.isSignedIn = (this.authService.User != null);
     });
-    this.userService.getPreferences()
-    this.userService.preferences()
+
+    this.userService.user();
+    this.userService.preferences();
   }
+
   helper = new JwtHelperService();
   decodedToken: any;
 
@@ -43,18 +46,21 @@ export class GoogleLoginComponent implements OnInit {
   sendToken() {
     if (this.authService.sendGoogleToken().subscribe()) {
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
-      
-      if (localStorage.getItem('accessToken')) {
-        console.log("table:",this.userService.userPref.categories)
-        console.log("Length:",this.userService.userPref.categories.length )
-        if(this.userService.userPref.categories.length==0){
-          this.authService.changePage('preferences')
-        }
-        else{
-          this.authService.changePage('main')
-        }
-      }
 
+      console.log("Table:", this.userService.userPref.categories)
+      console.log("Length:", this.userService.userPref.categories.length)
+
+      if (localStorage.getItem('accessToken')) {
+        this.userService.preferences().then(() => {
+
+          if (this.userService.userPref.categories.length == 0) {
+            this.authService.changePage('preferences')
+          }
+          else {
+            this.authService.changePage('main')
+          }
+        });
+      }
     }
   }
 
