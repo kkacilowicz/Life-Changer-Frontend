@@ -6,6 +6,7 @@ import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { SafePipe } from 'src/app/safe.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from 'src/app/shared/services/user.service';
+import { AlertService } from 'ngx-alerts';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class CalendarComponent implements OnInit {
 
   // calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
-  constructor(private httpClient: HttpClient,private userService: UserService,  public authService: AuthService, private socialAuthService: SocialAuthService, public calendarService: CalendarService, private safePipe: SafePipe, private domSanitizer: DomSanitizer) {
+  constructor(private httpClient: HttpClient,private userService: UserService,  public authService: AuthService, private socialAuthService: SocialAuthService, public calendarService: CalendarService, private safePipe: SafePipe, private domSanitizer: DomSanitizer, private alertService: AlertService) {
    }
 
   ngOnInit(): void {
@@ -43,10 +44,12 @@ export class CalendarComponent implements OnInit {
           next: nxt => {
             this.calendarService.pickCalendarFlag = true;
             console.log("Dodano kalendarz do biblioteki");
+            this.alertService.success("Calendar choosen")
             this.calendarService.getChoosenCalendarId();
           },
           error: err => {
             console.log(err);
+            this.alertService.success(err.message)
           }
         };
     this.calendarService.sendCalendarId(pickedCalendar.idCalendar).subscribe(calendarObserver);
@@ -61,7 +64,7 @@ export class CalendarComponent implements OnInit {
         }
       },
       error: err => {
-        console.log(err);
+        console.log(err.message);
       }
     };
     this.calendarService.getGoogleCalendars().subscribe(calendarObserver);

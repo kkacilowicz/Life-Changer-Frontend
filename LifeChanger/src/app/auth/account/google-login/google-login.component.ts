@@ -22,6 +22,12 @@ export class GoogleLoginComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       this.authService.User = user;
       this.authService.isSignedIn = (this.authService.User != null);
+      if(this.authService.isSignedIn){
+        if(this.authService.helper.isTokenExpired(localStorage.getItem('accesssToken'))){
+          this.refreshToken();
+        }
+      }
+
     });
 
   }
@@ -32,6 +38,7 @@ export class GoogleLoginComponent implements OnInit {
   googleLogin() {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(User => {
       this.sendToken();
+
       console.log(User);
     })
   }
@@ -42,11 +49,12 @@ export class GoogleLoginComponent implements OnInit {
 
   sendToken() {
     if (this.authService.sendGoogleToken().subscribe()) {
-     
+
       localStorage.setItem('accessToken', this.authService.User.response.access_token);
-      
+
       if (localStorage.getItem('accessToken')) {
         this.authService.changePage('main')
+        this.alertService.success("User logged in")
        }
     }
   }
