@@ -39,7 +39,7 @@ export class GoogleLoginComponent implements OnInit {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(User => {
       this.sendToken();
 
-      console.log(User);
+      // console.log(User);
     })
   }
 
@@ -66,8 +66,7 @@ export class GoogleLoginComponent implements OnInit {
         this.alertService.success("User logged in")
        }
     }
-    return dataPromise;
-
+    return dataPromise
   }
 
 
