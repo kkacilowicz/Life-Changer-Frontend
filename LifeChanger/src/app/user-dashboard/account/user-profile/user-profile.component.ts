@@ -19,9 +19,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+
     this.userService.preferences();
-    console.log(this.authService.decodedToken);
+    // console.log(this.authService.decodedToken);
 
   }
 

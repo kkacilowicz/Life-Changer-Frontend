@@ -4,6 +4,7 @@ import { Observable, timer } from 'rxjs';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'ngx-alerts';
+import { min } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CalendarService {
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
   calendarApi: string = environment.apiUrl;
 
-  sendEventUrl: string = environment.activityUrl ;
+  sendEventUrl: string = environment.activityUrl;
 
   pickCalendarFlag: boolean = false;
 
@@ -43,7 +44,6 @@ export class CalendarService {
   }
 
   createEvent(summary,startDate, endDate, calID){
-    console.log(this.calendarID);
     const minDate = {
       year: startDate.getFullYear(),
       month: startDate.getMonth()+1,
@@ -76,7 +76,6 @@ export class CalendarService {
     this.event.start.dateTime = `${minDate.year}-${minDate.month}-${minDate.day}T${minTime.hour}:${minTime.minutes}:00+02:00`;
     this.event.end.dateTime = `${maxDate.year}-${maxDate.month}-${maxDate.day}T${maxTime.hour}:${maxTime.minutes}:00+02:00`;
     this.sendEvent(calID, this.event).subscribe(response =>{
-      // console.log('Dodano event');
       this.alertService.success("Event added");
     })
   }
@@ -114,15 +113,6 @@ export class CalendarService {
   }
 
   getCalendarEvents(minTime, maxTime, calID):Observable<any>{
-    // minTime.month = this.checkNumber(minTime.month);
-    // minTime.day = this.checkNumber(minTime.day);
-    // minTime.hour = this.checkNumber(minTime.hour);
-    // minTime.minute = this.checkNumber(minTime.minute);
-    // maxTime.month = this.checkNumber(maxTime.month);
-    // maxTime.day = this.checkNumber(maxTime.day);
-    // maxTime.hour = this.checkNumber(maxTime.hour);
-    // maxTime.minute = this.checkNumber(maxTime.minute);
-
     let reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.accessToken,
@@ -174,18 +164,17 @@ export class CalendarService {
       'Authorization': 'Bearer ' + token,
       })
     this.httpClient.get<any>(this.calendarApi + 'calendar', { headers: reqHeader }).subscribe(response =>{
-      console.log(`Response token ${response.token}`);
       if(response.token == null)
       {
         this.calendarID = ''
       }else{
         this.pickCalendarFlag = true;
         this.calendarID = response.token;
-      }
+
       // this.calendarID = response.token;
       this.eventsToArray(this.calendarID);
       this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`
-
+      }
     });
   }
 
@@ -198,27 +187,34 @@ export class CalendarService {
       console.log("eventArray:", eventArr)
       if(eventArr.length == 0 )
       {
-        console.log("Wywolalo sie to");
         let todaysDate = new Date();
-        this.httpClient.post<any>(this.sendEventUrl + 'ProposeActivityOnFreeDay', JSON.stringify({date: `${todaysDate.getFullYear()}.${(todaysDate.getMonth()+1)}.${todaysDate.getDate()}`}) , { headers: reqHeader }).subscribe(response => {
+        this.httpClient.post<any>(this.sendEventUrl + 'ProposeActivityOnFreeDay', JSON.stringify({date: `${todaysDate.getFullYear()}.${(todaysDate.getMonth()+1)}.${todaysDate.getDate()}`}) , { headers: reqHeader }).subscribe({next :response => {
           let startDateString = `${response.dateStart}T${response.timeStart}:00`;
           let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
           let eventStartTime = new Date(startDateString);
           let eventEndTime = new Date(endDateString);
           this.createEvent(response.name, eventStartTime, eventEndTime, calID);
-        })
+        },
+        error: err => {
+          this.alertService.warning(err.error.message)
+        }
+      })
+
       }
       else
       {
         eventArr.sort((a,b) => a.timeStart.localeCompare(b.timeStart));
-        // console.log(eventArr);
-        this.httpClient.post<any>(this.sendEventUrl  + 'ProposeActivity', eventArr, { headers: reqHeader }).subscribe(response => {
+        this.httpClient.post<any>(this.sendEventUrl  + 'ProposeActivity', eventArr, { headers: reqHeader }).subscribe({next : response => {
         let startDateString = `${response.dateStart}T${response.timeStart}:00`;
         let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
         let eventStartTime = new Date(startDateString);
         let eventEndTime = new Date(endDateString);
         this.createEvent(response.name, eventStartTime, eventEndTime, calID);
-        })
+        },
+        error: err =>{
+          this.alertService.warning(err.error.message);
+        }
+      })
       }
   };
 
