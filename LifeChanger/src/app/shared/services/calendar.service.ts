@@ -4,7 +4,7 @@ import { Observable, timer } from 'rxjs';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'ngx-alerts';
-import { min } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,10 @@ export class CalendarService {
 
   accessToken = localStorage.getItem('accessToken');
   calendarID: string;
-  calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
+  calendarBgc: string = '23c0ac95';
+  calendarMode: string = 'WEEK';
+  calendarColor: string = '23039BE5';
+  calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=2&color=%${this.calendarColor}&bgcolor=%${this.calendarBgc}&showPrint=0&showCalendars=0&showTz=0&showNav=0&mode=${this.calendarMode}`;
   calendarApi: string = environment.apiUrl;
 
   sendEventUrl: string = environment.activityUrl;
@@ -76,7 +79,7 @@ export class CalendarService {
     this.event.start.dateTime = `${minDate.year}-${minDate.month}-${minDate.day}T${minTime.hour}:${minTime.minutes}:00+02:00`;
     this.event.end.dateTime = `${maxDate.year}-${maxDate.month}-${maxDate.day}T${maxTime.hour}:${maxTime.minutes}:00+02:00`;
     this.sendEvent(calID, this.event).subscribe(response =>{
-      this.alertService.success("Event added");
+      this.alertService.success(`Added event: "${this.event.summary}" for ${minDate.day}.${minDate.month} at ${minTime.hour}:${minTime.minutes} - ${maxTime.hour}:${maxTime.minutes}`)
     })
   }
 
@@ -107,9 +110,7 @@ export class CalendarService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.accessToken,
       });
-      //cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com
     return this.httpClient.post(`https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`, this.event, { headers: reqHeader });
-    // return this.httpClient.post(`https://www.googleapis.com/calendar/v3/calendars/cgr1d92tq6dtp81reav8caubbc@group.calendar.google.com/events`, this.event, { headers: reqHeader });
   }
 
   getCalendarEvents(minTime, maxTime, calID):Observable<any>{
@@ -173,7 +174,7 @@ export class CalendarService {
 
       // this.calendarID = response.token;
       this.eventsToArray(this.calendarID);
-      this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`
+      this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`
       }
     });
   }
@@ -184,11 +185,10 @@ export class CalendarService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
       })
-      console.log("eventArray:", eventArr)
       if(eventArr.length == 0 )
       {
         let todaysDate = new Date();
-        this.httpClient.post<any>(this.sendEventUrl + 'ProposeActivityOnFreeDay', JSON.stringify({date: `${todaysDate.getFullYear()}.${(todaysDate.getMonth()+1)}.${todaysDate.getDate()}`}) , { headers: reqHeader }).subscribe({next :response => {
+        this.httpClient.post<any>(this.sendEventUrl + 'ProposeActivityOnFreeDay', JSON.stringify({date: `${todaysDate.getFullYear()}.${(todaysDate.getMonth()+1)}.${todaysDate.getDate()+1}`}) , { headers: reqHeader }).subscribe({next :response => {
           let startDateString = `${response.dateStart}T${response.timeStart}:00`;
           let endDateString = `${response.dateEnd}T${response.timeEnd}:00`;
           let eventStartTime = new Date(startDateString);
