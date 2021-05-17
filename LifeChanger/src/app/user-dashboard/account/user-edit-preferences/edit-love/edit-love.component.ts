@@ -65,15 +65,18 @@ onSubmit() {
     }
     
   };
-
-  this.buttonClick=true
-  this.eventLove.emit(this.task)
-  this.form.patchValue({ images: this.selectedDetails })
-  this.Preferences.details(this.form.value).subscribe(detailsObserver);
-  if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
-    this.authService.changePage('/my-profile')
+  if(this.selectedDetails.length<3){
+    alert("You must select at least 3 images to send.")
   }
-  
+  else{
+    this.buttonClick=true
+    this.eventLove.emit(this.task)
+    this.form.patchValue({ images: this.selectedDetails })
+    this.Preferences.details(this.form.value).subscribe(detailsObserver);
+    if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
+      this.authService.changePage('/my-profile')
+    }
+  }
 }
 
 getDetailId(e: any, id: string) {

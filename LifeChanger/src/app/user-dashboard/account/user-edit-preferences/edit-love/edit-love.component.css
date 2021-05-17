@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Orelega+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Margarine&family=Rum+Raisin&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+HK&display=swap");
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -23,28 +23,29 @@ img {
 }
 
 .button {
-  background-color: #E5C3AF;
-  margin-top: 6vh;
-  margin-left: 40vw;
-  margin-right: 40vw;
-  height: 8vh;
-  width: 20vw;
-  color: white;
-  padding-top: 0px;
-  font-size: 2.5vw;
-  font-family: 'Fredoka One', cursive;
-  border-radius: 2vh;
-  border: 0.75vh solid #A27C7C;
+  display: flex;
+  justify-content: center;
 }
 
-.button:hover {
-  border-style: dashed;
-  border-color: #0CB504;
-  color: #0CB504;
+.profile-button {
+  background: #300606;
+  box-shadow: none;
+  border: none;
+  margin-bottom: 20px;
 }
 
-.button:hover ~ .info {
-  opacity: 1;
+.profile-button:hover {
+  background: #300606;
+}
+
+.profile-button:focus {
+  background: #300606;
+  box-shadow: none;
+}
+
+.profile-button:active {
+  background: #300606;
+  box-shadow: none;
 }
 
 .checkbox {
@@ -60,19 +61,8 @@ img {
   color: black;
 }
 
-.info {
-  color: red;
-  margin-top: 1vh;
-  text-align: center;
-  padding: 1vh 0vh 1vh 2vh;
-  font-family: 'Kiwi Maru', serif;
-  font-size: 25px;
-  font-weight: bold;
-  opacity: 0;
-}
-
 .text {
-  background-color: #765B5B;
+  background-color: #300606;
   width: 40vh;
   height: 5vh;
   margin-right: 5vh;
@@ -84,6 +74,7 @@ img {
   border-bottom-left-radius: 7px;
   color: #fff;
   text-align: center;
-  font-family: 'Margarine', cursive;
+  font-family: 'Noto Sans HK', sans-serif;
   font-size: 3vh;
+  font-weight: bold;
 }

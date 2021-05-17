@@ -66,8 +66,8 @@ export class EditCultureComponent implements OnInit {
         this.authService.changePage('edit-preferences');
       }
     };
-    if(this.selectedDetails.length!=3){
-      alert("You choose :" + this.selectedDetails.length + "pictures. You must select 3 options to send.")
+    if(this.selectedDetails.length<3){
+      alert("You must select at least 3 images to send.")
     }
     else{
     this.form.patchValue({ images: this.selectedDetails })
