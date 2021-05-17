@@ -2,7 +2,7 @@
   position: relative;
   overflow: auto;
   height: calc( 100vh - 56px);
-  background-image: url("../../../../assets/Images/User_Profil/background1.jpg");
+  background-image: url("../../../../assets/Images/User_Profil/background2.jpg");
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -12,7 +12,7 @@
 .background .bg {
   position: absolute;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.48);
+  background-color: rgba(0, 0, 0, 0.28);
   width: 100vw;
   height: calc( 100vh - 56px);
   left: 0;
@@ -30,27 +30,17 @@
 }
 
 .profile-button {
-  background: #632778;
+  background: #055160;
   box-shadow: none;
   border: none;
 }
 
 .profile-button:hover {
-  background: #682773;
-}
-
-.profile-button:focus {
-  background: #682773;
-  box-shadow: none;
-}
-
-.profile-button:active {
-  background: #682773;
-  box-shadow: none;
+  background: #055160;
 }
 
 .back:hover {
-  color: #682773;
+  color: #055160;
   cursor: pointer;
 }
 
@@ -98,7 +88,7 @@
 
 .cancel i {
   font-size: 30px;
-  color: #682773;
+  color: #055160;
 }
 
 .cancel i:hover {

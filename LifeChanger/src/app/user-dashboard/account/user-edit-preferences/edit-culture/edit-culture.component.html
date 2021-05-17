@@ -8,7 +8,7 @@
         <label>
             <input type="checkbox" class="checkbox" formControlName="images" (change)="getDetailId($event,option1)">
             <img [src]="cultureImage[0]">
-            <div class="text"> Film  </div>
+            <div class="text"> Film </div>
         </label>
         <label>
             <input type="checkbox" class="checkbox" formControlName="images" (change)="getDetailId($event,option2)">
@@ -40,20 +40,15 @@
             <img [src]="cultureImage[6]">
             <div class="text"> Arts </div>
         </label>
-
-
-
-
     </div>
 
-    <button type="submit" [disabled]="selectedDetails.length!=3"  class="button"> Next </button>
-    <div *ngIf="selectedDetails.length!=3" class="info">
+    <div class="button">
+        <button type="submit"  class="btn btn-primary profile-button"><i
+                class="fas fa-arrow-right"></i> Next </button>
+    </div>
+
+    <!-- <div *ngIf="selectedDetails.length!=3" class="info">
         You choose : {{selectedDetails.length}} pictures. You must select 3 options to send.
-    </div>
-
-
-
-
-
+    </div> -->
 
 </form>

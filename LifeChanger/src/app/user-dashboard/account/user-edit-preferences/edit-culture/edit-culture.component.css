@@ -16,6 +16,7 @@ img {
 }
 
 .label {
+  color: #055160;
   text-align: center;
   font-size: 50px;
   padding-top: 2%;
@@ -23,27 +24,39 @@ img {
 }
 
 .button {
-  background-color: #E5C3AF;
-  margin-top: 6vh;
-  margin-left: 40vw;
-  margin-right: 40vw;
-  height: 8vh;
-  width: 20vw;
-  color: white;
-  padding-top: 0px;
-  font-size: 2.5vw;
-  font-family: 'Fredoka One', cursive;
-  border-radius: 2vh;
-  border: 0.75vh solid #A27C7C;
+  display: flex;
+  justify-content: center;
 }
 
-.button:hover {
+.button1 {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-button {
+  background: #055160;
+  box-shadow: none;
+  border: none;
+}
+
+.profile-button:hover {
+  background: #055160;
   border-style: dashed;
   border-color: #0CB504;
   color: #0CB504;
 }
 
-.button:hover ~ .info {
+.profile-button:focus {
+  background: #055160;
+  box-shadow: none;
+}
+
+.profile-button:active {
+  background: #055160;
+  box-shadow: none;
+}
+
+.profile-button ~ .info {
   opacity: 1;
 }
 
@@ -72,7 +85,7 @@ img {
 }
 
 .text {
-  background-color: #765B5B;
+  background-color: #055160;
   width: 40vh;
   height: 5vh;
   margin-right: 5vh;

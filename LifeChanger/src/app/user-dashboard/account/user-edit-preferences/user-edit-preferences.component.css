@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orelega+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Margarine&family=Rum+Raisin&display=swap");
 .color {
-  background-color: #F9E3B2;
+  background-color: #C9DDDE;
   position: absolute;
   width: 100vw;
   height: calc( 100vh - 56px);
@@ -12,7 +12,7 @@
   position: relative;
   overflow: auto;
   height: calc( 100vh - 56px);
-  background-image: url("../../../../assets/Images/User_Profil/background1.jpg");
+  background-image: url("../../../../assets/Images/User_Profil/background2.jpg");
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -22,7 +22,7 @@
 .background .bg {
   position: absolute;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.48);
+  background-color: rgba(0, 0, 0, 0.28);
   width: 100vw;
   height: calc( 100vh - 56px);
   left: 0;
@@ -40,27 +40,27 @@
 }
 
 .profile-button {
-  background: #632778;
+  background: #055160;
   box-shadow: none;
   border: none;
 }
 
 .profile-button:hover {
-  background: #682773;
+  background: #055160;
 }
 
 .profile-button:focus {
-  background: #682773;
+  background: #055160;
   box-shadow: none;
 }
 
 .profile-button:active {
-  background: #682773;
+  background: #055160;
   box-shadow: none;
 }
 
 .back:hover {
-  color: #682773;
+  color: #055160;
   cursor: pointer;
 }
 
@@ -108,7 +108,7 @@
 
 .cancel i {
   font-size: 30px;
-  color: #682773;
+  color: #055160;
 }
 
 .cancel i:hover {
@@ -149,13 +149,13 @@
 }
 
 form {
-  border: 5px solid #632778;
+  border: 5px solid #055160;
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 5%;
   padding: 2%;
-  background-color: #e5adfc;
+  background-color: #C9DDDE;
   border-radius: 10px;
 }
 
