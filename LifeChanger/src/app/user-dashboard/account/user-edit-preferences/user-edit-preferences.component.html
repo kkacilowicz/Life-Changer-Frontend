@@ -14,8 +14,10 @@
                             <div >
                                 <div class="col-md-12"> <label> Selected areas of life: </label> <br>
                                     <div *ngFor=" let category of userService.userPref.categories">
-                                        {{category.name}}
-                                    </div>
+                                        <div *ngIf="category.name=='Love'"> <i class="fas fa-heart"></i>   {{category.name}} </div>
+                                        <div *ngIf="category.name=='Culture and enterntainment'">  <i class="fas fa-guitar"></i>  {{category.name}} </div>
+                                        <div *ngIf="category.name=='Sport and health'"> <i class="fas fa-futbol"></i>  {{category.name}} </div>
+                                        </div>
                                     <div *ngIf="userService.userPref.categories.length==0" class="areas">
                                         Oh no, you don't have chosen areas of life
                                     </div>
@@ -30,7 +32,7 @@
                                     </button>
 
                                     <button *ngIf="userService.userPref.categories.length<3" type="button"
-                                        (click)="clickButtonAdd()" class="btn btn-primary profile-button"> Add new area
+                                        (click)="clickButtonAdd()" class="btn btn-primary profile-button">  Add new area
                                         of
                                         life
                                     </button>

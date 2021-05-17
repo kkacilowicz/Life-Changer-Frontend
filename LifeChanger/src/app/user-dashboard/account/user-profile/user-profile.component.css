@@ -2,7 +2,9 @@
   position: relative;
   overflow: auto;
   height: calc( 100vh - 56px);
-  background-image: url("../../../../assets/Images/User_Profil/background2.jpg");
+  width: 100vw;
+  background-image: url("../../../../assets/Images/home.png");
+  background-color: #E1D2CD;
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -12,14 +14,14 @@
 .background .bg {
   position: absolute;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.25);
   width: 100vw;
   height: calc( 100vh - 56px);
   left: 0;
 }
 
 .profil {
-  background-color: #E2DED8;
+  background-color: #fff;
   border-radius: 45px;
   border: 5px solid #6A655E;
 }
@@ -30,29 +32,28 @@
 }
 
 .profile-button {
-  background: #055160;
+  background: #300606;
   box-shadow: none;
   border: none;
 }
 
 .profile-button:hover {
-  background: #055160;
+  background: #300606;
+}
+
+.profile-button:focus {
+  background: #300606;
+  box-shadow: none;
+}
+
+.profile-button:active {
+  background: #300606;
+  box-shadow: none;
 }
 
 .back:hover {
-  color: #055160;
+  color: #300606;
   cursor: pointer;
-}
-
-.labels {
-  font-size: 11px;
-}
-
-.add-experience:hover {
-  background: #BA68C8;
-  color: #fff;
-  cursor: pointer;
-  border: solid 1px #BA68C8;
 }
 
 .container {
@@ -65,6 +66,7 @@
 }
 
 .container .title h2 {
+  font-size: 45px;
   margin: 0 auto;
   text-align: center;
 }
@@ -88,15 +90,11 @@
 
 .cancel i {
   font-size: 30px;
-  color: #055160;
+  color: #300606;
 }
 
 .cancel i:hover {
   opacity: .7;
-}
-
-.title_area {
-  padding-top: 4vh;
 }
 
 .mt-5 {
@@ -117,9 +115,11 @@
 }
 
 .mt-5 i {
-  margin-right: 7px;
+  margin-right: 10px;
 }
 
 .mt-5 label {
+  margin-top: 5px;
   font-weight: bold;
+  font-size: 21px;
 }
