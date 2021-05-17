@@ -64,12 +64,15 @@ export class CultureComponent implements OnInit {
         this.alertService.danger(err.error.message);
       }
     };
-
+    if(this.selectedDetails.length<3){
+      alert("You must select at least 3 images to send.")
+    }
+    else{
     this.eventCulture.emit(this.task);
     this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
     this.authService.changePage('main')
-    
+    }
   }
 
   getDetailId(e: any, id: string) {
