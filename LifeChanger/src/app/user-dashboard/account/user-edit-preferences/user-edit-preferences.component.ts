@@ -4,9 +4,10 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { AlertService } from 'ngx-alerts';
 import { PreferencesService } from 'src/app/shared/services/preferences.service';
 import { AuthService } from '../../../shared/services/auth.service';
+import { CalendarService } from 'src/app/shared/services/calendar.service';
 
 @Component({
-  
+
   selector: 'app-user-edit-preferences',
   templateUrl: './user-edit-preferences.component.html',
   styleUrls: ['./user-edit-preferences.component.sass']
@@ -17,7 +18,7 @@ export class UserEditPreferencesComponent implements OnInit {
   love!: boolean;
   sport!: boolean;
   culture!: boolean;
-  areaList: boolean[] = []; // list of selected areas of life used for display 
+  areaList: boolean[] = []; // list of selected areas of life used for display
   selectedItems: number[] = []; // list of selected areas of life
   option1 = 1;  // id love
   option2 = 3;  // id sport
@@ -29,10 +30,11 @@ export class UserEditPreferencesComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
-    public userService: UserService, 
+    public userService: UserService,
     public Preferences: PreferencesService,
-    public fb: FormBuilder
-  
+    public fb: FormBuilder,
+    public calendarService: CalendarService
+
     ) { }
 
   buttonAddClicked !: boolean;
@@ -55,6 +57,10 @@ export class UserEditPreferencesComponent implements OnInit {
 
   }
 
+  chooseCalendar(){
+    this.calendarService.pickCalendarFlag = false;
+    this.authService.changePage('main');
+  }
 
   clickButtonAdd(){
     if(this.buttonAddClicked==false){
@@ -75,7 +81,7 @@ export class UserEditPreferencesComponent implements OnInit {
     }
     else{
       this.buttonDeleteClicked=false;
-      
+
     }
     this.buttonAddClicked=false;
     this.areaList=[];
@@ -88,7 +94,7 @@ export class UserEditPreferencesComponent implements OnInit {
     else {
       this.love = true;
     }
-    
+
     return this.love;
   }
 
@@ -139,7 +145,7 @@ export class UserEditPreferencesComponent implements OnInit {
 
   onDelete(){
     const preferencesDeleteObserver = {
-      next: x => {        
+      next: x => {
       this.alertService.success('Area deleted');
       this.authService.changePage('/my-profile');
       },
