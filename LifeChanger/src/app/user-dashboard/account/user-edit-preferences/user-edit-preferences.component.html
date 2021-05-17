@@ -169,7 +169,7 @@
                                         <button [disabled]="selectedItems.length==0||(selectedItems.length==3&&userService.userPref.categories.length==3)
     ||(selectedItems.length==2&&userService.userPref.categories.length==2)" type="submit"
                                             class="btn btn-primary profile-button "> Delete </button>
-                                        <div *ngIf="selectedItems.length==0"> You must select options to send </div>
+                                        <div *ngIf="selectedItems.length==0"> You must select one options to send </div>
                                         <div *ngIf="selectedItems.length==3&&userService.userPref.categories.length==3">
                                             You
                                             can

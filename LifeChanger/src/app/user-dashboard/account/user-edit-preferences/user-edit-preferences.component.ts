@@ -72,6 +72,7 @@ export class UserEditPreferencesComponent implements OnInit {
 
     this.buttonDeleteClicked=false;
     this.areaList=[];
+    this.selectedItems=[];
   }
 
   clickButtonDelete(){
@@ -85,6 +86,7 @@ export class UserEditPreferencesComponent implements OnInit {
     }
     this.buttonAddClicked=false;
     this.areaList=[];
+    this.selectedItems=[];
   }
 
   changeOptionLove() {
@@ -153,7 +155,7 @@ export class UserEditPreferencesComponent implements OnInit {
         this.alertService.danger(err.error.message);
       }
     };
-    console.log(this.selectedItems)
+    console.log("selectedItem to delete: ", this.selectedItems)
     if(this.selectedItems.indexOf(3)!=-1){
       this.Preferences.deletePreferences(3).subscribe(preferencesDeleteObserver);
     }
