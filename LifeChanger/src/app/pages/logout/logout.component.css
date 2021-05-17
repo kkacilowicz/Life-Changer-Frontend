@@ -1,38 +1,41 @@
-@import url("https://fonts.googleapis.com/css2?family=Farro:wght@500&family=Itim&display=swap");
 .background {
   position: relative;
   overflow: auto;
   height: calc( 100vh - 56px);
-  background-image: url("../../../assets/Images/4.png");
-  background-position: bottom;
+  width: 100vw;
+  background-image: url("../../../assets/Images/home.png");
+  background-color: #E1D2CD;
+  background-position: left;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: auto;
-  background-color: #308F86;
+  background-size: cover;
 }
 
 .background .bg {
   position: absolute;
   overflow: auto;
+  background-color: rgba(255, 255, 255, 0.25);
   width: 100vw;
   height: calc( 100vh - 56px);
   left: 0;
 }
 
-.text {
-  margin-top: 8vh;
-  font-size: 40px;
-  color: black;
+.display {
+  margin-right: 10vw;
+  margin-top: 30vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  padding: 30px;
 }
 
-.button {
-  margin-top: 3vh;
-  display: flex;
-  justify-content: center;
+.display .text {
+  font-family: 'Noto Sans HK', sans-serif;
+  font-size: 3vh;
+  margin-top: 1vh;
+  color: #300606;
+  font-weight: bold;
 }
 
-p {
-  text-align: center;
-  font-family: 'Itim', cursive;
-  color: #E1F6F4;
+.display .button {
+  margin-top: 2vh;
 }

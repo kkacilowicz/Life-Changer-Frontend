@@ -33,9 +33,9 @@
 }
 
 .google-btn:hover {
-  box-shadow: 0 0 6px #4285f4;
+  box-shadow: 0 0 6px red;
 }
 
 .google-btn:active {
-  background: #1669F2;
+  background: #5c0303;
 }
