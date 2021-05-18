@@ -7,25 +7,21 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 
 @Component({
-
   selector: 'app-user-edit-preferences',
   templateUrl: './user-edit-preferences.component.html',
-  styleUrls: ['./user-edit-preferences.component.sass']
+  styleUrls: ['./user-edit-preferences.component.sass'],
 })
 export class UserEditPreferencesComponent implements OnInit {
-
   form!: FormGroup;
   love!: boolean;
   sport!: boolean;
   culture!: boolean;
   areaList: boolean[] = []; // list of selected areas of life used for display
   selectedItems: number[] = []; // list of selected areas of life
-  option1 = 1;  // id love
-  option2 = 3;  // id sport
-  option3 = 2;  // id culture
-  choose !: boolean;
-
-
+  option1 = 1; // id love
+  option2 = 3; // id sport
+  option3 = 2; // id culture
+  choose!: boolean;
 
   constructor(
     public authService: AuthService,
@@ -34,40 +30,43 @@ export class UserEditPreferencesComponent implements OnInit {
     public Preferences: PreferencesService,
     public fb: FormBuilder,
     public calendarService: CalendarService
+  ) {}
 
-    ) { }
-
-  buttonAddClicked !: boolean;
-  buttonDeleteClicked !: boolean;
+  buttonAddClicked!: boolean;
+  buttonDeleteClicked!: boolean;
 
   ngOnInit(): void {
     this.selectedItems = new Array<number>();
     this.userService.preferences();
-    this.buttonAddClicked=false;
+    this.buttonAddClicked = false;
     this.love = false;
     this.culture = false;
     this.sport = false;
     this.areaList = new Array<boolean>();
-    this.buttonDeleteClicked=false;
-    this.choose=false;
+    this.buttonDeleteClicked = false;
+    this.choose = false;
 
     this.form = this.fb.group({
       categories: [''],
-    })
-
+    });
   }
 
-  chooseCalendar(){
+  async chooseCalendar() {
     this.calendarService.pickCalendarFlag = false;
-    this.authService.changePage('main');
+    this.calendarService.eventArray.length = 0;
+    await this.calendarService
+      .sendCalendarId(' ')
+      .toPromise()
+      .then(() => {
+        this.authService.changePage('main');
+      });
   }
 
-  clickButtonAdd(){
-    if(this.buttonAddClicked==false){
-      this.buttonAddClicked=true;
-    }
-    else{
-      this.buttonAddClicked=false;
+  clickButtonAdd() {
+    if (this.buttonAddClicked == false) {
+      this.buttonAddClicked = true;
+    } else {
+      this.buttonAddClicked = false;
     }
 
     this.buttonDeleteClicked=false;
@@ -75,14 +74,11 @@ export class UserEditPreferencesComponent implements OnInit {
     this.selectedItems=[];
   }
 
-  clickButtonDelete(){
-    if(this.buttonDeleteClicked==false){
-      this.buttonDeleteClicked=true;
-
-    }
-    else{
-      this.buttonDeleteClicked=false;
-
+  clickButtonDelete() {
+    if (this.buttonDeleteClicked == false) {
+      this.buttonDeleteClicked = true;
+    } else {
+      this.buttonDeleteClicked = false;
     }
     this.buttonAddClicked=false;
     this.areaList=[];
@@ -92,8 +88,7 @@ export class UserEditPreferencesComponent implements OnInit {
   changeOptionLove() {
     if (this.love == true) {
       this.love = false;
-    }
-    else {
+    } else {
       this.love = true;
     }
 
@@ -103,8 +98,7 @@ export class UserEditPreferencesComponent implements OnInit {
   changeOptionSport() {
     if (this.sport == true) {
       this.sport = false;
-    }
-    else {
+    } else {
       this.sport = true;
     }
 
@@ -114,67 +108,68 @@ export class UserEditPreferencesComponent implements OnInit {
   changeOptionCulture() {
     if (this.culture == true) {
       this.culture = false;
-    }
-    else {
+    } else {
       this.culture = true;
     }
     return this.culture;
   }
 
-
   onSubmit() {
-
     const preferencesObserver = {
-      next: x => {
+      next: (x) => {
         console.log('Edit Preferences OK');
         this.alertService.success('Sent correctly ');
-       // this.authService.changePage('/my-profile')
+        // this.authService.changePage('/my-profile')
       },
-      error: err => {
+      error: (err) => {
         console.log(err);
         this.alertService.danger(err.error.message);
-      }
+      },
     };
 
     this.areaList.push(this.love);
     this.areaList.push(this.sport);
     this.areaList.push(this.culture);
-    console.log("areaList", this.areaList)
-    this.choose=true;
-    this.form.patchValue({ categories: this.selectedItems })
-    this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
+    console.log('areaList', this.areaList);
+    this.choose = true;
+    this.form.patchValue({ categories: this.selectedItems });
+    this.Preferences.preferences(this.form.value).subscribe(
+      preferencesObserver
+    );
   }
 
-  onDelete(){
+  onDelete() {
     const preferencesDeleteObserver = {
-      next: x => {
-      this.alertService.success('Area deleted');
-      this.authService.changePage('/my-profile');
+      next: (x) => {
+        this.alertService.success('Area deleted');
+        this.authService.changePage('/my-profile');
       },
-      error: err => {
+      error: (err) => {
         this.alertService.danger(err.error.message);
-      }
+      },
     };
     console.log("selectedItem to delete: ", this.selectedItems)
     if(this.selectedItems.indexOf(3)!=-1){
       this.Preferences.deletePreferences(3).subscribe(preferencesDeleteObserver);
     }
-    if(this.selectedItems.indexOf(2)!=-1){
-      this.Preferences.deletePreferences(2).subscribe(preferencesDeleteObserver);
+    if (this.selectedItems.indexOf(2) != -1) {
+      this.Preferences.deletePreferences(2).subscribe(
+        preferencesDeleteObserver
+      );
     }
-    if(this.selectedItems.indexOf(1)!=-1){
-      this.Preferences.deletePreferences(1).subscribe(preferencesDeleteObserver);
+    if (this.selectedItems.indexOf(1) != -1) {
+      this.Preferences.deletePreferences(1).subscribe(
+        preferencesDeleteObserver
+      );
     }
   }
 
   getAreaId(e: any, categories: number) {
     if (e.target.checked) {
       this.selectedItems.push(categories);
-    }
-    else {
-      this.selectedItems = this.selectedItems.filter(m => m != categories);
+    } else {
+      this.selectedItems = this.selectedItems.filter((m) => m != categories);
     }
     return this.selectedItems;
   }
-
 }
