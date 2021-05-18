@@ -58,8 +58,8 @@ export class UserEditPreferencesComponent implements OnInit {
       .sendCalendarId(' ')
       .toPromise()
       .then(() => {
-        this.calendarService.pickCalendarFlag = this.calendarService.setFlag();
-        this.authService.changePage('main');
+        // this.calendarService.pickCalendarFlag = this.calendarService.setFlag();
+        this.authService.changePage('edit-calendar');
       });
   }
 

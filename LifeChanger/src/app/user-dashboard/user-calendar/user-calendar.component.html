@@ -1,0 +1,24 @@
+<div class="chooseCalendar">
+    <div class="bg">
+      <div class="container rounded mt-5 mb-5 profil">
+        <div class="row">
+          <div class="form-container">
+            <div class="p-2 py-2">
+              <div class="title d-flex justify-content-between align-items-center mb-3"></div>
+              <h2> Choose which calendar you want to use: </h2>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="flex-options">
+                  <div class="btn btn-primary profile-button" (click)="pickCalendar(calendar)"
+                    *ngFor="let calendar of calendarArray">
+                    <div class="option"> {{calendar.nameCalendar}} </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

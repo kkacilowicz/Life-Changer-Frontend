@@ -69,8 +69,18 @@ export class CalendarService {
       headers: reqHeader,
     });
   }
-  setFlag() {
+  setFlag():Promise<boolean> {
+    let resolveRef;
+    let rejectRef;
+
+    //create a new promise. Save the resolve and reject reference
+    let dataPromise: Promise<boolean> = new Promise((resolve, reject) => {
+      resolveRef = resolve;
+      rejectRef = reject;
+    });
+
     let flaga;
+   
     this.getCalId().subscribe((response) => {
       console.log(`To jest sprawdzane id kalendarza: `, response.token);
       if (response.token == '' || response.token == null) {
@@ -80,7 +90,9 @@ export class CalendarService {
         flaga = true;
         console.log('ID kalendarza przypisane');
       }
+      resolveRef(null);
     });
+
     return flaga;
   }
 
@@ -122,7 +134,8 @@ export class CalendarService {
     );
 
     await this.sendEvent(calID, this.event).toPromise();
-    delay(200);
+    delay(500);
+    
   }
 
   getGoogleCalendars() {
@@ -153,19 +166,17 @@ export class CalendarService {
   }
 
   sendEvent(calendarID, event) {
-    const accessToken = localStorage.getItem('accessToken');
-    let reqHeader = new HttpHeaders({
-      'Accept-Encoding': 'gzip',
-      'Content-Type': 'multipart/mixed; boundary=END_OF_PART',
-      'Content-Length': '308',
-      Authorization: 'Bearer ' + accessToken,
-    });
-    return this.httpClient.post(
-      `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
-      this.event,
-      { headers: reqHeader }
-    );
-  }
+      const accessToken = localStorage.getItem('accessToken');
+      let reqHeader = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + accessToken,
+      });
+      return this.httpClient.post(
+        `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
+        this.event,
+        { headers: reqHeader }
+      );
+    }
 
   getCalendarEvents(minTime, maxTime, calID) {
     const accessToken = localStorage.getItem('accessToken');

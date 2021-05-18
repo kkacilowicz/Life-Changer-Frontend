@@ -71,7 +71,7 @@ export class CultureComponent implements OnInit {
     this.eventCulture.emit(this.task);
     this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    this.authService.changePage('main')
+    this.authService.changePage('edit-calendar')
     }
   }
 

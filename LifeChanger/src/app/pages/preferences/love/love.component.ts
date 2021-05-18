@@ -74,7 +74,7 @@ export class LoveComponent implements OnInit {
       this.form.patchValue({ images: this.selectedDetails })
       this.Preferences.details(this.form.value).subscribe(detailsObserver);
       if(this.preferencesList[0]==true && this.preferencesList[1]==false && this.preferencesList[2]==false){
-        this.authService.changePage('main')
+        this.authService.changePage('edit-calendar')
       }
     }
   }

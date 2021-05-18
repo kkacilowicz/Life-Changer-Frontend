@@ -1,4 +1,4 @@
-<div *ngIf="!this.calendarService.pickCalendarFlag&&this.calendarService.calendarID==''" class="chooseCalendar">
+<!-- <div *ngIf="!this.calendarService.pickCalendarFlag&&this.calendarService.calendarID==''" class="chooseCalendar">
   <div class="bg">
     <div class="container rounded mt-5 mb-5 profil">
       <div class="row">
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div *ngIf="this.calendarService.pickCalendarFlag">
   <iframe [src]="this.calendarService.calendarUrl | safe" style="border:solid 1px #777" width="750" height="530"

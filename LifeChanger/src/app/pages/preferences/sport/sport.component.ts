@@ -78,7 +78,7 @@ export class SportComponent implements OnInit {
       console.log(this.selectedDetails)
       this.Preferences.details(this.form.value).subscribe(detailsObserver);
       if(this.preferencesList[1]==true && this.preferencesList[2]==false){
-        this.authService.changePage('main')
+        this.authService.changePage('edit-calendar')
       }
     }
   }

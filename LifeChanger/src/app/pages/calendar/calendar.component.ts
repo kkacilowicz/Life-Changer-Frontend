@@ -35,6 +35,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     //to ma sie wykonywac po acces token
+   
     this.calendarService.getChoosenCalendarId();
     this.showCalendar();
 
@@ -51,25 +52,25 @@ export class CalendarComponent implements OnInit {
 
   checkCalendar() {}
 
-  pickCalendar(pickedCalendar) {
-    this.calendarService.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
+  // pickCalendar(pickedCalendar) {
+  //   this.calendarService.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
-    const calendarObserver = {
-      next: (nxt) => {
-        this.calendarService.pickCalendarFlag = true;
-        console.log('Dodano kalendarz do biblioteki');
-        this.alertService.success('Calendar choosen');
-        this.calendarService.getChoosenCalendarId();
-      },
-      error: (err) => {
-        console.log(err);
-        this.alertService.success(err.message);
-      },
-    };
-    this.calendarService
-      .sendCalendarId(pickedCalendar.idCalendar)
-      .subscribe(calendarObserver);
-  }
+  //   const calendarObserver = {
+  //     next: (nxt) => {
+  //       this.calendarService.pickCalendarFlag = true;
+  //       console.log('Dodano kalendarz do biblioteki');
+  //       this.alertService.success('Calendar choosen');
+  //       this.calendarService.getChoosenCalendarId();
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //       this.alertService.success(err.message);
+  //     },
+  //   };
+  //   this.calendarService
+  //     .sendCalendarId(pickedCalendar.idCalendar)
+  //     .subscribe(calendarObserver);
+  // }
 
   showCalendar() {
     const calendarObserver = {

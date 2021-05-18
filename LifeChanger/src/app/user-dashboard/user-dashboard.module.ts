@@ -10,10 +10,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { EditLoveComponent } from './account/user-edit-preferences/edit-love/edit-love.component';
 import { EditSportComponent } from './account/user-edit-preferences/edit-sport/edit-sport.component';
 import { EditCultureComponent } from './account/user-edit-preferences/edit-culture/edit-culture.component';
+import { UserCalendarComponent } from './user-calendar/user-calendar.component';
 
 
 @NgModule({
-  declarations: [ UserProfileComponent, UserEditPreferencesComponent, EditLoveComponent, EditSportComponent, EditCultureComponent],
+  declarations: [ UserProfileComponent, UserEditPreferencesComponent, EditLoveComponent, EditSportComponent, EditCultureComponent, UserCalendarComponent],
   imports: [
     CommonModule,
     UserDashboardRoutingModule,
