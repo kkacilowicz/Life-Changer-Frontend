@@ -36,10 +36,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     //to ma sie wykonywac po acces token
     this.calendarService.getChoosenCalendarId();
-    // if ((this.calendarService.calendarID = null)) {
     this.showCalendar();
-    // this.calendarService.pickCalendarFlag = true;
-    // }
 
     // if (this.userService.userPref.categories.length !== 0) {
     //   this.calendarService.getChoosenCalendarId();
