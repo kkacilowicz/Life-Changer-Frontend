@@ -4,12 +4,12 @@ import { Observable, timer } from 'rxjs';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'ngx-alerts';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
-  // accessToken = localStorage.getItem('accessToken');
   calendarID: string;
   calendarBgc: string = '23c0ac95';
   calendarMode: string = 'WEEK';
@@ -19,7 +19,7 @@ export class CalendarService {
 
   sendEventUrl: string = environment.activityUrl;
 
-  pickCalendarFlag: boolean = true;
+  pickCalendarFlag: boolean = false;
 
   date = new Date();
   constructor(
@@ -47,8 +47,6 @@ export class CalendarService {
     },
   };
 
-  eventsArray: { summary: string; startTime: string; endTime: string }[] = [];
-
   eventArray: {
     name: string;
     dateStart: string;
@@ -61,7 +59,32 @@ export class CalendarService {
     return (number = number < 10 ? `0${number}` : number);
   }
 
-  createEvent(summary, startDate, endDate, calID) {
+  getCalId(): Observable<any> {
+    const token = localStorage.getItem('token');
+    let reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    });
+    return this.httpClient.get<any>(this.calendarApi + 'calendar', {
+      headers: reqHeader,
+    });
+  }
+  setFlag() {
+    let flaga;
+    this.getCalId().subscribe((response) => {
+      console.log(`To jest sprawdzane id kalendarza: `, response.token);
+      if (response.token == '' || response.token == null) {
+        flaga = false;
+        console.log('Oznacza ze nie ma przypisanego id kalendarza');
+      } else {
+        flaga = true;
+        console.log('ID kalendarza przypisane');
+      }
+    });
+    return flaga;
+  }
+
+  async createEvent(summary, startDate, endDate, calID) {
     const minDate = {
       year: startDate.getFullYear(),
       month: startDate.getMonth() + 1,
@@ -98,9 +121,8 @@ export class CalendarService {
       `Added event: "${this.event.summary}" for ${minDate.day}.${minDate.month} at ${minTime.hour}:${minTime.minutes} - ${maxTime.hour}:${maxTime.minutes}`
     );
 
-    this.sendEvent(calID, this.event).subscribe({
-      next: (response) => {},
-    });
+    await this.sendEvent(calID, this.event).toPromise();
+    delay(200);
   }
 
   getGoogleCalendars() {
@@ -133,7 +155,9 @@ export class CalendarService {
   sendEvent(calendarID, event) {
     const accessToken = localStorage.getItem('accessToken');
     let reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Accept-Encoding': 'gzip',
+      'Content-Type': 'multipart/mixed; boundary=END_OF_PART',
+      'Content-Length': '308',
       Authorization: 'Bearer ' + accessToken,
     });
     return this.httpClient.post(
@@ -256,6 +280,11 @@ export class CalendarService {
           console.log(`calendarID z get choosen: ${this.calendarID}`);
         }
       });
+    if ((this.calendarID = '')) {
+      this.pickCalendarFlag = false;
+    } else if (this.calendarID != '') {
+      this.pickCalendarFlag = true;
+    }
   }
 
   giveCalendarEvents(eventArr, calID) {
