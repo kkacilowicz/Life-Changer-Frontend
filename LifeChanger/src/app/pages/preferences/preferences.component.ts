@@ -77,14 +77,16 @@ export class PreferencesComponent implements OnInit {
         this.alertService.danger(err.error.message);
       }
     };
-
-    this.areaList.push(this.love);
-    this.areaList.push(this.sport);
-    this.areaList.push(this.culture);
-    this.choose=true;
-    this.form.patchValue({ categories: this.selectedItems })
-    this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
-
+    if(this.selectedItems.length==0){
+     alert("You must select options to send")
+    }else{
+      this.areaList.push(this.love);
+      this.areaList.push(this.sport);
+      this.areaList.push(this.culture);
+      this.choose=true;
+      this.form.patchValue({ categories: this.selectedItems })
+      this.Preferences.preferences(this.form.value).subscribe(preferencesObserver);
+    }
   }
 
   selected(task: boolean){

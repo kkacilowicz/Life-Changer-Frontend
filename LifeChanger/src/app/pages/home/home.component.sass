@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Girassol&family=Permanent+Marker&family=Vast+Shadow&display=swap')
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK&display=swap')
 .homePage
   position: relative
   overflow: auto
   height: calc( 100vh - 56px )
-  background-image: url("../../../assets/Images/background.jpg")
+  width: 100vw
+  background-image: url("../../../assets/Images/home.png")
+  background-color: #E1D2CD
   background-position: top
   background-repeat: no-repeat
   background-attachment: fixed
@@ -12,62 +13,31 @@
   .bg
     position: absolute
     overflow: auto
-    //background-color: rgba(158, 19, 104, 0.18)
-    //background-color: rgba(255, 202, 236, 0.2)
-    background-color: rgba(0, 0, 0, 0.48)
+    background-color: rgba(255, 255, 255, 0.25)
     width: 100vw
     height: calc( 100vh - 56px )
     left: 0
-  h1
-    text-align: center
-    margin-top: vh
-    font-size: 8vh
-    //color: #FEA784
-    color: #E1E839
-    //font-family: 'Permanent Marker', cursive
-    font-family: 'Vast Shadow', cursive
-    //top: 30%
-    //left: 50%
-    //transform: translate(-50%, -50%)
 
-.question1
-  margin-left: 2vw
-  margin-top: 4vh
-  text-align: left
-  font-size: 5vh
-  color: #F5E2D4
-  //font-family: 'Girassol', cursive
-  font-family: 'Permanent Marker', cursive
-  
+.display
+  margin-left: 10vw
+  margin-top: 30vh
+  background-color: rgba(255,255 ,255 ,0.8 )
+  border-radius: 30px
+  padding: 30px 
+  .name
+    font-family: 'Noto Sans HK', sans-serif
+    font-size: 7vh
+    font-weight: bold
+    color: #300606
+  .text
+   font-family: 'Noto Sans HK', sans-serif
+   font-size: 3vh
+   margin-top: 1vh
+   color: #300606
+  .button
+    margin-top: 2vh
 
-.question2
-  margin-top: 6vh
-  margin-right: 2vw
-  text-align: right
-  font-size: 5vh
-  color: #F5E2D4
-  //font-family: 'Girassol', cursive
-  font-family: 'Permanent Marker', cursive
-  
-.question3
-  margin-top: 6vh
-  text-align: center
-  margin-right: 5vw
-  font-size: 5vh
-  color: #F5E2D4
-  //font-family: 'Girassol', cursive
-  font-family: 'Permanent Marker', cursive
-  
-.button
-  margin-top: 5vh
-  display: flex
-  justify-content: center
 
-.and
-  text-align: center
-  margin-top: 5vh
-  font-size: 6vh
-  color: #F5E2D4
-  font-family: 'Permanent Marker', cursive
+
   
   

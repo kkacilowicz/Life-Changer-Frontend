@@ -1,49 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&family=Orelega+One&family=Original+Surfer&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK&display=swap')
 
 .background
   position: relative
   overflow: auto
   height: calc( 100vh - 56px )
-  background-image: url('../../../assets/Images/User_Profil/background7.jpg')
-  background-position: bottom
+  width: 100vw
+  background-image: url("../../../assets/Images/home.png")
+  background-color: #E1D2CD
+  background-position: top
   background-repeat: no-repeat
   background-attachment: fixed
   background-size: cover
   .bg
     position: absolute
     overflow: auto
-    background-color: rgba(0, 0, 0, 0.20)
+    background-color: rgba(255, 255, 255, 0.25)
     width: 100vw
     height: calc( 100vh - 56px )
     left: 0
 
-.container
-    width: 100vw
-    height: calc( 100vh - 56px ) 
+h3
+  font-family: 'Noto Sans HK', sans-serif
+  font-weight: bold
+  font-size: 30px
 
+.info
+  margin-top: 15px
 
 .calendar
-    margin-top: 3vh
-    display: flex
-    justify-content: center 
+  margin-top: 5vh
+  margin-left: 1vw
+  display: flex
+  flex-direction: wrap
+  justify-content: space-around
 
 .welcome
-    text-align: center
-    //color: #D4CC
-    color: #E1F4FA
-    font-size: 40px
-    padding-top: 4vh
-    font-family: 'Orelega One', cursive
+  width: 40vw
+  margin-top: 28vh
+  margin-left: 1vw
+  margin-right: 1vw
+  background-color: #fff
+  padding: 20px
+  border: 5px solid #6A655E
+  border-radius: 2px
 
-.information
-  background-color: rgba(148,111 ,80 , 0.9)
-  border-style: solid
-  border-radius: 10px
-  border-color: skyblue
-  border-size: 5px
-  margin: 10px 10px 10px 10px
-  color: skyblue
-  h2
-    text-align: center
-    font-size: 30px
-    font-family: 'Orelega One', cursive

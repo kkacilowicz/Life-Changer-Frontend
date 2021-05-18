@@ -5,44 +5,109 @@
   height: 50%
 
 .chooseCalendar
-  background-color: rgba(255,255 ,255 , 0.7)
-  border-style: solid
-  border-radius: 10px
-  border-color: #fff
-  border-size: 5px
-  margin-bottom: 10px
-  .question
-    text-align: center
-    color: #5F5D5B
-    font-size: 30px
-    padding-top: 1vh
-    font-family: 'Orelega One', cursive
-  .calendarNames
-    display: flex
-    flex-direction: row
-    justify-content: center
-    .option
-      background-color: #C0AC95
-      padding: 6px 6px 6px 6px
-      margin-top: 5px
-      border-radius: 3px
-      margin-bottom: 5px
-      color: #F6EED4
-      text-align: center
-      font-size: 22px
-      border: 1px solid #B3A782
-      cursor: pointer
-      width: 22vw
+  position: relative
+  overflow: auto
+  height: calc( 100vh - 56px )
+  width: 100vw
+  background-image: url("../../../assets/Images/home.png")
+  background-color: #E1D2CD
+  background-position: top
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-size: cover
+  .bg
+    position: absolute
+    overflow: auto
+    background-color: rgba(255, 255, 255, 0.28)
+    width: 100vw
+    height: calc( 100vh - 56px )
+    left: 0
 
-.information
-  background-color: rgba(255,255 ,255 , 0.7)
-  border-style: solid
-  border-radius: 10px
-  border-color: red
-  border-size: 5px
-  margin: 10px 10px 10px 10px
-  color: red
-  h2
-    text-align: center
-    font-size: 30px
-    font-family: 'Orelega One', cursive
+.profil
+  background-color: #fff
+  border-radius: 45px
+  border: 5px solid #6A655E
+  padding: 30px
+
+.form-control:focus
+  box-shadow: none
+  border-color: #BA68C8
+
+.profile-button
+  background: #300606
+  box-shadow: none
+  border: none
+  margin-bottom: 10px
+
+  &:hover
+    background: #300606
+
+  &:focus
+    background: #300606
+    box-shadow: none
+
+  &:active
+    background: #300606
+    box-shadow: none
+
+.back:hover
+  color: #300606
+  cursor: pointer
+
+
+.container
+  width: 70vw
+  max-width: 500px
+  .py-5
+    padding-top: 2rem !important
+  .title
+    h2
+      font-size: 45px
+      margin: 0 auto
+      text-align: center
+  .col-md-12
+    width: 75%
+    margin: 5px auto
+    display: flex
+    flex-direction: column
+
+
+.flex-options
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+
+
+  
+
+
+
+//   .all
+//     background-color: white
+//     padding: 30px
+//     margin-top: 10vh
+//     border-radius: 20px
+
+//   .question
+//     margin-top: 2vh
+//     text-align: center
+//     font-size: 30px
+//     font-family: 'Orelega One', cursive
+
+//   .profile-button
+//     background: #300606
+//     box-shadow: none
+//     border: none
+//     width: 200px
+   
+
+//     &:hover
+//       background: #300606
+
+//     &:focus
+//       background: #300606
+//       box-shadow: none
+
+//     &:active
+//       background: #300606
+//       box-shadow: none

@@ -9,7 +9,7 @@ import { PreferencesComponent } from './pages/preferences/preferences.component'
 import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SocialLoginModule } from 'angularx-social-login'
+import { SocialLoginModule } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { SocialAuthServiceConfig } from 'angularx-social-login';
 
@@ -21,13 +21,13 @@ import { CultureComponent } from './pages/preferences/culture/culture.component'
 import { MainComponent } from './pages/main/main.component';
 import { SafePipe } from './safe.pipe';
 import { LogoutComponent } from './pages/logout/logout.component';
-
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { InterceptorInterceptor } from './shared/interceptors/interceptor.interceptor';
 
 const googleLoginOptions = {
   scope: 'https://www.googleapis.com/auth/calendar',
   access_type: 'offline',
-  redirect_uri: ''
+  redirect_uri: '',
 };
 
 @NgModule({
@@ -44,8 +44,6 @@ const googleLoginOptions = {
     MainComponent,
     SafePipe,
     LogoutComponent,
- 
-
   ],
   imports: [
     BrowserModule,
@@ -66,14 +64,15 @@ const googleLoginOptions = {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com', googleLoginOptions
-            )
-          }
-        ]
+              '1024899223351-uhvfele4a4l51n7nd62cjdbe31bfujdc.apps.googleusercontent.com',
+              googleLoginOptions
+            ),
+          },
+        ],
       } as SocialAuthServiceConfig,
     },
-    SafePipe
+    SafePipe,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

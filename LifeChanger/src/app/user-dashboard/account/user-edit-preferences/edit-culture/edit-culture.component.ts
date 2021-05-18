@@ -66,9 +66,14 @@ export class EditCultureComponent implements OnInit {
         this.authService.changePage('edit-preferences');
       }
     };
+    if(this.selectedDetails.length<3){
+      alert("You must select at least 3 images to send.")
+    }
+    else{
     this.form.patchValue({ images: this.selectedDetails })
     this.Preferences.details(this.form.value).subscribe(detailsObserver);
     this.authService.changePage('/my-profile');
+    }
   }
 
   getDetailId(e: any, id: string) {

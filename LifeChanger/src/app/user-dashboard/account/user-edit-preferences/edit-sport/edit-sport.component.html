@@ -1,6 +1,6 @@
 <div *ngIf="!buttonClick">
     <h4 class="label">
-        Select 3 images that show what you like
+        Select at least 3 images that show what you like
     </h4>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -62,10 +62,10 @@
             </label>
 
         </div>
-
-        <button type="submit" [disabled]="selectedDetails.length!=3" class="button"> Next </button>
-        <div *ngIf="selectedDetails.length!=3" class="info">
-            You choose : {{selectedDetails.length}} pictures. You must select 3 options to send.
+        
+        <div class="button">
+            <button type="submit"  class="btn btn-primary profile-button"><i
+                    class="fas fa-arrow-right"></i> Next </button>
         </div>
 
     </form>

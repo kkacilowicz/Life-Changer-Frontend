@@ -71,13 +71,18 @@ export class EditSportComponent implements OnInit {
         this.authService.changePage('edit-preferences')
       }
     };
-    this.buttonClick=true
-    this.eventSport.emit(this.task);
-    this.form.patchValue({ images: this.selectedDetails })
-    console.log(this.selectedDetails)
-    this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    if(this.preferencesList[1]==true && this.preferencesList[2]==false){
-      this.authService.changePage('/my-profile')
+    if(this.selectedDetails.length<3){
+      alert("You must select at least 3 images to send.")
+    }
+    else{
+      this.buttonClick=true
+      this.eventSport.emit(this.task);
+      this.form.patchValue({ images: this.selectedDetails })
+      console.log(this.selectedDetails)
+      this.Preferences.details(this.form.value).subscribe(detailsObserver);
+      if(this.preferencesList[1]==true && this.preferencesList[2]==false){
+        this.authService.changePage('/my-profile')
+      }
     }
   }
 

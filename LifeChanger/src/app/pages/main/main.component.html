@@ -1,5 +1,33 @@
 <div div class="background">
     <div class="bg">
+<!-- 
+        <div *ngIf="this.userService.userPref.categories.length==0" class="information">
+            <h2> Oh no, you have no preferences selected. <br>
+                Go to My profile or Edit preferences to change it.
+            </h2>
+        </div> -->
+ 
+      <div class="row">
+            <div class="calendar">
+                <app-calendar></app-calendar>
+                <div div *ngIf="this.calendarService.pickCalendarFlag">
+                    <div class="welcome"> 
+                    <h3>Hello {{authService.decodedToken?.email}} </h3>
+                    <div class="info">
+                        <!-- On {{calendarService.eventArray[0].dateStart}} from {{calendarService.eventArray[0].timeStart}} to 
+                        {{calendarService.eventArray[0].timeEnd}} add event: {{calendarService.eventArray[0].name}} -->
+                    </div>
+                </div>
+        </div> 
+    </div>
+</div>
+
+
+
+
+<!-- 
+<div div class="background">
+    <div class="bg">
         <div class="container">
             <div *ngIf="this.userService.userPref.categories.length==0" class="information">
                 <h2> Oh no, you have no preferences selected. <br>
@@ -12,4 +40,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

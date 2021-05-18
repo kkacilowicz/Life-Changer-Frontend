@@ -68,13 +68,18 @@ export class SportComponent implements OnInit {
         this.alertService.danger(err.error.message);
       }
     };
-    this.buttonClick=true
-    this.eventSport.emit(this.task);
-    this.form.patchValue({ images: this.selectedDetails })
-    console.log(this.selectedDetails)
-    this.Preferences.details(this.form.value).subscribe(detailsObserver);
-    if(this.preferencesList[1]==true && this.preferencesList[2]==false){
-      this.authService.changePage('main')
+    if(this.selectedDetails.length<3){
+      alert("You must select at least 3 images to send.")
+    }
+    else{
+      this.buttonClick=true
+      this.eventSport.emit(this.task);
+      this.form.patchValue({ images: this.selectedDetails })
+      console.log(this.selectedDetails)
+      this.Preferences.details(this.form.value).subscribe(detailsObserver);
+      if(this.preferencesList[1]==true && this.preferencesList[2]==false){
+        this.authService.changePage('edit-calendar')
+      }
     }
   }
 

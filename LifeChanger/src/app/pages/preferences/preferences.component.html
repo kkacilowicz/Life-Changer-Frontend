@@ -1,5 +1,5 @@
 <div *ngIf="authService.loggedIn()" class="background">
-
+<div class="bg" >
     <div *ngIf="!choose" >
         <div class="label"> Choose the area of life you want to improve </div>
 
@@ -36,12 +36,9 @@
                 </label>
             </div>
 
-
-
-
-            <button type="submit" [disabled]="selectedItems.length==0" class="button" > NEXT </button>
-            <div *ngIf="selectedItems.length==0" class="info">
-                You must select options to send
+            <div class="button">
+                <button type="submit"  class="btn btn-primary profile-button"><i
+                        class="fas fa-arrow-right"></i> Next </button>
             </div>
         </form>
 
@@ -60,5 +57,5 @@
     <app-culture (eventCulture)="selected($event)" [preferencesList]="areaList"></app-culture>
 </div>
 
-
+</div>
 </div>
