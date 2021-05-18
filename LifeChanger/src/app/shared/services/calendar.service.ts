@@ -19,7 +19,7 @@ export class CalendarService {
 
   sendEventUrl: string = environment.activityUrl;
 
-  pickCalendarFlag: boolean = true;
+  pickCalendarFlag: boolean = false;
 
   date = new Date();
   constructor(
