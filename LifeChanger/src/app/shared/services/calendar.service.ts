@@ -19,7 +19,7 @@ export class CalendarService {
 
   sendEventUrl: string = environment.activityUrl;
 
-  pickCalendarFlag: boolean = false;
+  pickCalendarFlag: boolean = true;
 
   date = new Date();
   constructor(
@@ -244,13 +244,13 @@ export class CalendarService {
       .get<any>(this.calendarApi + 'calendar', { headers: reqHeader })
       .toPromise()
       .then((response) => {
-        if (response.token == null) {
+        if (response.token == null || response.token == ' ') {
           this.calendarID = '';
           // this.pickCalendarFlag = false;
         } else {
           // this.pickCalendarFlag = true;
           this.calendarID = response.token;
-
+          this.eventArray.length = 0;
           this.eventsToArray(this.calendarID);
           this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
           console.log(`calendarID z get choosen: ${this.calendarID}`);

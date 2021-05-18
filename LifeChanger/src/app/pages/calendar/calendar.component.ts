@@ -19,7 +19,6 @@ import { AlertService } from 'ngx-alerts';
 })
 export class CalendarComponent implements OnInit {
   calendarArray: { idCalendar: string; nameCalendar: string }[] = [];
-  calendarID: string;
 
   // calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
@@ -36,7 +35,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     //to ma sie wykonywac po acces token
-
     this.calendarService.getChoosenCalendarId();
     // if ((this.calendarService.calendarID = null)) {
     this.showCalendar();

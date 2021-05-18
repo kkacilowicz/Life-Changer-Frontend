@@ -51,9 +51,15 @@ export class UserEditPreferencesComponent implements OnInit {
     });
   }
 
-  chooseCalendar() {
+  async chooseCalendar() {
     this.calendarService.pickCalendarFlag = false;
-    this.authService.changePage('main');
+    this.calendarService.eventArray.length = 0;
+    await this.calendarService
+      .sendCalendarId(' ')
+      .toPromise()
+      .then(() => {
+        this.authService.changePage('main');
+      });
   }
 
   clickButtonAdd() {
