@@ -1,5 +1,4 @@
 <div *ngIf="!this.calendarService.pickCalendarFlag" class="chooseCalendar">
-<<<<<<< HEAD
   <div class="bg">
     <div class="container rounded mt-5 mb-5 profil">
       <div class="row">
@@ -28,23 +27,3 @@
   <iframe [src]="this.calendarService.calendarUrl | safe" style="border:solid 1px #777" width="750" height="530"
     frameborder="0" scrolling="no"></iframe>
 </div>
-=======
-  <div class="question">Choose which calendar you want to use:</div>
-  <div
-    class="calendarNames"
-    (click)="pickCalendar(calendar)"
-    *ngFor="let calendar of calendarArray"
-  >
-    <div class="option">{{ calendar.nameCalendar }}</div>
-  </div>
-</div>
-
-<iframe
-  [src]="this.calendarService.calendarUrl | safe"
-  style="border: solid 1px #777"
-  width="900"
-  height="500"
-  frameborder="0"
-  scrolling="no"
-></iframe>
->>>>>>> origin/correctingServices
