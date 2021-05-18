@@ -10,7 +10,6 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CalendarService {
-  // accessToken = localStorage.getItem('accessToken');
   calendarID: string;
   calendarBgc: string = '23c0ac95';
   calendarMode: string = 'WEEK';
@@ -48,36 +47,6 @@ export class CalendarService {
     },
   };
 
-  events = [
-    {
-      summary: '1',
-      start: {
-        dateTime: '2020-05-20T015:00:00+02:00',
-      },
-      end: {
-        dateTime: '2020-05-20T016:00:00+02:00',
-      },
-    },
-    {
-      summary: '2',
-      start: {
-        dateTime: '2020-05-20T017:00:00+02:00',
-      },
-      end: {
-        dateTime: '2020-05-20T018:00:00+02:00',
-      },
-    },
-    {
-      summary: '3',
-      start: {
-        dateTime: '2020-05-20T020:00:00+02:00',
-      },
-      end: {
-        dateTime: '2020-05-20T021:00:00+02:00',
-      },
-    },
-  ];
-
   eventArray: {
     name: string;
     dateStart: string;
@@ -88,6 +57,31 @@ export class CalendarService {
 
   checkNumber(number) {
     return (number = number < 10 ? `0${number}` : number);
+  }
+
+  getCalId(): Observable<any> {
+    const token = localStorage.getItem('token');
+    let reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    });
+    return this.httpClient.get<any>(this.calendarApi + 'calendar', {
+      headers: reqHeader,
+    });
+  }
+  setFlag() {
+    let flaga;
+    this.getCalId().subscribe((response) => {
+      console.log(`To jest sprawdzane id kalendarza: `, response.token);
+      if (response.token == '' || response.token == null) {
+        flaga = false;
+        console.log('Oznacza ze nie ma przypisanego id kalendarza');
+      } else {
+        flaga = true;
+        console.log('ID kalendarza przypisane');
+      }
+    });
+    return flaga;
   }
 
   async createEvent(summary, startDate, endDate, calID) {
