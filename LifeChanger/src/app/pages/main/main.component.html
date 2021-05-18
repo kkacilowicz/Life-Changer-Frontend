@@ -1,15 +1,18 @@
 <div div class="background">
     <div class="bg">
-        <div class="container">
-            <div *ngIf="this.userService.userPref.categories.length==0" class="information">
-                <h2> Oh no, you have no preferences selected. <br>
-                    Go to My profile or Edit preferences to change it.
-                </h2>
-            </div>
-            <h3 class="welcome"> Hello {{authService.decodedToken?.email}} </h3>
+
+        <div *ngIf="this.userService.userPref.categories.length==0" class="information">
+            <h2> Oh no, you have no preferences selected. <br>
+                Go to My profile or Edit preferences to change it.
+            </h2>
+        </div>
+ 
+      <div class="row">
             <div class="calendar">
                 <app-calendar></app-calendar>
-            </div>
-        </div>
+                <div div *ngIf="this.calendarService.pickCalendarFlag">
+                    <h3 class="welcome"> Hello {{authService.decodedToken?.email}} <br><br>
+                    Added event: {{calendarService.event.summary}} </h3>
+        </div> 
     </div>
 </div>

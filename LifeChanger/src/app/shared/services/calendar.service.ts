@@ -13,9 +13,9 @@ export class CalendarService {
 
   accessToken = localStorage.getItem('accessToken');
   calendarID: string;
-  calendarBgc: string = '23c0ac95';
+  calendarBgc: string = '236a655e';
   calendarMode: string = 'WEEK';
-  calendarColor: string = '23039BE5';
+  calendarColor: string = '23E67C73';
   calendarUrl = `https://calendar.google.com/calendar/embed?ctz=Europe%2FWarsaw&wkst=2&color=%${this.calendarColor}&bgcolor=%${this.calendarBgc}&showPrint=0&showCalendars=0&showTz=0&showNav=0&mode=${this.calendarMode}`;
   calendarApi: string = environment.apiUrl;
 

@@ -1,13 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&family=Orelega+One&family=Original+Surfer&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+HK&display=swap");
 .background {
   position: relative;
   overflow: auto;
   height: calc( 100vh - 56px);
   width: 100vw;
+  background-image: url("../../../assets/Images/home.png");
   background-color: #E1D2CD;
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 .background .bg {
@@ -19,23 +22,22 @@
   left: 0;
 }
 
-.container {
-  width: 100vw;
-  height: calc( 100vh - 56px);
-}
-
 .calendar {
-  margin-top: 3vh;
+  margin-top: 5vh;
   display: flex;
-  justify-content: center;
+  flex-direction: wrap;
+  justify-content: space-around;
 }
 
 .welcome {
-  text-align: center;
-  color: #E1F4FA;
-  font-size: 40px;
-  padding-top: 4vh;
-  font-family: 'Orelega One', cursive;
+  margin-top: 30vh;
+  font-family: 'Noto Sans HK', sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border: 5px solid #6A655E;
+  border-radius: 2px;
 }
 
 .information {
