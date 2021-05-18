@@ -15,7 +15,13 @@ export class MainComponent implements OnInit {
   
   ngOnInit(): void {
     this.userService.preferences()  
+    this.validationPreferences()
   }
 
+  validationPreferences(){
+    if(this.userService.userPref.categories.length==0){
+      alert("  Oh no, you have no preferences selected. Go to My profile or Edit preferences to change it.")
+    }
+  }
 
 }
