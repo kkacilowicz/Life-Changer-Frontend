@@ -33,5 +33,11 @@ export class HeaderComponent implements OnInit {
   this.authService.changePage('logout')
 }
 
+routePage(){
+
+  let url:string = this.authService.loggedIn()? 'main': ''
+  this.authService.changePage(url);
+}
+
 }
 
