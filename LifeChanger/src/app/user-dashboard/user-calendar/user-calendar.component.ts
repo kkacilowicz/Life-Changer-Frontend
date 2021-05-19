@@ -6,26 +6,29 @@ import { CalendarService } from 'src/app/shared/services/calendar.service';
 @Component({
   selector: 'app-user-calendar',
   templateUrl: './user-calendar.component.html',
-  styleUrls: ['./user-calendar.component.sass']
+  styleUrls: ['./user-calendar.component.sass'],
 })
 export class UserCalendarComponent implements OnInit {
-
-  constructor(public calendarService:CalendarService, private alertService:AlertService, private authService: AuthService) { }
+  constructor(
+    public calendarService: CalendarService,
+    private alertService: AlertService,
+    private authService: AuthService
+  ) {}
   calendarArray: { idCalendar: string; nameCalendar: string }[] = [];
   ngOnInit(): void {
     this.showCalendar();
-    console.log("calendarID: " , this.calendarService.calendarID)
   }
   pickCalendar(pickedCalendar) {
     this.calendarService.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
 
     const calendarObserver = {
       next: (nxt) => {
-        this.calendarService.pickCalendarFlag = true;
+        this.calendarService.eventArray.length = 0;
         console.log('Dodano kalendarz do biblioteki');
         this.alertService.success('Calendar choosen');
         this.calendarService.getChoosenCalendarId();
-        this.authService.changePage('main')
+        this.authService.changePage('main');
+        this.calendarService.setID();
       },
       error: (err) => {
         console.log(err);

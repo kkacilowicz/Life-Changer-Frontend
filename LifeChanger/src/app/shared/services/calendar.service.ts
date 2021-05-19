@@ -5,7 +5,6 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'ngx-alerts';
 import { delay } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root',
@@ -75,8 +74,15 @@ export class CalendarService {
       .toPromise()
       .then((response) => {
         this.calendarID = response.token;
+        console.log('Id w setID', this.calendarID);
         this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
       });
+    if (this.calendarID == undefined || this.calendarID == '') {
+      this.authService.changePage('edit-calendar');
+    } else {
+      this.eventsToArray(this.calendarID);
+    }
+    return this.calendarID;
   }
 
   async createEvent(summary, startDate, endDate, calID) {
@@ -117,7 +123,6 @@ export class CalendarService {
     );
 
     await this.sendEvent(calID, this.event).toPromise();
-    delay(1000);
   }
 
   getGoogleCalendars() {
@@ -183,6 +188,7 @@ export class CalendarService {
   }
 
   eventsToArray(calID) {
+    this.eventArray.length = 0;
     let eventFlag = false;
     const minTime = {
       year: this.date.getFullYear(),
@@ -199,6 +205,7 @@ export class CalendarService {
       minute: 0,
     };
     if (calID !== '') {
+      console.log('Pobranie eventow z kalendarza');
       this.getCalendarEvents(minTime, maxTime, calID).subscribe((response) => {
         for (let i = 0; i < response.items.length; i++) {
           console.log(`eventy pobrane z kalendarza to : `, response.items);
