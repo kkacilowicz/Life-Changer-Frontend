@@ -23,13 +23,18 @@
   </div>
 </div> -->
 
-<div *ngIf="this.calendarService.pickCalendarFlag">
-  <iframe [src]="this.calendarService.calendarUrl | safe" style="border:solid 1px #777" width="750" height="530"
-    frameborder="0" scrolling="no"></iframe>
+<div>
+  <iframe
+    [src]="this.calendarService.calendarUrl | safe"
+    style="border: solid 1px #777"
+    width="750"
+    height="530"
+    frameborder="0"
+    scrolling="no"
+  ></iframe>
 </div>
 
-
-<!-- 
+<!--
 <div
   *ngIf="
     !this.calendarService.pickCalendarFlag &&
