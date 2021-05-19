@@ -21,6 +21,7 @@ export class UserService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   getPreferences(): Observable<userPreferences> {
+    console.log("Makjiojjij")
     let headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
@@ -31,6 +32,7 @@ export class UserService {
   }
 
   preferences(): Promise<void> {
+    console.log("Makareena")
     let resolveRef;
     let rejectRef;
 
@@ -54,11 +56,11 @@ export class UserService {
     this.router.navigateByUrl(path);
   }
 
-  async checkPreferences() {
+  checkPreferences() {
     console.log('Weszlo do check preferences');
     if (localStorage.hasOwnProperty('token')) {
       console.log('wywolane jest user Service');
-      await this.preferences().then(() => {
+      this.preferences().then(() => {
         if (this.userPref.categories.length == 0) {
           this.changePagePreferences('preferences');
         } else {
