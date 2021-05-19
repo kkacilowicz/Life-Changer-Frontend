@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'ngx-alerts';
 import { delay } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root',
@@ -69,22 +70,13 @@ export class CalendarService {
       headers: reqHeader,
     });
   }
-  setFlag() {
- 
-    let flaga;
-    this.getCalId().subscribe((response) => {
-      console.log(`To jest sprawdzane id kalendarza: `, response.token);
-      if (response.token == '' || response.token == null) {
-        flaga = false;
-        console.log('Oznacza ze nie ma przypisanego id kalendarza');
-      } else {
-        flaga = true;
-        console.log('ID kalendarza przypisane');
-      }
-      
-    });
-
-    return flaga;
+  async setID() {
+    await this.getCalId()
+      .toPromise()
+      .then((response) => {
+        this.calendarID = response.token;
+        this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
+      });
   }
 
   async createEvent(summary, startDate, endDate, calID) {
@@ -125,8 +117,7 @@ export class CalendarService {
     );
 
     await this.sendEvent(calID, this.event).toPromise();
-    delay(500);
-    
+    delay(1000);
   }
 
   getGoogleCalendars() {
@@ -157,17 +148,17 @@ export class CalendarService {
   }
 
   sendEvent(calendarID, event) {
-      const accessToken = localStorage.getItem('accessToken');
-      let reqHeader = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + accessToken,
-      });
-      return this.httpClient.post(
-        `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
-        this.event,
-        { headers: reqHeader }
-      );
-    }
+    const accessToken = localStorage.getItem('accessToken');
+    let reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + accessToken,
+    });
+    return this.httpClient.post(
+      `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
+      this.event,
+      { headers: reqHeader }
+    );
+  }
 
   getCalendarEvents(minTime, maxTime, calID) {
     const accessToken = localStorage.getItem('accessToken');
@@ -192,6 +183,7 @@ export class CalendarService {
   }
 
   eventsToArray(calID) {
+    let eventFlag = false;
     const minTime = {
       year: this.date.getFullYear(),
       month: this.date.getMonth() + 1,
@@ -209,7 +201,7 @@ export class CalendarService {
     if (calID !== '') {
       this.getCalendarEvents(minTime, maxTime, calID).subscribe((response) => {
         for (let i = 0; i < response.items.length; i++) {
-          console.log(`dlugosc odpowiedzi${response.items.length}`);
+          console.log(`eventy pobrane z kalendarza to : `, response.items);
           let minTimeDate = new Date(response.items[i].start.dateTime);
           let maxTimeDate = new Date(response.items[i].end.dateTime);
           this.eventArray.splice(i, 1, {
@@ -231,8 +223,14 @@ export class CalendarService {
               maxTimeDate.getHours()
             )}:${this.checkNumber(maxTimeDate.getMinutes())}`,
           });
+
+          if (response.items[i].summary.includes('[LifeChanger]')) {
+            eventFlag = true;
+          }
         }
-        this.giveCalendarEvents(this.eventArray, calID);
+        if (!eventFlag) {
+          this.giveCalendarEvents(this.eventArray, calID);
+        }
       });
     } else {
       console.log(`calendarID = ${calID}`);
@@ -311,10 +309,18 @@ export class CalendarService {
           next: (response) => {
             console.log('Free day');
             for (let i = 0; i < response.length; i++) {
+              console.log('Wydarzenia z backendu w freeDay: ', response);
               let startDateString = `${response[i].dateStart}T${response[i].timeStart}:00`;
               let endDateString = `${response[i].dateEnd}T${response[i].timeEnd}:00`;
               let eventStartTime = new Date(startDateString);
               let eventEndTime = new Date(endDateString);
+              console.log(
+                `${i}Wydarzenie wyslane do stworzenia free day: `,
+                response[i].name,
+                eventStartTime,
+                eventEndTime,
+                calID
+              );
               this.createEvent(
                 response[i].name,
                 eventStartTime,
@@ -329,19 +335,26 @@ export class CalendarService {
         });
     } else {
       eventArr.sort((a, b) => a.timeStart.localeCompare(b.timeStart));
-      console.log(eventArr);
+      console.log('Eventy wyslane na backend: ', eventArr);
       this.httpClient
         .post<any>(this.sendEventUrl + 'ProposeActivity', eventArr, {
           headers: reqHeader,
         })
         .subscribe({
           next: (response) => {
-            console.log('Busy day');
+            console.log('Eventy otrzymane z backendu: (busy day)', response);
             for (let i = 0; i < response.length; i++) {
               let startDateString = `${response[i].dateStart}T${response[i].timeStart}:00`;
               let endDateString = `${response[i].dateEnd}T${response[i].timeEnd}:00`;
               let eventStartTime = new Date(startDateString);
               let eventEndTime = new Date(endDateString);
+              console.log(
+                `${i}Wydarzenie wyslane do stworzenia busy day: `,
+                response[i].name,
+                eventStartTime,
+                eventEndTime,
+                calID
+              );
               this.createEvent(
                 response[i].name,
                 eventStartTime,
