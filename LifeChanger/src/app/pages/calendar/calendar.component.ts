@@ -33,8 +33,8 @@ export class CalendarComponent implements OnInit {
     private alertService: AlertService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     console.log('wejscie do google calendar component');
-    this.calendarService.setID();
+    await this.calendarService.setID();
   }
 }
