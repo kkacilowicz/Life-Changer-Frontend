@@ -12,7 +12,10 @@ export class MainComponent implements OnInit {
 
   constructor(public authService: AuthService, public userService: UserService, public calendarService: CalendarService) { }
 
-  
+  userInfo = {
+    userName: this.authService.decodedToken.given_name,
+  }
+
   ngOnInit(): void {
     this.userService.preferences()  
     
