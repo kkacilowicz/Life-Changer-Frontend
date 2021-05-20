@@ -35,9 +35,6 @@ export class AuthService {
     private http: HttpClient,
     private router: Router
   ) {}
-  // loggedIn(){
-  //   return this.isSignedIn;
-  // }
 
   changePage(path: string) {
     this.router.navigateByUrl(path);

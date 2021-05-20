@@ -55,10 +55,9 @@ export class UserEditPreferencesComponent implements OnInit {
     this.calendarService.pickCalendarFlag = false;
     this.calendarService.eventArray.length = 0;
     await this.calendarService
-      .sendCalendarId(' ')
+      .sendCalendarId('')
       .toPromise()
       .then(() => {
-        // this.calendarService.pickCalendarFlag = this.calendarService.setFlag();
         this.authService.changePage('edit-calendar');
       });
   }
@@ -70,9 +69,9 @@ export class UserEditPreferencesComponent implements OnInit {
       this.buttonAddClicked = false;
     }
 
-    this.buttonDeleteClicked=false;
-    this.areaList=[];
-    this.selectedItems=[];
+    this.buttonDeleteClicked = false;
+    this.areaList = [];
+    this.selectedItems = [];
   }
 
   clickButtonDelete() {
@@ -81,9 +80,9 @@ export class UserEditPreferencesComponent implements OnInit {
     } else {
       this.buttonDeleteClicked = false;
     }
-    this.buttonAddClicked=false;
-    this.areaList=[];
-    this.selectedItems=[];
+    this.buttonAddClicked = false;
+    this.areaList = [];
+    this.selectedItems = [];
   }
 
   changeOptionLove() {
@@ -149,9 +148,11 @@ export class UserEditPreferencesComponent implements OnInit {
         this.alertService.danger(err.error.message);
       },
     };
-    console.log("selectedItem to delete: ", this.selectedItems)
-    if(this.selectedItems.indexOf(3)!=-1){
-      this.Preferences.deletePreferences(3).subscribe(preferencesDeleteObserver);
+    console.log('selectedItem to delete: ', this.selectedItems);
+    if (this.selectedItems.indexOf(3) != -1) {
+      this.Preferences.deletePreferences(3).subscribe(
+        preferencesDeleteObserver
+      );
     }
     if (this.selectedItems.indexOf(2) != -1) {
       this.Preferences.deletePreferences(2).subscribe(
