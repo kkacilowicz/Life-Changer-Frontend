@@ -4,7 +4,6 @@ import { Observable, timer } from 'rxjs';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'ngx-alerts';
-import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -76,12 +75,15 @@ export class CalendarService {
         this.calendarID = response.token;
         console.log('Id w setID', this.calendarID);
         this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
+      })
+      .then(() => {
+        if (this.calendarID == undefined || this.calendarID == '') {
+          this.authService.changePage('edit-calendar');
+        } else {
+          this.eventsToArray(this.calendarID);
+        }
       });
-    if (this.calendarID == undefined || this.calendarID == '') {
-      this.authService.changePage('edit-calendar');
-    } else {
-      this.eventsToArray(this.calendarID);
-    }
+
     return this.calendarID;
   }
 
@@ -121,7 +123,7 @@ export class CalendarService {
     this.alertService.success(
       `Added event: "${this.event.summary}" for ${minDate.day}.${minDate.month} at ${minTime.hour}:${minTime.minutes} - ${maxTime.hour}:${maxTime.minutes}`
     );
-
+    console.log('Event przed wejsciem do this.sendEvent', this.event);
     await this.sendEvent(calID, this.event).toPromise();
   }
 
@@ -206,9 +208,9 @@ export class CalendarService {
     };
     if (calID !== '') {
       console.log('Pobranie eventow z kalendarza');
+      console.log('Tablica eventow przed pobraniem', this.eventArray);
       this.getCalendarEvents(minTime, maxTime, calID).subscribe((response) => {
         for (let i = 0; i < response.items.length; i++) {
-          console.log(`eventy pobrane z kalendarza to : `, response.items);
           let minTimeDate = new Date(response.items[i].start.dateTime);
           let maxTimeDate = new Date(response.items[i].end.dateTime);
           this.eventArray.splice(i, 1, {
@@ -230,7 +232,8 @@ export class CalendarService {
               maxTimeDate.getHours()
             )}:${this.checkNumber(maxTimeDate.getMinutes())}`,
           });
-
+          console.log('Tablica eventow PO pobraniem', this.eventArray);
+          console.log(`eventy pobrane z kalendarza to : `, response.items);
           if (response.items[i].summary.includes('[LifeChanger]')) {
             eventFlag = true;
           }
@@ -265,34 +268,34 @@ export class CalendarService {
   //       }
   //     });
   // }
-  async getChoosenCalendarId() {
-    const token = localStorage.getItem('token');
-    let reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    });
-    this.calendarID = <string>await this.httpClient
-      .get<any>(this.calendarApi + 'calendar', { headers: reqHeader })
-      .toPromise()
-      .then((response) => {
-        if (response.token == null || response.token == ' ') {
-          this.calendarID = '';
-          // this.pickCalendarFlag = false;
-        } else {
-          // this.pickCalendarFlag = true;
-          this.calendarID = response.token;
-          this.eventArray.length = 0;
-          this.eventsToArray(this.calendarID);
-          this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
-          console.log(`calendarID z get choosen: ${this.calendarID}`);
-        }
-      });
-    if ((this.calendarID = '')) {
-      this.pickCalendarFlag = false;
-    } else if (this.calendarID != '') {
-      this.pickCalendarFlag = true;
-    }
-  }
+  // async getChoosenCalendarId() {
+  //   const token = localStorage.getItem('token');
+  //   let reqHeader = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: 'Bearer ' + token,
+  //   });
+  //   this.calendarID = <string>await this.httpClient
+  //     .get<any>(this.calendarApi + 'calendar', { headers: reqHeader })
+  //     .toPromise()
+  //     .then((response) => {
+  //       if (response.token == null || response.token == ' ') {
+  //         this.calendarID = '';
+  //         // this.pickCalendarFlag = false;
+  //       } else {
+  //         // this.pickCalendarFlag = true;
+  //         this.calendarID = response.token;
+  //         this.eventArray.length = 0;
+  //         this.eventsToArray(this.calendarID);
+  //         this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
+  //         console.log(`calendarID z get choosen: ${this.calendarID}`);
+  //       }
+  //     });
+  //   if ((this.calendarID = '')) {
+  //     this.pickCalendarFlag = false;
+  //   } else if (this.calendarID != '') {
+  //     this.pickCalendarFlag = true;
+  //   }
+  // }
 
   giveCalendarEvents(eventArr, calID) {
     const token = localStorage.getItem('token');
@@ -315,19 +318,12 @@ export class CalendarService {
         .subscribe({
           next: (response) => {
             console.log('Free day');
+            console.log('Wydarzenia z backendu w freeDay: ', response);
             for (let i = 0; i < response.length; i++) {
-              console.log('Wydarzenia z backendu w freeDay: ', response);
               let startDateString = `${response[i].dateStart}T${response[i].timeStart}:00`;
               let endDateString = `${response[i].dateEnd}T${response[i].timeEnd}:00`;
               let eventStartTime = new Date(startDateString);
               let eventEndTime = new Date(endDateString);
-              console.log(
-                `${i}Wydarzenie wyslane do stworzenia free day: `,
-                response[i].name,
-                eventStartTime,
-                eventEndTime,
-                calID
-              );
               this.createEvent(
                 response[i].name,
                 eventStartTime,
@@ -355,13 +351,7 @@ export class CalendarService {
               let endDateString = `${response[i].dateEnd}T${response[i].timeEnd}:00`;
               let eventStartTime = new Date(startDateString);
               let eventEndTime = new Date(endDateString);
-              console.log(
-                `${i}Wydarzenie wyslane do stworzenia busy day: `,
-                response[i].name,
-                eventStartTime,
-                eventEndTime,
-                calID
-              );
+
               this.createEvent(
                 response[i].name,
                 eventStartTime,
@@ -369,7 +359,6 @@ export class CalendarService {
                 calID
               );
             }
-            this.eventArray.length = 0;
           },
           error: (err) => {
             this.alertService.warning(err.error.message);

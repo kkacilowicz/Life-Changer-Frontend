@@ -23,12 +23,9 @@ export class UserCalendarComponent implements OnInit {
 
     const calendarObserver = {
       next: (nxt) => {
-        this.calendarService.eventArray.length = 0;
         console.log('Dodano kalendarz do biblioteki');
         this.alertService.success('Calendar choosen');
-        this.calendarService.getChoosenCalendarId();
         this.authService.changePage('main');
-        this.calendarService.setID();
       },
       error: (err) => {
         console.log(err);

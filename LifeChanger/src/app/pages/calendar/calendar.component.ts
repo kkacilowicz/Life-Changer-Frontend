@@ -39,14 +39,6 @@ export class CalendarComponent implements OnInit {
     // this.calendarService.getChoosenCalendarId();
 
     this.calendarService.setID();
-    // if (
-    //   this.calendarService.calendarID == undefined ||
-    //   this.calendarService.calendarID == ''
-    // ) {
-    //   this.authService.changePage('edit-calendar');
-    // } else {
-    //   this.calendarService.eventsToArray(this.calendarService.calendarID);
-    // }
   }
 
   // pickCalendar(pickedCalendar) {
