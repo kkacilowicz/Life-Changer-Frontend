@@ -14,9 +14,10 @@
           <div class="welcome">
             <h3>Hello {{ this.authService.decodedToken?.given_name }}</h3>
             <div *ngFor="let event of displayedEvents" class="info">
-              <li>{{ event.name }}</li>
-              <!-- On {{calendarService.eventArray[0].dateStart}} from {{calendarService.eventArray[0].timeStart}} to
-                        {{calendarService.eventArray[0].timeEnd}} add event: {{calendarService.eventArray[0].name}} -->
+              <li>
+                {{ event.name }}: from {{ event.timeStart }} to
+                {{ event.timeEnd }} on {{ event.dateStart }}
+              </li>
             </div>
           </div>
         </div>
