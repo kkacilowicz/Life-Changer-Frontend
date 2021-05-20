@@ -18,7 +18,16 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.userService.preferences();
     console.log(this.calendarService.eventArray);
+    this.displayedEvents = this.calendarService.eventArray;
   }
+
+  displayedEvents: {
+    name: string;
+    dateStart: string;
+    timeStart: string;
+    dateEnd: string;
+    timeEnd: string;
+  }[] = [];
 
   validationPreferences() {
     if (this.userService.userPref.categories.length == 0) {

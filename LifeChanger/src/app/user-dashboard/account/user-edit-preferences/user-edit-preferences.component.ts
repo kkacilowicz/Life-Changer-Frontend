@@ -51,15 +51,20 @@ export class UserEditPreferencesComponent implements OnInit {
     });
   }
 
-  async chooseCalendar() {
-    this.calendarService.pickCalendarFlag = false;
+  // async chooseCalendar() {
+  //   this.calendarService.pickCalendarFlag = false;
+  //   this.calendarService.eventArray.length = 0;
+  //   await this.calendarService
+  //     .sendCalendarId('')
+  //     .toPromise()
+  //     .then(() => {
+  //       this.authService.changePage('edit-calendar');
+  //     });
+  // }
+
+  chooseCalendar() {
     this.calendarService.eventArray.length = 0;
-    await this.calendarService
-      .sendCalendarId('')
-      .toPromise()
-      .then(() => {
-        this.authService.changePage('edit-calendar');
-      });
+    this.authService.changePage('edit-calendar');
   }
 
   clickButtonAdd() {

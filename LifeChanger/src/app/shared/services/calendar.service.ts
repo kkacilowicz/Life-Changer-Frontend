@@ -124,7 +124,11 @@ export class CalendarService {
       `Added event: "${this.event.summary}" for ${minDate.day}.${minDate.month} at ${minTime.hour}:${minTime.minutes} - ${maxTime.hour}:${maxTime.minutes}`
     );
     console.log('Event przed wejsciem do this.sendEvent', this.event);
-    await this.sendEvent(calID, this.event).toPromise();
+    await this.sendEvent(calID, this.event)
+      .toPromise()
+      .then(() => {
+        location.reload();
+      });
   }
 
   getGoogleCalendars() {
@@ -246,56 +250,6 @@ export class CalendarService {
       console.log(`calendarID = ${calID}`);
     }
   }
-
-  // getChoosenCalendarId() {
-  //   const token = localStorage.getItem('token');
-  //   let reqHeader = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Authorization: 'Bearer ' + token,
-  //   });
-  //   this.httpClient
-  //     .get<any>(this.calendarApi + 'calendar', { headers: reqHeader })
-  //     .subscribe((response) => {
-  //       if (response.token == null) {
-  //         this.calendarID = '';
-  //         // this.pickCalendarFlag = false;
-  //       } else {
-  //         // this.pickCalendarFlag = true;
-  //         this.calendarID = response.token;
-
-  //         this.eventsToArray(this.calendarID);
-  //         this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
-  //       }
-  //     });
-  // }
-  // async getChoosenCalendarId() {
-  //   const token = localStorage.getItem('token');
-  //   let reqHeader = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Authorization: 'Bearer ' + token,
-  //   });
-  //   this.calendarID = <string>await this.httpClient
-  //     .get<any>(this.calendarApi + 'calendar', { headers: reqHeader })
-  //     .toPromise()
-  //     .then((response) => {
-  //       if (response.token == null || response.token == ' ') {
-  //         this.calendarID = '';
-  //         // this.pickCalendarFlag = false;
-  //       } else {
-  //         // this.pickCalendarFlag = true;
-  //         this.calendarID = response.token;
-  //         this.eventArray.length = 0;
-  //         this.eventsToArray(this.calendarID);
-  //         this.calendarUrl = `https://calendar.google.com/calendar/embed?src=${this.calendarID}&wkst=2&bgcolor=%${this.calendarBgc}&showPrint=0&color=%${this.calendarColor}&showCalendars=0&showNav=0&showTz=0&mode=${this.calendarMode}`;
-  //         console.log(`calendarID z get choosen: ${this.calendarID}`);
-  //       }
-  //     });
-  //   if ((this.calendarID = '')) {
-  //     this.pickCalendarFlag = false;
-  //   } else if (this.calendarID != '') {
-  //     this.pickCalendarFlag = true;
-  //   }
-  // }
 
   giveCalendarEvents(eventArr, calID) {
     const token = localStorage.getItem('token');
