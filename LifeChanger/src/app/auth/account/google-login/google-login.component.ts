@@ -49,6 +49,7 @@ export class GoogleLoginComponent implements OnInit {
 
   sendToken() {
     this.authService.sendGoogleToken().subscribe((response) => {
+      console.log(`to je od grzegorza`, response);
       localStorage.setItem('token', response.token);
       localStorage.setItem(
         'accessToken',

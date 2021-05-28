@@ -34,58 +34,7 @@ export class CalendarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //to ma sie wykonywac po acces token
-   
-    this.calendarService.getChoosenCalendarId();
-    this.showCalendar();
-
-    // if (this.userService.userPref.categories.length !== 0) {
-    //   this.calendarService.getChoosenCalendarId();
-    //   if (!this.calendarService.pickCalendarFlag) {
-    //     console.log(this.calendarService.pickCalendarFlag);
-    //     console.log('wywolanie showCalendar');
-    //     this.showCalendar();
-    //   }
-    // }
-    console.log(this.calendarArray);
-  }
-
-  checkCalendar() {}
-
-  // pickCalendar(pickedCalendar) {
-  //   this.calendarService.calendarUrl = `https://calendar.google.com/calendar/embed?src=${pickedCalendar.idCalendar}&ctz=Europe%2FWarsaw&wkst=1&bgcolor=%23ffffff&showPrint=0&showCalendars=0`;
-
-  //   const calendarObserver = {
-  //     next: (nxt) => {
-  //       this.calendarService.pickCalendarFlag = true;
-  //       console.log('Dodano kalendarz do biblioteki');
-  //       this.alertService.success('Calendar choosen');
-  //       this.calendarService.getChoosenCalendarId();
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //       this.alertService.success(err.message);
-  //     },
-  //   };
-  //   this.calendarService
-  //     .sendCalendarId(pickedCalendar.idCalendar)
-  //     .subscribe(calendarObserver);
-  // }
-
-  showCalendar() {
-    const calendarObserver = {
-      next: (response) => {
-        for (let i = 0; i < response.items.length; i++) {
-          this.calendarArray.splice(i, 1, {
-            idCalendar: response.items[i].id,
-            nameCalendar: response.items[i].summary,
-          });
-        }
-      },
-      error: (err) => {
-        console.log(err.message);
-      },
-    };
-    this.calendarService.getGoogleCalendars().subscribe(calendarObserver);
+    console.log('wejscie do google calendar component');
+    this.calendarService.setID();
   }
 }
